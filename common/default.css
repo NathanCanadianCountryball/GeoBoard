@@ -1,0 +1,252 @@
+/* DEFAULT STYLESHEET, INCLUDE FOR ALL PAGES */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-size: var(--font-size);
+  transition: font-size 0.3s ease, background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Colour Variables */
+:root {
+  --bg: #f0f0f0;
+  --text: #466450 !important;
+  --topbar: #c7d7ba !important;
+  --box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  --link: #84baa3;
+  --font-size: 16px;
+  --font-family: 'Geologica', 'SpaceGrotesk', 'Forum', sans-serif;
+}
+
+/* Dark Mode Variables */
+body.dark {
+  --bg: #121212;
+  --text: #e8e8e8 !important;
+  --topbar: #2e4741 !important;
+  --box-shadow: 0 4px 10px rgba(255, 255, 255, 0.222);
+  --link: #9dffec;
+}
+
+/* Fonts */
+@font-face {
+  font-family: 'Forum';
+  src: url('../assets/fonts/Forum-Regular.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'FunnelDisplay';
+  src: url('../assets/fonts/FunnelDisplay-Variable.ttf') format('truetype');
+  font-weight: 100 900;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'SpaceGrotesk';
+  src: url('../assets/fonts/SpaceGrotesk-Variable.ttf') format('truetype');
+  font-weight: 100 900;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Geologica';
+  src: url('../assets/fonts/Geologica-Variable.ttf') format('truetype');
+  font-weight: 100 900;
+  font-style: normal;
+}
+
+/* The Topbar */
+.topbar {
+  background-color: var(--topbar);
+  color: var(--text);
+  padding: 5px 15px;
+  position: relative;
+  top: 0;
+  left: 0;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  border-bottom: 10px solid #22717a;
+  box-shadow: var(--box-shadow);
+  z-index: 1000;
+  min-height: 70px; /* Lock height to account for padding and border */
+}
+
+.topbar ul {
+  list-style-type: none;
+  display: flex;
+  font-family: 'Forum', serif;
+  font-size: var(--font-size);
+  transition: font-size 0.3s ease;
+  gap: 30px;
+  margin: 0;
+  padding: 15px;
+}
+
+.topbar ul li,
+.topbar ul li a,
+.topbar li i {
+  color: var(--text);
+}
+
+.topbar li {
+  cursor: pointer;
+  transition: transform 0.3s ease, color 0.3s ease;
+}
+
+.topbar li a {
+  color: inherit;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+}
+
+.topbar li a:hover {
+  color: var(--link);
+}
+
+.topbar li i {
+  margin-right: 3px;
+}
+
+.topbar li:hover {
+  color: var(--link);
+  transform: scale(1.1);
+}
+
+.topbar img {
+  width: 180px;
+  height: auto;
+  margin-right: 15px;
+  padding: 0;
+}
+
+.topbar a img {
+  transition: transform 0.3s ease;
+}
+
+.topbar a:hover img {
+  transform: scale(1.05);
+  cursor: pointer;
+}
+
+/* Remove conflicting main styles to let index-style.css take over */
+main {
+  margin-top: 0;
+  padding: 0;
+  top: 0;
+}
+
+/* Settings Panel */
+.settings-panel {
+  position: fixed;
+  top: 0;
+  right: -400px;
+  width: 300px;
+  height: 100vh;
+  background-color: var(--topbar);
+  color: var(--text);
+  padding: 20px;
+  box-shadow: -3px 0 10px #0000004d;
+  transition: right 0.4s ease;
+  z-index: 2000;
+  font-family: 'FunnelDisplay', sans-serif;
+  font-weight: 400;
+}
+
+.settings-panel h2 {
+  font-family: 'FunnelDisplay', sans-serif;
+}
+.settings-panel.active {
+  right: 0;
+}
+
+.settings-panel button {
+  margin-top: 20px;
+  border-radius: 10px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  font-family: 'FunnelDisplay', sans-serif;
+  font-weight: 800;
+  background-color: var(--link);
+  border: none;
+  color: black;
+  padding: 8px 12px;
+  cursor: pointer;
+  transition: transform 0.3s ease, background-color 0.3s ease;
+}
+
+.settings-panel button:hover {
+  background-color: white;
+  transform: scale(1.1);
+  transition: transform 0.3s ease, color 0.3s ease;
+}
+
+.font-size, .font-style {
+  display: flex;
+  overflow: scroll;
+  flex-direction: column;
+  margin-bottom: 20px;
+  padding: 15px;
+}
+
+/* Font Slider */
+#fontSlider {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 8px;
+  background: var(--text);
+  border-radius: 5px;
+  outline: none;
+  margin-top: 10px;
+}
+
+/* Smooth transition for WebKit browsers (Chrome, Safari) */
+#fontSlider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  background: var(--link);
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+/* Smooth transition for Firefox */
+#fontSlider::-moz-range-thumb {
+  width: 20px;
+  height: 20px;
+  background: var(--link);
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+/* Smooth font size transitions for affected elements */
+html, body, h2, h3, p, .settings-panel {
+  transition: font-size 0.3s ease;
+}
+
+select {
+  width: 200px;
+  border: 3px solid #5c8465;
+  border-radius: 5px;
+  background-color: #f9f9f9;
+  color: #333;
+  font-size: 16px;
+  font-family: 'FunnelDisplay', sans-serif;
+  appearance: none;
+}
+
+body {
+  font-family: var(--font-family);
+}

@@ -1,0 +1,162 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  height: 100%;
+  overflow: hidden;
+}
+
+/* Root Variables */
+:root {
+  --bg: #f5f7fa;
+  --text: #2c2c2c;
+  --topbar: #539482;
+  --link: #2a6f66;
+  --font-size: 16px;
+}
+
+body.dark {
+  --bg: #121212;
+  --text: #e8e8e8;
+  --topbar: #2e4741;
+  --link: #9dffec;
+}
+
+/* Global Styles */
+body {
+  font-family: 'SpaceGrotesk', sans-serif;
+  font-weight: 400;
+  font-size: var(--font-size);
+  background-color: var(--bg);
+  color: var(--text);
+  margin: 0;
+  padding: 0;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Top Navigation Bar */
+.topbar {
+  position: fixed;
+}
+
+/* Main Content */
+.main-content {
+  width: 100%;
+  height: calc(100vh - 70px); /* Match topbar min-height */
+  margin-top: 70px; /* Push down below fixed topbar */
+  padding: 0;
+  z-index: 1;
+  overflow: hidden; /* Prevent internal scrolling */
+  position: relative; /* Keep for z-index or absolute children */
+}
+
+/* Map Container */
+#map {
+  height: 100%; /* Fill main-content height */
+  width: 100%;
+  position: relative;
+  border-radius: 10px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+  top: 70px;
+}
+
+/* Leaflet Popup Styling */
+.leaflet-popup-content-wrapper {
+  background-color: var(--topbar);
+  color: var(--text);
+  border-radius: 5px;
+  font-family: 'FunnelDisplay', sans-serif;
+  font-weight: 400;
+}
+
+.leaflet-popup-content {
+  margin: 10px;
+}
+
+.leaflet-popup-tip {
+  background-color: var(--topbar);
+}
+
+.leaflet-container a.leaflet-popup-close-button {
+  color: var(--link);
+}
+
+/* Settings Panel */
+.settings-panel {
+  position: fixed;
+  top: 0;
+  right: -400px;
+  width: 300px;
+  height: 100vh;
+  background-color: var(--topbar);
+  color: var(--text);
+  padding: 20px;
+  box-shadow: -3px 0 10px rgba(0, 0, 0, 0.3);
+  transition: right 0.4s ease;
+  font-weight: 400;
+}
+
+.settings-panel.active {
+  right: 0;
+}
+
+.settings-panel button {
+  margin-top: 20px;
+  border-radius: 10px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  font-family: 'FunnelDisplay', sans-serif;
+  font-weight: 800;
+  background-color: var(--link);
+  border: none;
+  color: black;
+  padding: 8px 12px;
+  cursor: pointer;
+  transition: transform 0.3s ease, background-color 0.3s ease;
+}
+
+.settings-panel button:hover {
+  background-color: white;
+  transform: scale(1.1);
+}
+
+#fontSlider {
+  width: 100%;
+  margin-top: 10px;
+  accent-color: var(--link);
+}
+
+#fontSizeValue {
+  display: inline-block;
+  margin-left: 10px;
+  font-size: 14px;
+}
+
+/* Page Containers */
+.main-content,
+.articles-menu {
+  transition: transform 0.5s ease, opacity 0.5s ease;
+}
+
+.articles-menu {
+  transform: translateX(100%);
+  opacity: 0;
+  pointer-events: none;
+  z-index: 2;
+}
+
+/* Back Button */
+.close-button {
+  background-color: var(--link);
+  color: black;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 10px;
+  margin-bottom: 15px;
+  cursor: pointer;
+  font-family: 'FunnelDisplay', sans-serif;
+  font-weight: 700;
+}

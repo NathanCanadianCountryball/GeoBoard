@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GeoBoard</title>
+
+  <!-- Fonts & Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="common/default.css">
+  <link rel="stylesheet" href="css/index-style.css">
+   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+     integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+     crossorigin=""/>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+     integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+     crossorigin=""></script>
+</head>
+<body>
+    <!-- SETTINGS PANEL -->
+    <div id="settingsPanel" class="settings-panel">
+      <h2>Settings</h2>
+      <div class="font-size">
+        <label for="fontSlider">Font Size</label>
+        <input type="range" id="fontSlider" min="12" max="24" value="16">
+        <small id="fontSizeValue">16px</small>
+      </div>
+
+      <div class="font-style">
+        <label for="fontSelector">Font Style</label>
+          <select id="fontSelector">
+            <option value="default">Default</option>
+            <option value="'Geologica', sans-serif">Geologica</option>
+            <option value="'Courier New', monospace">Courier New</option>
+            <option value="'SpaceGrotesk', sans-serif">Space Grotesk</option>
+            <option value="'FunnelDisplay', sans-serif">FunnelDisplay</option>
+            <option value="'Forum', serif">Forum</option>
+          </select>
+      </div>
+
+      <p>Coming soon: adjustable font sizes, themes, and more!</p>
+      <button id="closeSettings">Close</button>
+    </div>
+
+  <!-- TOPBAR -->
+    <header class="topbar">
+      <div class="topbar-left">
+        <a href="index.html">
+          <img id="geoLogo" src="Assets/Media/GeoBoardIcon.svg" alt="GeoBoard Logo">
+        </a>
+      </div>
+      <ul class="topbar-menu">
+        <li><a href="articles.html"><i class="fa-solid fa-newspaper"></i> Articles</a></li>
+        <li><a href="#"><i class="fas fa-landmark"></i> History Quizzes</a></li>
+        <li id="darkModeToggle"><a href="#"><i class="fas fa-moon"></i> Dark Mode</a></li>
+        <li><a href="#"><i class="fas fa-cog"></i> Settings</a></li>
+        <li><a href="#"><i class="fa-solid fa-user"></i> Profile</a></li>
+      </ul>
+    </header>
+
+  <!-- MAIN CONTENT -->
+  <main class="main-content">
+    <!-- Page content goes here -->
+    <div id="map"></div>
+  </main>
+
+  <!-- SCRIPT -->
+  <script type="module" src="common/js/main.js"></script>
+</body>
+</html>

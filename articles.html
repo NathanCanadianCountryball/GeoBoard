@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>GeoBoard - Articles</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="common/default.css">
+  <link rel="stylesheet" href="css/articles-style.css">
+</head>
+<body>
+    <!-- SETTINGS PANEL -->
+    <div id="settingsPanel" class="settings-panel">
+      <h2>Settings</h2>
+      <div class="font-size">
+        <label for="fontSlider">Font Size</label>
+        <input type="range" id="fontSlider" min="12" max="24" value="16">
+        <small id="fontSizeValue">16px</small>
+      </div>
+
+      <div class="font-style">
+        <label for="fontSelector">Font Style</label>
+          <select id="fontSelector">
+            <option value="default">Default</option>
+            <option value="'Geologica', sans-serif">Geologica</option>
+            <option value="'Courier New', monospace">Courier New</option>
+            <option value="'SpaceGrotesk', sans-serif">Space Grotesk</option>
+            <option value="'FunnelDisplay', sans-serif">FunnelDisplay</option>
+            <option value="'Forum', serif">Forum</option>
+          </select>
+      </div>
+
+      <p>Coming soon: adjustable font sizes, themes, and more!</p>
+      <button id="closeSettings">Close</button>
+    </div>
+
+    <!-- TOPBAR -->
+    <header class="topbar">
+      <div class="topbar-left">
+        <a href="index.html">
+          <img id="geoLogo" src="Assets/Media/GeoBoardIcon.svg" alt="GeoBoard Logo">
+        </a>
+      </div>
+      <ul class="topbar-menu">
+        <li><a href="index.html"><i class="fa-solid fa-house-user"></i> Home</a></li>
+        <li><a href="#"><i class="fas fa-landmark"></i> History Quizzes</a></li>
+        <li id="darkModeToggle"><a href="#"><i class="fas fa-moon"></i> Dark Mode</a></li>
+        <li><a href="#"><i class="fas fa-cog"></i> Settings</a></li>
+        <li><a href="#"><i class="fa-solid fa-user"></i> Profile</a></li>
+      </ul>
+    </header>
+
+    <!-- FILTER BAR -->
+    <section class="filter-section">
+      <h2>Filters</h2>
+      <div id="filter-bar">
+        <button class="filter-btn" data-filter="wwii">WWII</button>
+        <button class="filter-btn" data-filter="zanzibar">Zanzibar</button>
+        <button class="filter-btn" data-filter="england">England</button>
+        <button class="filter-btn" data-filter="nazi-germany">Nazi Germany</button>
+        <button class="filter-btn" data-filter="ussr">Soviet Union</button>
+        <button class="filter-btn" data-filter="europe">Europe</button>
+        <button class="filter-btn" data-filter="asia-pacific">Asia Pacific</button>
+        <button class="filter-btn" data-filter="japanese-empire">Japanese Empire</button>
+      </div>
+    </section>
+
+    <!-- ARTICLES LIST -->
+    <section class="articles-menu">
+      <h2>Articles</h2>
+
+      <a href="Anglo-ZanzibarWar.html" class="article-preview" data-era="modern" data-tags="zanzibar england africa">
+        <h3>The 38-Minute War</h3>
+        <span class="tag">Zanzibar</span>
+        <span class="tag">England</span>
+        <span class="tag">Africa</span>
+        <p>How Zanzibar managed to lose a war before most people had their morning tea.</p>
+      </a>
+
+      <a href="BattleofKursk.html" class="article-preview" data-era="modern" data-tags="europe wwii nazi germany soviet union">
+        <h3>The Battle of Kursk</h3>
+        <span class="tag">Europe WWII</span>
+        <span class="tag">Nazi Germany</span>
+        <span class="tag">Soviet Union</span>
+        <p>The largest tank battle in history, and the turning point of the Eastern Front.</p>
+      </a>
+
+      <a href="BattleofOkinawa.html" id="okinawaLink" class="article-preview" data-era="modern" data-tags="asia pacific wwii usa japanese empire">
+        <h3>Timeline of the Battle of Okinawa</h3>
+        <span class="tag">Pacific WWII</span>
+        <span class="tag">USA</span>
+        <span class="tag">Japanese Empire</span>
+        <p>The last major battle of the Pacific Front that cost numerous lives on its beaches.</p>
+      </a>
+    </section>
+    
+    <!-- SCRIPT -->
+    <script type="module" src="common/js/main.js"></script>
+
+</body>
+</html>

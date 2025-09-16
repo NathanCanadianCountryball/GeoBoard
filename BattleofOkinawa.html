@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>GeoBoard - Timeline of the Battle of Okinawa</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="common/default.css">
+  <link rel="stylesheet" href="css/BattleofOkinawa-style.css">
+</head>
+<body>
+    <!-- SETTINGS PANEL -->
+    <div id="settingsPanel" class="settings-panel">
+      <h2>Settings</h2>
+      <div class="font-size">
+        <label for="fontSlider">Font Size</label>
+        <input type="range" id="fontSlider" min="12" max="24" value="16">
+        <small id="fontSizeValue">16px</small>
+      </div>
+
+      <div class="font-style">
+        <label for="fontSelector">Font Style</label>
+          <select id="fontSelector">
+            <option value="default">Default</option>
+            <option value="'Geologica', sans-serif">Geologica</option>
+            <option value="'Courier New', monospace">Courier New</option>
+            <option value="'SpaceGrotesk', sans-serif">Space Grotesk</option>
+            <option value="'FunnelDisplay', sans-serif">FunnelDisplay</option>
+            <option value="'Forum', serif">Forum</option>
+          </select>
+      </div>
+      <p>Coming soon: adjustable font sizes, themes, and more!</p>
+      <button id="closeSettings">Close</button>
+    </div>
+  <!-- TOPBAR -->
+    <header class="topbar">
+      <div class="topbar-left">
+        <a href="index.html">
+          <img id="geoLogo" src="Assets/Media/GeoBoardIcon.svg" alt="GeoBoard Logo">
+        </a>
+      </div>
+      <ul class="topbar-menu">
+        <li><a href="index.html"><i class="fa-solid fa-house-user"></i> Home</a></li>
+        <li><a href="#"><i class="fas fa-landmark"></i> History Quizzes</a></li>
+        <li id="darkModeToggle"><a href="#"><i class="fas fa-moon"></i> Dark Mode</a></li>
+        <li><a href="#"><i class="fas fa-cog"></i> Settings</a></li>
+        <li><a href="#"><i class="fa-solid fa-user"></i> Profile</a></li>
+      </ul>
+    </header>
+  <!-- MAIN CONTENT -->
+  <main>
+    <!-- ARTICLE TITLE -->
+    <section id="title">
+      <h2>The Battle of Okinawa</h2>
+      <h3>Put together in a timeline.</h3>
+      <div id="author-box">
+        <h3 class="author">Nathan Wong</h3>
+        <h3 class="author">12 June 2025</h3>
+      </div>
+    </section>
+
+  <!-- ARTICLE INTRODUCTION -->
+  <section class="article-content">
+  
+    <div id="date">
+      <h3>Okinawa, Japanese Empire</h3>
+      <h3>1945</h3>
+    </div>
+    <div id="article-intro" class="article-intro">
+      <div class="article-text">
+        <figure class="image-container">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/8/88/Battle_of_Okinawa_1945_April_1-5.png" alt="U.S. troops during the Battle of Okinawa">
+          <figcaption>
+            Map of the Battle of Okinawa, and the paths of the U.S. forces as they advanced southward across the island.
+          </figcaption>
+          <h6><a href="https://commons.wikimedia.org/wiki/File:Battle_of_Okinawa_1945_April_1-5.png">U.S. Marine Corps</a>, Public domain, via Wikimedia Commons</h6>
+        </figure>
+
+        <p class="summary">
+          "Ever since they turned the tide at Midway and got increasingly close to the Japanese home islands, the United States eyed Okinawa with interest. A set of strategic islands right at the doorstep of mainland Japan,
+          Okinawa could be used to bomb major Japanese cities, unlike tedious bombing runs from distant bases like Guam or Saipan. 
+          The Japanese, seeing defeat was increasingly unavoidable, staged more extreme attacks on U.S.
+          ships to the point where pilots were encouraged to fly their planes into enemy ships. It was not just warfare; it was ritual sacrifice, delivered from the sky. America now has two choices: launch a costly invasion 
+          that could kill hundreds of thousands—or find a way to end the war without setting foot on Japan’s soil."
+        </p>
+        <p>
+          The <strong>Battle of Okinawa</strong> (April 1 – June 22, 1945) was the largest and bloodiest amphibious assault of the Pacific War. Its goal was to seize Okinawa, the largest of Japan’s Ryukyu Islands, as a base 
+          for pounding the Japanese homeland and preparing for a planned invasion of Kyushu. 350 miles south of Japan’s main islands, Okinawa was the “crucial final stepping stone” toward Japan. By capturing Okinawa, the Allies 
+          aimed to cut Japan off from its Asian supply lines and set up airfields for long-range bombers. With Okinawa in hand, U.S. forces could unleash massive air strikes on Japan, blockade its ports, and stage the final 
+          invasion (codenamed Operation Olympic).
+        </p>
+      </div>
+    </div>
+
+    <div class="okinawa-map-container">
+      <img src="Assets/Media/OkinawaLandingMapLight.png" alt="Okinawa Map Light" class="okinawa-map light-mode-map">
+      <img src="Assets/Media/OkinawaLandingMapDark.png" alt="Okinawa Map Dark" class="okinawa-map dark-mode-map">
+    </div>
+
+
+    <!-- TIMELINE -->
+    <section class="timeline">
+      <h3>Planning</h3>
+      <ul>
+        <li class="timeline-item">
+          <div class="timeline-header">
+            <span class="timeline-date">Early 1945</span>
+            <span class="timeline-summary">Allies plan massive amphibious invasion: Operation Iceberg.</span>
+            <button class="toggle-btn">+</button>
+          </div>
+          <div class="timeline-details">
+            <p>
+              Allied planners (codename <strong>Operation Iceberg</strong>) prepared the largest Pacific amphibious invasion to date. Adm. Spruance’s Fifth Fleet and Lt. Gen. Buckner’s 10th Army trained for an 182,000‑man landing force.
+              U.S. carriers and battleships launched round‑the‑clock strikes on Okinawa and nearby islands in February–March, destroying hundreds of Japanese planes. Japanese Commander Lt. Gen. Ushijima Mitsuru fortified southern Okinawa with 
+              ~100,000 troops in deep caves and ridge lines (the “Shuri Line”), readying an attrition defense. U.S. planners anticipated heavy losses and aimed to overwhelm defenders with massive bombardment and overwhelming force.
+            </p>
+          </div>
+        </li>
+
+        <li class="timeline-item">
+          <div class="timeline-header">
+            <span class="timeline-date">March 26, 1945</span>
+            <span class="timeline-summary">Kerama Islands under U.S. control.</span>
+            <button class="toggle-btn">+</button>
+          </div>
+          <div class="timeline-details">
+            <p>
+            U.S. Marines land on the nearby Kerama and Keise Islets (15 miles west of Okinawa) to seize harbors and anchorages. Over 350 Japanese small boats (prepared for suicide attacks) are captured. American 155-mm artillery on 
+            Keise Islets is positioned to support the main assault.
+            </p>
+          </div>
+        </li>
+
+        <li class="timeline-item">
+          <div class="timeline-header">
+            <span class="timeline-date">Late March, 1945</span>
+            <span class="timeline-summary">Allied demolition teams and minesweepers clear obstacles from the Okinawan beaches.</span>
+            <button class="toggle-btn">+</button>
+          </div>
+          <div class="timeline-details">
+            <p>
+            Carrier Task Force 58 (Adm. Mitscher) strikes Japanese airfields to suppress enemy air cover. By month’s end, the invasion fleet (1,600+ ships, 350,000 naval personnel) is assembled off Okinawa.
+            </p>
+          </div>
+        </li>
+      </ul>
+          <h3>Battle of Okinawa</h3>
+      <ul>
+        <li class="timeline-item">
+          <div class="timeline-header">
+            <span class="timeline-date">April 1, 1945 (~08:30 AM)</span>
+            <span class="timeline-summary">Allied landings on Okinawa.</span>
+            <button class="toggle-btn">+</button>
+          </div>
+          <div class="timeline-details">
+            <figure class="image-container">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/5/50/SC_205191_-_INVASION_OF_OKINAWA._Men_of_7th_Infantry_Division_head_for_the_beaches_of_Okinawa_in_LVTs.jpg" alt="Men of 7th Infantry Division head for the beaches of Okinawa in LVTs.">
+                <figcaption>
+                  Men of 7th Infantry Division head for the beaches of Okinawa in LVTs (Landing Vehicle, Tracked).
+                </figcaption>
+                <h6><a href="https://commons.wikimedia.org/wiki/File:SC_205191_-_INVASION_OF_OKINAWA._Men_of_7th_Infantry_Division_head_for_the_beaches_of_Okinawa_in_LVTs.jpg">U.S. Army Signal Corps</a>, Public domain, via Wikimedia Commons</h6>
+            </figure>
+            <p>
+            The U.S. 10th Army (6 Marine and 4 Army divisions) lands on the Hagushi beaches on Okinawa’s west coast. A massive naval bombardment and air attack precede the assault. Japanese 
+            defenders (Ushijima’s 32nd Army) refuse to defend the coast and have withdrawn inland, so the beach assault meets almost no opposition. Within the first hour ~16,000 American troops are ashore; 
+            by nightfall ~50,000 total. At the same time, U.S. Marines stage a diversionary feint on the east coast (Minatoga Beach) which draws kamikaze attacks: Japanese suicide planes strike the decoy 
+            force, damaging USS Hinsdale and LST‑844 and causing ~50 Marine casualties. (Allied L‑Day casualties are relatively light due to the lack of beach defenses.)
+            </p>
+          </div>
+        </li>
+
+        <li class="timeline-item">
+          <div class="timeline-header">
+            <span class="timeline-date">April 4, 1945</span>
+            <span class="timeline-summary">U.S. forces split the island.</span>
+            <button class="toggle-btn">+</button>
+          </div>
+          <div class="timeline-details">
+            <p>
+            Advancing inland, Army and Marine units have cut Okinawa in two by April 4. The northern half is largely secured; Japanese troops withdraw into the south (Shuri) strongholds. On this day kamikaze 
+            attacks intensify, but no major land counterattack yet occurs.
+            </p>
+          </div>
+        </li>
+
+        <li class="timeline-item">
+          <div class="timeline-header">
+            <span class="timeline-date">April 6-7, 1945</span>
+            <span class="timeline-summary">Operation Ten‑Go.</span>
+            <button class="toggle-btn">+</button>
+          </div>
+          <div class="timeline-details">
+            <p>
+            Beginning April 6, the Japanese launch a mass kamikaze offensive, sending over 300 suicide planes against the invasion fleet. Simultaneously, Japan 
+            dispatches the battleship Yamato (escorted by destroyers) on a one‑way mission to attack the fleet. On April 7 U.S. carrier planes sink Yamato (with most of her crew) before she reaches Okinawa. 
+            The kamikazes inflict heavy naval losses: over the campaign 36 Allied ships are sunk and ~368 damaged (26 ships lost by mid‑May). About 40% of U.S. battle casualties occur at sea from these 
+            suicide attacks.
+            </p>
+          </div>
+        </li>
+
+        <li class="timeline-item">
+          <div class="timeline-header">
+            <span class="timeline-date">April 12, 1945</span>
+            <span class="timeline-summary">New Japanese suicide weapon appears.</span>
+            <button class="toggle-btn">+</button>
+          </div>
+          <div class="timeline-details">
+            <figure class="image-container">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/e/ed/Yokosuka_MXY-7_Ohka_Model_11_%2850098279777%29.jpg" alt="Yokosuka MXY-7 Ohka ('Cherry Blossom') Model 11 (Allied Code Name 'Baka') rocket-powered kamikaze aircraft at the RAF Museum, Cosford, 2020.">
+                <figcaption>
+                  The Ohka Model 11 (named after the Japanese term for 'cherry blossom') had Baka rockets as its armaments.
+                </figcaption>
+                <h6><a href="https://commons.wikimedia.org/wiki/File:Yokosuka_MXY-7_Ohka_Model_11_(50098279777).jpg">Hugh Llewelyn from Keynsham, UK</a>, 
+                <a href="https://creativecommons.org/licenses/by-sa/2.0">CC BY-SA 2.0</a>, via Wikimedia Commons</h6>
+              </figure>
+            <p>
+            The Japanese debut the Baka piloted rocket (manned bomb). A Baka crashes into USS Abele off Okinawa, sinking the destroyer. (These attacks continue sporadically 
+            through June.)
+            </p>
+          </div>
+        </li>
+          
+        <li class="timeline-item">
+          <div class="timeline-header">
+            <span class="timeline-date">April 18, 1945</span>
+            <span class="timeline-summary">American forces complete capture of northern Okinawa.</span>
+            <button class="toggle-btn">+</button>
+          </div>
+          <div class="timeline-details">
+            <p>
+            U.S. troops and Marines have cleared the entire northern two‑thirds of the island by April 22. (Notably, war correspondent Ernie Pyle is killed 
+            on Ie Shima on April 18, highlighting the campaign’s toll.)
+            </p>
+          </div>
+        </li>
+      </ul>
+        <h3>Shuri Line Battles</h3>
+      <ul>
+        <li class="timeline-item">
+          <div class="timeline-header">
+            <span class="timeline-date">Late April-May, 1945</span>
+            <span class="timeline-summary">Battle for the Shuri Line.</span>
+            <button class="toggle-btn">+</button>
+          </div>
+          <div class="timeline-details">
+            <p>
+            American units press south into heavily fortified Japanese defenses around Shuri (Okinawa’s medieval capital). Intense fighting is fought ridge by ridge (e.g. Kakazu, Sugar Loaf) 
+            along a series of prepared lines. Supply problems, monsoon rains, and murderous artillery make the advance slow and costly (American combat losses rise sharply during this period). The Japanese 
+            defense, anchored at Shuri Castle and its ridgelines, is largely under Lt. Gen. Ushijima’s 32nd Army, intent on inflicting maximum casualties as promised.
+            </p>
+          </div>
+        </li>
+        <li class="timeline-item">
+          <div class="timeline-header">
+            <span class="timeline-date">May 29, 1945</span>
+            <span class="timeline-summary">Capture of Shuri Castle.</span>
+            <button class="toggle-btn">+</button>
+          </div>
+          <div class="timeline-details">
+              <figure class="image-container">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/8/85/Rubble_of_the_walls_of_Shuri_castle%2C_1945_01.jpg" alt="The rubble of Shuri Castle after the battle.">
+                <figcaption>
+                  The ruined walls of Shuri Castle, Okinawa, 1945.
+                </figcaption>
+                <h6><a href="https://commons.wikimedia.org/wiki/File:Rubble_of_the_walls_of_Shuri_castle,_1945_01.jpg">U.S. Navy</a>, Public domain, via Wikimedia Commons</h6>
+              </figure>
+            <p>
+            After weeks of bitter fighting, U.S. forces finally overrun Shuri Castle (the Japanese headquarters) on May 29. This breaks the main defensive line. Surviving Japanese troops 
+            retreat into the southernmost hills around Naha; many commit suicide rather than surrender.
+            </p>
+          </div>
+        </li>
+
+        <li class="timeline-item">
+          <div class="timeline-header">
+            <span class="timeline-date">June 4, 1945</span>
+            <span class="timeline-summary">Capture of Kanegusuku.</span>
+            <button class="toggle-btn">+</button>
+          </div>
+          <div class="timeline-details">
+            <p>
+            U.S. Marines conduct a small amphibious landing to the west of Naha and secure the town’s airfield (Kanegusuku) on June 4. This move bypasses remaining Japanese positions and helps encircle the last 
+            defenders in southern Okinawa.
+            </p>
+            <img src="" alt="Map of Operation Iceberg" />
+          </div>
+        </li>
+
+        <li class="timeline-item">
+          <div class="timeline-header">
+            <span class="timeline-date">June 18, 1945</span>
+            <span class="timeline-summary">Death of Lt. Gen. Buckner Jr..</span>
+            <button class="toggle-btn">+</button>
+          </div>
+          <div class="timeline-details">
+            <figure class="image-container">
+              <img src="https://upload.wikimedia.org/wikipedia/commons/f/f7/General_Simon_B._Buckner%2C_Jr.jpg" alt="General Simon B. Buckner Jr. posing for his portrait.">
+              <figcaption>
+                General Simon B. Buckner Jr..
+              </figcaption>
+              <h6><a href="https://commons.wikimedia.org/wiki/File:General_Simon_B._Buckner,_Jr.jpg">US gov</a>, Public domain, via Wikimedia Commons</h6>
+            </figure>
+            <p>
+            Lt. Gen. Simon B. Buckner Jr., commander of the 10th Army, is killed by Japanese artillery fire while observing the front lines. Buckner’s death (during the final thrust south) is a major U.S. loss; 
+            he is the highest‑ranking American killed in World War II. Brig. Gen. Roy Geiger (USMC) assumes command briefly before Gen. J. Stilwell takes over on June 23.
+            </p>
+          </div>
+        </li>
+
+        <li class="timeline-item">
+          <div class="timeline-header">
+            <span class="timeline-date">June 21-22, 1945</span>
+            <span class="timeline-summary">End of organized resistance.</span>
+            <button class="toggle-btn">+</button>
+          </div>
+          <div class="timeline-details">
+            <figure class="image-container">
+              <img src="https://upload.wikimedia.org/wikipedia/commons/f/f7/General_Simon_B._Buckner%2C_Jr.jpg" alt="General Simon B. Buckner Jr. posing for his portrait.">
+              <figcaption>
+                General Simon B. Buckner Jr..
+              </figcaption>
+              <h6><a href="https://commons.wikimedia.org/wiki/File:General_Simon_B._Buckner,_Jr.jpg">US gov</a>, Public domain, via Wikimedia Commons</h6>
+            </figure>
+            <p>
+            On June 21 the last U.S. units link up on Okinawa’s south coast. The remaining Japanese garrison (now cut off) effectively ceases resistance on June 22. That same day Lt. 
+            Gen. Ushijima and his chief of staff Gen. Cho commit ritual suicide rather than surrender. The Battle of Okinawa is officially over after 82 days of fighting.
+            </p>
+          </div>
+        </li>
+      </ul>
+      <h3>Outcome & Casualties</h3>
+      <p id="casualties">
+      The assault secured Okinawa for the Allies but at enormous cost. U.S. forces suffered roughly 49,000 casualties (about 12,000 killed) during the campaign. The Japanese garrison was 
+      almost completely destroyed: of ~100,000 defenders, 90,000–100,000 were killed (most others were wounded or committed suicide). Okinawan civilian deaths were also catastrophic (on the order of 100,000), many 
+      forced by the Japanese to kill themselves. The ferocity of Okinawa convinced Allied leaders that a mainland invasion would be prohibitively bloody (a factor in the decision to use atomic bombs).
+      </p>
+    </section>
+
+    <section class="bibliography">
+      <h2>Bibliography</h2>
+      <ol>
+        <li><h5>Alexander, Joseph H.<em>The Final Campaign: Marines in the Victory on Okinawa (L‑Day and Movement to Contact).</em>U.S. Marine Corps Historical Division, 1994.</h5></li>
+        <li><h5>“Battle of Okinawa.”<em>Encyclopædia Britannica.</em> Accessed June 13, 2025.<a href="https://www.britannica.com/topic/Battle-of-Okinawa" aria-label="Battle of Okinawa on Britannica">Read on Britannica</a>.</h5></li>
+        <li><h5>“Battle of Okinawa Ends.”<em>History.com,</em> February 9, 2010 (updated February 18, 2025).<a href="https://www.history.com/this-day-in-history/june-22/battle-of-okinawa-ends" aria-label="Battle of Okinawa Ends on History.com">Read on History.com</a>.</h5></li>
+        <li><h5>National World War II Museum.“Battle of Okinawa.” Accessed June 13, 2025.<a href="https://www.nationalww2museum.org/war/topics/battle-of-okinawa" aria-label="Battle of Okinawa on National WWII Museum">Read on National WWII Museum</a>.</h5></li>
+        <li><h5>National World War II Museum.“Iwo Jima and Okinawa: Death at Japan’s Doorstep.” June 13, 2025.<a href="https://www.nationalww2museum.org/war/articles/iwo-jima-and-okinawa-death-japans-doorstep" aria-label="Iwo Jima and Okinawa article on National WWII Museum">Read article</a>.</h5></li>
+        <li><h5>Vergun, David. “Remembering the Battle of Okinawa; Lessons Learned for Future Fights.”<em>U.S. Department of Defense,</em> March 27, 2025.<a href="https://www.defense.gov/News/Feature-Stories/Story/Article/4125312/remembering-the-battle-of-okinawa-lessons-learned-for-future-fights/" aria-label="Remembering the Battle of Okinawa on U.S. Department of Defense">Read on U.S. Department of Defense</a>.</h5></li>
+      </ol>
+    </section>
+</section>
+</main>
+
+  <!-- SCRIPT -->
+  <script type="module" src="common/js/main.js"></script>
+</body>
+</html>

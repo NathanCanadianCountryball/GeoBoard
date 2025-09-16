@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>GeoBoard - Battle of Kursk</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="common/default.css">
+  <link rel="stylesheet" href="css/BattleofKursk-style.css">
+</head>
+<body>
+    <!-- SETTINGS PANEL -->
+    <div id="settingsPanel" class="settings-panel">
+      <h2>Settings</h2>
+      <div class="font-size">
+        <label for="fontSlider">Font Size</label>
+        <input type="range" id="fontSlider" min="12" max="24" value="16">
+        <small id="fontSizeValue">16px</small>
+      </div>
+
+      <div class="font-style">
+        <label for="fontSelector">Font Style</label>
+          <select id="fontSelector">
+            <option value="default">Default</option>
+            <option value="'Geologica', sans-serif">Geologica</option>
+            <option value="'Courier New', monospace">Courier New</option>
+            <option value="'SpaceGrotesk', sans-serif">Space Grotesk</option>
+            <option value="'FunnelDisplay', sans-serif">FunnelDisplay</option>
+            <option value="'Forum', serif">Forum</option>
+          </select>
+      </div>
+
+      <p>Coming soon: adjustable font sizes, themes, and more!</p>
+      <button id="closeSettings">Close</button>
+    </div>
+  <!-- TOPBAR -->
+    <header class="topbar">
+      <div class="topbar-left">
+        <a href="index.html">
+          <img id="geoLogo" src="Assets/Media/GeoBoardIcon.svg" alt="GeoBoard Logo">
+        </a>
+      </div>
+      <ul class="topbar-menu">
+        <li><a href="index.html"><i class="fa-solid fa-house-user"></i> Home</a></li>
+        <li><a href="#"><i class="fas fa-landmark"></i> History Quizzes</a></li>
+        <li id="darkModeToggle"><a href="#"><i class="fas fa-moon"></i> Dark Mode</a></li>
+        <li><a href="#"><i class="fas fa-cog"></i> Settings</a></li>
+        <li><a href="#"><i class="fa-solid fa-user"></i> Profile</a></li>
+      </ul>
+    </header>
+  <!-- MAIN CONTENT -->
+  <main>
+    <!-- ARTICLE TITLE -->
+    <section id="title">
+      <h2>Battle of Kursk</h2>
+      <div id="author-box">
+        <h3 class="author">Nathan Wong</h3>
+        <h3 class="author">12 June 2025</h3>
+      </div>
+    </section>
+
+    <!-- ARTICLE INTRODUCTION -->
+    <section class="article-content">
+      <div id="date">
+          <h3>Kursk, Soviet Union</h3>
+          <h3>1943</h3>
+      </div>
+
+      <div id="article-intro" class="article-intro">
+        <div class="article-text">
+          <p class="summary">
+                "The Battle of Stalingrad was a huge defeat for the Germans, but the war is far from over. The Soviets are on the offensive, and the Germans are in retreat. However, the Germans see a chance to turn the tide at 
+                Kursk, where they plan to launch a massive counteroffensive. The Soviets, however, are ready and waiting, having prepared not one, not two, but three defensive lines that will prove nearly impenetrable. Germany 
+                had built up a massive force of tanks and troops, but the Soviets had anticipated this and prepared their defenses accordingly. With Operation citadel confirmed, Kursk saw one of the bloodiest battles of the 
+                Eastern Front."
+          </p>
+                
+          <figure class="image-container">
+              <img src="https://upload.wikimedia.org/wikipedia/commons/e/eb/RIAN_archive_4408_Armor_piercers_on_the_Kursk_Bulge.jpg" alt="Armour-piercing gunners during the Kursk Bulge, 1943.">
+              <figcaption>
+              Armour-piercing gunners during the Kursk Bulge, 1943.
+              </figcaption>
+              <h6>RIA Novosti archive, image #4408 / N. Bode / CC-BY-SA 3.0, CC BY-SA 3.0 <https://creativecommons.org/licenses/by-sa/3.0>, via Wikimedia Commons</h6>
+          </figure>
+
+          <br>
+          <p>
+            The <strong>Battle of Kursk</strong> (July 5 – August 23, 1943) was a major battle on the Eastern front of World War II and the largest tank battle in history, involving nearly two million soldiers and about 6,000 
+            tanks. Near Kursk, the Soviet front lines bulged westward into German-held territory. Germany launched Operation Citadel, attacking from the north and south to encircle Soviet forces. However, the Soviets had foreseen 
+            the attack and built massive defenses, so the Germans could not break through. By mid-July the Soviets counterattacked, pushing the Germans back and ending the offensive.
+          </p>
+        </div>
+      </div>
+
+    <div class="kursk-map-container">
+      <img src="Assets/Media/BattleofKurskMapLight.png" alt="Kursk Map Light" class="kursk-map light-mode-map">
+      <img src="Assets/Media/BattleofKurskMapDark.png" alt="Kursk Map Dark" class="kursk-map dark-mode-map">
+    </div>
+
+      <h3 class="header">Background and Buildup</h3>
+      <div id="background-buildup">
+        <ul>
+          <li>
+            After the German defeat at Stalingrad (February 1943), Hitler wanted a big victory to regain initiative on the Eastern Front.
+          </li>
+          <li>
+            German forces formed a large salient (a bulge) around Kursk. Field Marshals Günther von Kluge (north) and Erich von Manstein (south) commanded the two German thrusts. Hitler delayed the attack for months to gather 
+            more forces, giving the Soviets time to prepare. 
+          </li>
+          <li>
+            British codebreakers even warned the Soviet High Command about the German plans, so the Red Army strengthened its positions. By early July 1943, both sides had built up huge armies facing each other.
+          </li>
+        </ul>
+      </div>
+      <h3 class="header">Opposing Forces and Plans</h3>
+      <div id="opposing-forces">
+        <p>
+          About 50 German divisions (roughly 900,000 men) gathered for the attack, including nearly all their newest tanks:
+        </p>
+        <ul>
+          <li>Tiger Heavy Tanks</li>
+          <li>Panther Medium Tanks</li>
+          <li>Elefant Tank Destroyers</li>
+        </ul>
+        <p>
+          and assault guns. The Germans hoped to punch through Soviet lines from north and south and meet at Kursk. Opposing them were about 1.3 million Soviet soldiers with over 3,000 tanks and thousands of planes. The Soviets 
+          organized these into the Central Front (north, under Marshal Rokossovsky) and the Voronezh Front (south, under General Vatutin), with Steppe Front reserves under General Konev held just behind. The Soviet plan was defense 
+          in depth: absorb the German attack, then counterattack once the enemy was weakened.
+        </p>
+      </div>
+      <h3 class="header">Soviet Defenses and German Tactics</h3>
+      <div id="soviet-german-tactics">
+          <h4>Soviets:</h4>
+          <p>The Red Army dug three lines of trenches around the Kursk salient, stretching over 150 kilometers from north to south. They laid hundreds of thousands of mines (about 943,000 in all) in front of these lines. In some places 
+          every mile of front had over 2,500 anti-tank mines. Artillery and machine guns were hidden in forward trenches, while tank forces were held in reserve behind the defensive belts. Soviet civilians (about 300,000 of them) helped 
+          dig these defenses.</p>
+          <h4>Germans:</h4>
+          <p>The Germans massed their armored divisions (9th Army in the north, 4th Panzer Army in the south) for a fast breakthrough. They counted on their heavy new Tiger and Panther tanks to smash through Soviet lines. In the north, 
+          General Walter Model’s 9th Army led the assault, and in the south General Hermann Hoth’s 4th Panzer Army attacked.</p>
+      </div>
+
+      <div id="battle">
+        <h3 class="header">The Battle</h3>
+        <ul class="timeline">
+          <li class="timeline-item">
+            <div class="timeline-header">
+              <span class="timeline-date">July 5, 1943, Dawn</span>
+              <span class="timeline-summary">Operation Citadel begins.</span>
+              <button class="toggle-btn">+</button>
+            </div>
+            <div class="timeline-details">
+              <p>
+                Soviet artillery unleashed a surprise barrage, “pulling the rug” out from under the Germans, who had expected to go first. Despite the barrage, German infantry and tanks pushed hard. 
+                In the north, the 9th Army broke through the first Soviet trench line and advanced about 10 km the first day. However, they faced intricate defenses.
+              </p>
+            </div>
+          </li>
+
+          <li class="timeline-item">
+            <div class="timeline-header">
+              <span class="timeline-date">July 10, 1943</span>
+              <span class="timeline-summary">German advance slows.</span>
+              <button class="toggle-btn">+</button>
+            </div>
+            <div class="timeline-details">
+              <p>
+                Deep defensive belts slowed the Germans quickly, and by July 10 Model’s advance had halted. In the south, the Germans 
+                made more progress: units of the 4th Panzer Army and Army Detachment Kempf neared the village of Prokhorovka by July 11.
+              </p>
+            </div>
+          </li>
+          <li class="timeline-item">
+            <div class="timeline-header">
+              <span class="timeline-date">July 12, 1943</span>
+              <span class="timeline-summary">Soviet counterattack at Prokhorovka.</span>
+              <button class="toggle-btn">+</button>
+            </div>
+            <div class="timeline-details">
+              <figure class="image-container">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/f/f9/Kursk_Soviet_machineguns.JPG" alt="soviet machinegunners during the Battle of Kursk, 1943.">
+                <figcaption>
+                Soviet machinegunners during the Battle of Kursk, 1943.
+                </figcaption>
+                <h6><a href="https://commons.wikimedia.org/wiki/File:Kursk_Soviet_machineguns.JPG">&quot;The Eastern Front in Photographs&quot;, John Erickson</a>, Public domain, via Wikimedia Commons</h6>
+              </figure>
+              <p>
+                The Soviets counterattacked the Germans in Prokhorovka with five tank brigades in a massive clash. Around 900 German tanks 
+                (including Tigers) met 900 Soviet tanks in this encounter. By nightfall, hundreds of tanks lay destroyed. The Germans had 
+                failed to break through the final line. At the same time, Hitler had to move forces south to meet the Allied invasion of 
+                Sicily (July 10). On the evening of July 12 he called off Citadel and ordered German units to dig in. While Citadel was being 
+                canceled, the Soviets launched Operation Kutuzov north of Kursk, pushing back Model’s forces.
+              </p>
+              <div class="pull-quote">
+                <h4>The Earth was black and scorched with tanks like burning torches.</h4>
+                <p>—Soviet Officer, describing the aftermath of the Prokhorovka clash</p>
+              </div>
+            </div>
+          </li>
+          <li class="timeline-item">
+            <div class="timeline-header">
+              <span class="timeline-date">July 12, 1943</span>
+              <span class="timeline-summary">Soviet victory.</span>
+              <button class="toggle-btn">+</button>
+            </div>
+            <div class="timeline-details">
+              <p>
+                German High Command authorized one more southern attack (Operation Roland) on July 14–17, but it also failed. Meanwhile, Soviet 
+                reserves entered the fight. A few weeks later the Soviets launched Operation Rumyantsev in the south, retaking Kharkov by August 
+                23. In each case, the Red Army forced the Germans out of the Kursk salient and began liberating occupied Soviet territory.
+              </p>
+            </div>
+          </li>
+        </ul>
+      </div>
+
+      <h3 class="header">Casualties and Aftermath</h3>
+      <div id="casualties">
+        <p>The Battle of Kursk was incredibly costly. Historians estimate Soviet losses around 800,000 men and German losses around 200,000 men, though Soviet figures sometimes claim even higher German casualties (up to 500,000). Germany lost 
+          about 30 of its 50 divisions in the fighting. Crucially, after Kursk the Germans never again had the strength for a major Eastern Front offensive. The Soviets, on the other hand, gained the strategic initiative. They liberated the 
+          city of Orel on August 5 and entered Kharkov by August 23. Kursk marked the turning point: from then on the Red Army pushed westward toward Berlin, while German forces were mostly on the defensive for the rest of the war.</p>
+      </div>
+
+      <div id="did-you-know">
+        <h3>Did You Know?</h3>
+        <ul>
+          <li><strong>World’s largest tank battle:</strong> Kursk involved nearly 6,000 tanks and 2 million troops</li>
+          <li><strong>Preparing the defenses:</strong> 300,000 Soviet civilians dug trenches and laid an incredible 943,000 mines before the battle.</li>
+          <li><strong>New German tanks:</strong> Kursk saw the first large-scale use of the Panther tank and the Ferdinand (Elefant) tank destroyer, but many were disabled by mines.</li>
+        </ul>
+    </section>
+    <section class="bibliography">
+      <h2>Bibliography</h2>
+      <ol>
+        <li><h5>“Battle of Kursk.” <em>Seventeen Moments in Soviet History.</em> Michigan State University. Accessed July 15, 2025. <a href="https://soviethistory.msu.edu/1943-2/battle-of-kursk/">https://soviethistory.msu.edu/1943-2/battle-of-kursk/</a></h5></li>
+        <li><h5>“Battle of Kursk.” <em>Encyclopaedia Britannica.</em> Accessed July 15, 2025. <a href="https://www.britannica.com/event/Battle-of-Kursk">https://www.britannica.com/event/Battle-of-Kursk</a></h5></li>
+        <li><h5>Cartwright, Mark. “Battle of Kursk: Largest Tank Battle in History.” <em>World History Encyclopedia.</em> Last modified July 12, 2022. <a href="https://www.worldhistory.org/article/2704/battle-of-kursk/">https://www.worldhistory.org/article/2704/battle-of-kursk/</a></h5></li>
+        <li><h5>“The Battle of Kursk: The Largest Tank Battle in History.” <em>Sky HISTORY.</em> Accessed July 15, 2025. <a href="https://www.history.co.uk/article/the-battle-of-kursk-the-largest-tank-battle-in-history">https://www.history.co.uk/article/the-battle-of-kursk-the-largest-tank-battle-in-history</a></h5></li>
+        <li><h5>“Russians Halt German Advance in a Decisive Battle at Kursk.” <em>HISTORY.</em> July 12, 1943. <a href="https://www.history.com/this-day-in-history/july-12/russians-halt-german-advance-in-a-decisive-battle-at-kursk">https://www.history.com/this-day-in-history/july-12/russians-halt-german-advance-in-a-decisive-battle-at-kursk</a></h5></li>
+        <li><h5>“Battle of Kursk: The Clash of the Tanks.” <em>Forces News.</em> Accessed July 15, 2025. <a href="https://www.forcesnews.com/news/battle-kursk-clash-tanks">https://www.forcesnews.com/news/battle-kursk-clash-tanks</a></h5></li>
+      </ol>
+    </section>
+
+  </main>
+
+  <!-- SCRIPT -->
+  <script type="module" src="common/js/main.js"></script>
+</body>
+</html>
