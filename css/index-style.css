@@ -9,22 +9,6 @@ html, body {
   overflow: hidden;
 }
 
-/* Root Variables */
-:root {
-  --bg: #f5f7fa;
-  --text: #2c2c2c;
-  --topbar: #539482;
-  --link: #2a6f66;
-  --font-size: 16px;
-}
-
-body.dark {
-  --bg: #121212;
-  --text: #e8e8e8;
-  --topbar: #2e4741;
-  --link: #9dffec;
-}
-
 /* Global Styles */
 body {
   font-family: 'SpaceGrotesk', sans-serif;

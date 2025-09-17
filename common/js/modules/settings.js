@@ -73,10 +73,32 @@ export function setupSettingsPanel() {
   } else {
     console.error("Font slider or font size value element not found");
   }
+
   // Font selector logic
   if (fontSelector) {
+    // Load saved font
+    const savedFont = localStorage.getItem("geoFont");
+    if (savedFont) {
+      console.log(`Found saved font: ${savedFont}`);
+      fontSelector.value = savedFont;
+      if (savedFont === 'default') {
+        document.body.style.fontFamily = '';
+        document.querySelectorAll('h2, h3, p').forEach(el => {
+          el.style.fontFamily = '';
+        });
+      } else {
+        document.body.style.fontFamily = savedFont;
+        document.querySelectorAll('h2, h3, p').forEach(el => {
+          el.style.fontFamily = savedFont;
+        });
+      }
+    } else {
+      console.log("No saved font found");
+    }
+
     fontSelector.addEventListener('change', function () {
       const selectedFont = this.value;
+      console.log(`Font changed to: ${selectedFont}`);
 
       if (selectedFont === 'default') {
         document.body.style.fontFamily = '';
@@ -89,6 +111,10 @@ export function setupSettingsPanel() {
           el.style.fontFamily = selectedFont;
         });
       }
+
+      // Save selected font to localStorage
+      localStorage.setItem("geoFont", selectedFont);
+      console.log(`Font saved to localStorage: ${selectedFont}`);
     });
   } else {
     console.error("Font selector not found (id='fontSelector')");
