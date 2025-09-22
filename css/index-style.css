@@ -30,7 +30,7 @@ body {
 .main-content {
   width: 100%;
   height: calc(100vh - 70px); /* Match topbar min-height */
-  margin-top: 70px; /* Push down below fixed topbar */
+  margin-top: 70px;
   padding: 0;
   z-index: 1;
   overflow: hidden; /* Prevent internal scrolling */
@@ -67,56 +67,6 @@ body {
 
 .leaflet-container a.leaflet-popup-close-button {
   color: var(--link);
-}
-
-/* Settings Panel */
-.settings-panel {
-  position: fixed;
-  top: 0;
-  right: -400px;
-  width: 300px;
-  height: 100vh;
-  background-color: var(--topbar);
-  color: var(--text);
-  padding: 20px;
-  box-shadow: -3px 0 10px rgba(0, 0, 0, 0.3);
-  transition: right 0.4s ease;
-  font-weight: 400;
-}
-
-.settings-panel.active {
-  right: 0;
-}
-
-.settings-panel button {
-  margin-top: 20px;
-  border-radius: 10px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-  font-family: 'FunnelDisplay', sans-serif;
-  font-weight: 800;
-  background-color: var(--link);
-  border: none;
-  color: black;
-  padding: 8px 12px;
-  cursor: pointer;
-  transition: transform 0.3s ease, background-color 0.3s ease;
-}
-
-.settings-panel button:hover {
-  background-color: white;
-  transform: scale(1.1);
-}
-
-#fontSlider {
-  width: 100%;
-  margin-top: 10px;
-  accent-color: var(--link);
-}
-
-#fontSizeValue {
-  display: inline-block;
-  margin-left: 10px;
-  font-size: 14px;
 }
 
 /* Page Containers */

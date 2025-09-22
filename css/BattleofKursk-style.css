@@ -3,25 +3,13 @@
 ============================= */
 :root {
   --bg: #ece9dd;
-  --text: #104474;
-  --card: #ffffff;
-  --accent-border: #1fa39d;
-  --box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-  --box-color: #b5d3c0;
-  --titles: #28552e;
 }
 
 body.dark {
-  --card: #0c1e3b;
-  --accent-border: #00b7c2;
-  --box-shadow: 0 4px 10px rgba(255, 255, 255, 0.222);
-  --box-color: #254561;
-  --titles: #8cd0e5;
+  --bg: #122f3b;
 }
 
-/* =============================
-   BASE STYLES
-============================= */
+/* Base Styles */
 body {
   font-family: 'FunnelDisplay', serif;
   font-weight: 300;
@@ -50,28 +38,6 @@ body.dark .article-content h2 {
   color: var(--titles);
 }
 
-h3.header {
-  font-family: 'SpaceGrotesk', sans-serif;
-  font-size: 1.8rem;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  margin: 0 0 20px 0;
-  padding: 10px 15px;
-  background-color: #104474;
-  color: #ffffff;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-}
-
-body.dark #background-buildup h3,
-body.dark #opposing-forces h3,
-body.dark #soviet-german-tactics h3,
-body.dark #battle h3,
-body.dark #casualties h3,
-body.dark #did-you-know h3 {
-  color: #3edfc4;
-  text-shadow: 2px 2px 5px #1d3c45;
-}
-
 #soviet-german-tactics h4 {
   margin-top: 12px;
   font-size: 1.4rem;
@@ -93,33 +59,9 @@ body.dark #date {
   text-shadow: 2px 2px 5px #781b1b;
 }
 
-.summary {
-  font-family: 'Courier New', Courier, monospace;
-  font-weight: bold;
-  font-size: var(--font-size);
-  color: #000000;
-  margin-top: 0;
-  margin-bottom: 4px;
-}
-
-body.dark .summary {
-  color: var(--accent-border);
-}
-
 /* =============================
    IMAGES
 ============================= */
-
-.kursk-map-container {
-  max-width: 1000px;
-  margin: 40px auto;
-  padding: 16px;
-  border-radius: 16px;
-  background-color: var(--card);
-  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
-  text-align: center;
-}
-
 .kursk-map {
   max-width: 100%;
   height: auto;
@@ -133,63 +75,15 @@ body.dark .summary {
 ============================= */
 p {
   font-family: 'Geologica', sans-serif;
+  font-weight: 400;
   color: var(--text);
   padding: 20px 20px;
   font-size: calc(var(--font-size) + 2px);
   margin: 0 auto 24px;
-}
-
-#background-buildup, #opposing-forces, #soviet-german-tactics, #casualties li {
-  font-family: 'Geologica', sans-serif;
-  color: var(--text);
-  font-size: calc(var(--font-size) + 2px);
-  margin-bottom: 12px;
-  padding-left: 20px;
-  margin-left: 20px;
-  list-style-type: square;
+  line-height: 1.6; /* Improved line spacing */
 }
 
 body.dark p {
-  color: #cce2e0;
-}
-
-/* =============================
-   KURSK ARTICLE SECTIONS
-============================= */
-#background-buildup,
-#opposing-forces,
-#soviet-german-tactics,
-#casualties,
-#did-you-know {
-  background-color: var(--card);
-  margin: 30px auto;
-  padding: 24px;
-  border-left: 6px solid var(--accent-border);
-  box-shadow: var(--box-shadow);
-  border-radius: 12px;
-  max-width: 900px;
-  opacity: 0;
-  transform: translateY(30px);
-  animation: fadeInUp 0.6s ease forwards;
-  animation-delay: 0.2s;
-}
-
-/* =============================
-   LISTS
-============================= */
-#did-you-know ul {
-  list-style: inside square;
-  padding-left: 20px;
-}
-
-#did-you-know li {
-  padding: 10px 0;
-  font-family: 'Geologica', sans-serif;
-  font-size: 1.05rem;
-  color: var(--text);
-}
-
-body.dark #did-you-know li {
   color: #cce2e0;
 }
 
@@ -218,9 +112,7 @@ body.dark .pull-quote {
   color: #acebf6;
 }
 
-/* =============================
-   TITLE SECTION
-============================= */
+/* Title Section */
 #title {
   display: flex;
   flex-direction: column;
@@ -301,200 +193,6 @@ body.dark .subtitle h3 {
   margin: 10px 0 0;
 }
 
-/* =============================
-   ARTICLE INTRO AND IMAGES
-============================= */
-.article-intro {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  align-items: flex-start;
-  gap: 24px;
-  padding: 10px 20px 30px;
-  margin-top: 10px;
-}
-
-.image-container {
-  float: right;
-  max-width: 200px;
-  margin: 0 0 10px 15px;
-  background-color: #eaf4ec;
-  border: 1px solid #c4d8cc;
-  border-radius: 16px;
-  padding: 8px 12px;
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
-  font-family: 'Geologica', sans-serif;
-  text-align: center;
-}
-
-.image-container img {
-  width: 100%;
-  height: auto;
-  border-radius: 12px;
-  margin-bottom: 12px;
-}
-
-.image-container figcaption, .image-container p {
-  font-family: 'FunnelDisplay', sans-serif;
-  font-size: 0.9rem;
-  font-weight: 600;
-  color: #3a5a40;
-  line-height: 1.4;
-  margin: 0;
-}
-
-.image-container h6, .image-container a {
-  font-family: 'FunnelDisplay', sans-serif;
-  font-size: 0.7rem;
-  font-weight: 600;
-  color: #3a5a40;
-  line-height: 1.4;
-  margin: 0;
-  padding-top: 10px;
-}
-
-/* =============================
-   TIMELINE
-============================= */
-.timeline ul {
-  list-style: none;
-  padding: 0;
-}
-
-
-.timeline-item {
-  background-color: var(--card);
-  border-left: 5px solid var(--accent-border);
-  border-radius: 10px;
-  margin: 20px;
-  padding: 0;
-  box-shadow: var(--box-shadow);
-  overflow: hidden;
-  opacity: 0;
-  transform: translateY(30px);
-  transition: box-shadow 0.3s ease, opacity 0.6s ease-out, transform 0.6s ease-out;
-}
-
-
-.timeline li.visible {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-
-.timeline-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 16px 20px;
-  cursor: pointer;
-  background-color: #c7ddcd;
-  font-weight: bold;
-  font-family: 'SpaceGrotesk', sans-serif;
-  color: #143f2c;
-  transition: background-color 0.3s ease;
-}
-
-
-.timeline-header:hover {
-  background-color: #8fd1b0;
-}
-
-
-.timeline-date {
-  font-weight: 700;
-  color: #1b5e3c;
-  margin-right: 10px;
-}
-
-
-.timeline-summary {
-  flex-grow: 1;
-  margin: 0 10px;
-  color: #2d4e3d;
-  font-size: 1rem;
-}
-
-
-.toggle-btn {
-  background-color: transparent;
-  border: none;
-  font-size: 1.2rem;
-  font-weight: bold;
-  color: #1b5e3c;
-  cursor: pointer;
-  transition: transform 0.3s ease;
-  margin-left: auto;
-}
-
-
-.timeline-item.active .toggle-btn {
-  transform: rotate(180deg);
-}
-
-
-.toggle-btn:hover {
-  transform: scale(1.2);
-}
-
-
-.timeline-details {
-  background-color: var(--box-color);
-  max-height: 0;
-  overflow: hidden;
-  opacity: 0;
-  padding: 0 20px;
-  transition: max-height 0.5s ease, opacity 0.4s ease, padding 0.4s ease;
-}
-
-
-.timeline-item.active .timeline-details {
-  max-height: 500px;
-  opacity: 1;
-  padding: 20px;
-}
-
-/* =============================
-   BIBLIOGRAPHY
-============================= */
-.bibliography ol {
-  padding-left: 24px;
-  list-style-type: square;
-}
-
-.bibliography li h5 {
-  font-size: 0.95rem;
-  color: #444;
-  font-family: 'FunnelDisplay', sans-serif;
-  padding: auto 15px;
-  font-weight: normal;
-}
-
-body.dark .bibliography li {
-  color: #d1d1d1;
-}
-
-.bibliography h2 {
-  border-bottom: 2px solid #3edfc4;
-  padding-bottom: 5px;
-  margin-top: 50px;
-}
-
-.bibliography li em {
-  font-style: italic;
-}
-
-.bibliography li strong {
-  font-weight: bold;
-}
-
-.bibliography li a {
-  font-weight: bolder;
-  font-style: italic;
-  color: #1fa39d;
-  text-decoration: none;
-}
-
 @media (prefers-reduced-motion: no-preference) {
   .timeline li {
     will-change: transform, opacity;
@@ -520,9 +218,7 @@ body.dark .bibliography li {
   }
 }
 
-/* =============================
-   ANIMATIONS
-============================= */
+/* Animations */
 @keyframes fadeInUp {
   to {
     opacity: 1;

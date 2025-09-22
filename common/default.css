@@ -6,8 +6,15 @@
   box-sizing: border-box;
 }
 
+main {
+  margin-top: 0;
+  padding: 0;
+  top: 0;
+}
+
 body {
   font-size: var(--font-size);
+  font-family: var(--font-family);
   transition: font-size 0.3s ease, background-color 0.3s ease, color 0.3s ease;
 }
 
@@ -17,8 +24,9 @@ body {
   --text: #477268 !important;
   --topbar: #c7d7ba !important;
   --box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  --card: #d0e7db;
   --link: #c76f4a;
-  --link-hover: #743e28;
+  --link-hover: #77341a;
   --font-size: 18px;
   --font-family: 'Geologica', 'SpaceGrotesk', 'Forum', sans-serif;
 }
@@ -29,6 +37,7 @@ body.dark {
   --text: #e8e8e8 !important;
   --topbar: #194944 !important;
   --box-shadow: 0 4px 10px rgba(255, 255, 255, 0.222);
+  --card: #203127;
   --link: #e6855a;
   --link-hover: #dca086;
 }
@@ -37,7 +46,7 @@ body.dark {
 @font-face {
   font-family: 'Forum';
   src: url('../assets/fonts/Forum-Regular.ttf') format('truetype');
-  font-weight: normal;
+  font-weight: 100 900;
   font-style: normal;
 }
 
@@ -65,8 +74,9 @@ body.dark {
 /* The Topbar */
 .topbar {
   background-color: var(--topbar);
+  color: var(--text);
   padding: 5px 15px;
-  position: relative;
+  position: fixed;
   top: 0;
   left: 0;
   width: 100%;
@@ -85,6 +95,8 @@ body.dark {
   display: flex;
   font-family: 'FunnelDisplay', sans-serif;
   font-size: var(--font-size);
+  font-style: normal !important;
+  font-weight: 400 !important;
   transition: font-size 0.3s ease;
   gap: 30px;
   margin: 0;
@@ -92,7 +104,8 @@ body.dark {
 }
 
 .topbar ul li,
-.topbar ul i {
+.topbar ul li a,
+.topbar li i {
   color: var(--link);
 }
 
@@ -137,39 +150,40 @@ body.dark {
   cursor: pointer;
 }
 
-/* Remove conflicting main styles to let index-style.css take over */
-main {
-  margin-top: 0;
-  padding: 0;
-  top: 0;
-}
-
 /* Settings Panel */
 .settings-panel {
-  position: fixed;
+  position: fixed !important;
   top: 0;
   right: -400px;
   width: 300px;
   height: 100vh;
   background-color: var(--topbar);
   color: var(--text);
-  padding: 20px;
+  padding-bottom: 15px;
   box-shadow: -3px 0 10px #0000004d;
-  transition: right 0.4s ease;
+  transition: right 0.4s ease !important;
   z-index: 2000;
   font-family: 'FunnelDisplay', sans-serif;
-  font-weight: 400;
+  font-weight: 400 !important;
+}
+
+.settings-panel {
+  padding-left: 15px;
+  padding-top: 10px;
 }
 
 .settings-panel h2 {
-  font-family: 'FunnelDisplay', sans-serif;
+  font-family: 'FunnelDisplay', sans-serif !important;
+  margin: 10px;
+  padding-top: 10px;
 }
+
 .settings-panel.active {
-  right: 0;
+  right: 0 !important;
 }
 
 .settings-panel button {
-  margin-top: 20px;
+  margin: 10px;
   border-radius: 10px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
   font-family: 'FunnelDisplay', sans-serif;
@@ -190,10 +204,10 @@ main {
 
 .font-size, .font-style {
   display: flex;
-  overflow: scroll;
   flex-direction: column;
-  margin-bottom: 20px;
-  padding: 15px;
+  margin-bottom: 10px; /* Reduced from 20px for less vertical spacing */
+  padding: 10px; /* Reduced from 15px for tighter internal padding */
+  overflow: auto; /* Changed to auto to only scroll if needed */
 }
 
 /* Font Slider */
@@ -236,6 +250,14 @@ html, body, h2, h3, p, .settings-panel {
   transition: font-size 0.3s ease;
 }
 
+p, li {
+  line-height: calc(var(--font-size)*1.4);
+}
+
+h2, h3 {
+  line-height: calc(var(--font-size)*1.2);
+}
+
 select {
   width: 200px;
   border: 3px solid #5c8465;
@@ -245,8 +267,4 @@ select {
   font-size: 16px;
   font-family: 'FunnelDisplay', sans-serif;
   appearance: none;
-}
-
-body {
-  font-family: var(--font-family);
 }

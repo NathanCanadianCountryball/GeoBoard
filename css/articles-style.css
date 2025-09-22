@@ -7,6 +7,11 @@ body {
   transition: background-color 0.3s ease, color 0.3s ease;
 }
 
+main {
+  position: relative;
+  top: 140px !important;
+}
+
 h2 {
   font-family: 'SpaceGrotesk', sans-serif;
   padding: 5px 15px;
@@ -68,6 +73,7 @@ p {
   padding: 3px 8px;
   margin-right: 6px;
   font-size: 0.8rem;
+  text-align: center;
   border-radius: 6px;
   font-family: 'FunnelDisplay', sans-serif;
   display: inline-block;
@@ -82,10 +88,8 @@ p {
   display: flex;
   flex-wrap: wrap;
   gap: 10px;
-  padding: 20px 0;
-  margin-top: 200px;
-  padding: 60px;
-  top: 250px;
+  padding: 10px 0;
+  top: 90px;
 }
 
 .filter-btn {
