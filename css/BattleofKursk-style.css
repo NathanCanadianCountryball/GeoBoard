@@ -1,14 +1,3 @@
-/* =============================
-   ROOT VARIABLES (INHERIT)
-============================= */
-:root {
-  --bg: #ece9dd;
-}
-
-body.dark {
-  --bg: #122f3b;
-}
-
 /* Base Styles */
 body {
   font-family: 'FunnelDisplay', serif;

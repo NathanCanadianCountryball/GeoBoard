@@ -21,6 +21,15 @@ main {
 }
 
 /* Titles */
+p {
+  font-family: 'Geologica', sans-serif;
+  color: var(--text);
+  padding: 20px 20px;
+  font-size: calc(var(--font-size) + 2px);
+  color: #1d3c45;
+  margin: 0 auto 24px;
+}
+
 #title h3 {
   font-family: 'SpaceGrotesk', sans-serif;
   font-size: calc(var(--font-size) + 15px);
@@ -127,7 +136,7 @@ li:before.list {
 .image-container {
   float: right;
   max-width: 200px;
-  margin: 0 0 10px 15px;
+  margin: 10px 15px;
   background-color: #eaf4ec;
   border: 1px solid #c4d8cc;
   border-radius: 16px;

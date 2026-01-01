@@ -135,7 +135,7 @@ body.dark {
 }
 
 .topbar img {
-  width: 180px;
+  width: 200px;
   height: auto;
   margin-right: 15px;
   padding: 0;
@@ -202,12 +202,12 @@ body.dark {
   transition: transform 0.3s ease, color 0.3s ease;
 }
 
-.font-size, .font-style {
+.font-size, .font-style, .language-select {
   display: flex;
   flex-direction: column;
   margin-bottom: 10px; /* Reduced from 20px for less vertical spacing */
   padding: 10px; /* Reduced from 15px for tighter internal padding */
-  overflow: auto; /* Changed to auto to only scroll if needed */
+  overflow: auto;
 }
 
 /* Font Slider */
