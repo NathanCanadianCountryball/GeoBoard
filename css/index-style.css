@@ -22,7 +22,7 @@ body {
 
 /* Map Container */
 #map {
-  height: 100%; /* Fill main-content height */
+  height: calc(100vh - 100px); /* Fill main-content height */
   width: 100%;
   position: sticky;
   border-radius: 10px;
