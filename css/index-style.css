@@ -1,17 +1,5 @@
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-html, body {
-  height: 100%;
-  overflow: hidden;
-}
-
 /* Global Styles */
 body {
-  font-family: 'SpaceGrotesk', sans-serif;
   font-weight: 400;
   font-size: var(--font-size);
   background-color: var(--bg);
@@ -21,19 +9,14 @@ body {
   transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-/* Top Navigation Bar */
-.topbar {
-  position: fixed;
-}
-
 /* Main Content */
 .main-content {
   width: 100%;
   height: calc(100vh - 70px); /* Match topbar min-height */
-  margin-top: 70px;
   padding: 0;
   z-index: 1;
-  overflow: hidden; /* Prevent internal scrolling */
+  overflow-x: hidden;
+  overflow-y: visible;
   position: relative; /* Keep for z-index or absolute children */
 }
 
@@ -41,11 +24,10 @@ body {
 #map {
   height: 100%; /* Fill main-content height */
   width: 100%;
-  position: relative;
+  position: sticky;
   border-radius: 10px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
   z-index: 1;
-  top: 80px;
 }
 
 /* Leaflet Popup Styling */

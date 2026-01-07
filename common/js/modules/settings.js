@@ -83,12 +83,12 @@ export function setupSettingsPanel() {
       fontSelector.value = savedFont;
       if (savedFont === 'default') {
         document.body.style.fontFamily = '';
-        document.querySelectorAll('h2, h3, p, li').forEach(el => {
+        document.querySelectorAll('h2, h3, h6, p, li, figcaption').forEach(el => {
           el.style.fontFamily = '';
         });
       } else {
         document.body.style.fontFamily = savedFont;
-        document.querySelectorAll('h2, h3, p, li').forEach(el => {
+        document.querySelectorAll('h2, h3, p, li, figcaption').forEach(el => {
           el.style.fontFamily = savedFont;
         });
       }
@@ -102,12 +102,12 @@ export function setupSettingsPanel() {
 
       if (selectedFont === 'default') {
         document.body.style.fontFamily = '';
-        document.querySelectorAll('h2, h3, p, li').forEach(el => {
+        document.querySelectorAll('h2, h3, h6, p, li, figcaption').forEach(el => {
           el.style.fontFamily = '';
         });
       } else {
         document.body.style.fontFamily = selectedFont;
-        document.querySelectorAll('h2, h3, p, li').forEach(el => {
+        document.querySelectorAll('h2, h3, h6, p, li, figcaption').forEach(el => {
           el.style.fontFamily = selectedFont;
         });
       }

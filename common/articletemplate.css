@@ -15,8 +15,8 @@ body.dark {
 }
 
 main {
-  position: absolute;
-  top: 140px !important;
+  position: relative;
+  top: 0px;
   box-sizing: border-box;
 }
 
@@ -83,7 +83,7 @@ body.dark h3.header {
 /* Summary Box */
 .summary {
   padding: 20px;
-  margin: 20px 0;
+  margin: 20px;
   border-radius: 8px;
   font-style: italic;
   color: var(--summary);
@@ -137,10 +137,15 @@ li:before.list {
   float: right;
   max-width: 200px;
   margin: 10px 15px;
-  background-color: #eaf4ec;
+  margin-left: 20px;
+  background: linear-gradient(
+    to bottom,
+    #eef7f1,
+    #e6f0ea
+  );
   border: 1px solid #c4d8cc;
   border-radius: 16px;
-  padding: 8px 12px;
+  padding: 14px;
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
   font-family: 'Geologica', sans-serif;
   text-align: center;
@@ -150,26 +155,40 @@ li:before.list {
   width: 100%;
   height: auto;
   border-radius: 12px;
-  margin-bottom: 12px;
+  margin-bottom: 10px;
 }
 
 .image-container figcaption, .image-container p {
   font-family: 'FunnelDisplay', sans-serif;
-  font-size: 0.9rem;
+  font-size: 0.7em;
+  font-weight: 600;
+  color: #3a5a40;
+  line-height: 1.4;
+  margin: 0;
+  padding: 0;
+}
+
+.image-container figcaption {
+  margin-bottom: 6px;
+  padding: 0 4px;
+}
+
+.image-container h6, .image-container h6 a {
+  font-family: 'FunnelDisplay', sans-serif;
+  padding-top: 6px;
+  opacity: 0.8;
   font-weight: 600;
   color: #3a5a40;
   line-height: 1.4;
   margin: 0;
 }
 
-.image-container h6, .image-container a {
-  font-family: 'FunnelDisplay', sans-serif;
-  font-size: 0.7rem;
-  font-weight: 600;
-  color: #3a5a40;
-  line-height: 1.4;
-  margin: 0;
-  padding-top: 10px;
+.image-container h6 {
+  font-size: 0.55em;
+}
+
+.image-container h6 a {
+  font-size: 1em;
 }
 
 /* Timeline */

@@ -9,8 +9,8 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
   <!-- Stylesheets -->
-  <link rel="stylesheet" href="common/default.css">
-  <link rel="stylesheet" href="css/index-style.css">
+  <link rel="stylesheet" href="/common/default.css">
+  <link rel="stylesheet" href="/css/index-style.css">
    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
      integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
      crossorigin=""/>
@@ -52,21 +52,52 @@
       <button id="closeSettings">Close</button>
     </div>
 
-  <!-- TOPBAR -->
-    <header class="topbar">
-      <div class="topbar-left">
-        <a href="index.html">
-          <img id="geoLogo" src="Assets/Media/GeoBoardIcon.svg" alt="GeoBoard Logo">
+<!-- TOPBAR -->
+<header class="topbar">
+  <div class="topbar-left">
+    <a href="/index.html" class="logo-link">
+      <img id="geoLogo" src="Assets/Media/GeoBoardIcon.svg" alt="GeoBoard Logo">
+    </a>
+  </div>
+  <nav class="topbar-nav" aria-label="Main Navigation">
+    <ul class="topbar-menu">
+      <li>
+        <a href="/articles.html" class="nav-pill">
+          <i class="fa-solid fa-newspaper"></i>
+          <span>Articles</span>
         </a>
-      </div>
-      <ul class="topbar-menu">
-        <li><a href="articles.html"><i class="fa-solid fa-newspaper"></i> Articles</a></li>
-        <li><a href="#"><i class="fas fa-landmark"></i> History Quizzes</a></li>
-        <li id="darkModeToggle"><a href="#"><i class="fas fa-moon"></i> Dark Mode</a></li>
-        <li><a href="#"><i class="fas fa-cog"></i> Settings</a></li>
-        <li><a href="#"><i class="fa-solid fa-user"></i> Profile</a></li>
-      </ul>
-    </header>
+      </li>
+
+      <li>
+        <a href="#" class="nav-pill">
+          <i class="fas fa-landmark"></i>
+          <span>History Quizzes</span>
+        </a>
+      </li>
+
+      <li>
+        <button id="darkModeToggle" class="nav-pill nav-pill--button">
+          <i class="fas fa-moon"></i>
+          <span>Dark Mode</span>
+        </button>
+      </li>
+
+      <li>
+        <a href="#" class="nav-pill">
+          <i class="fas fa-cog"></i>
+          <span>Settings</span>
+        </a>
+      </li>
+
+      <li>
+        <a href="#" class="nav-pill">
+          <i class="fa-solid fa-user"></i>
+          <span>Profile</span>
+        </a>
+      </li>
+    </ul>
+  </nav>
+</header>
 
   <!-- MAIN CONTENT -->
   <main class="main-content">
@@ -75,6 +106,6 @@
   </main>
 
   <!-- SCRIPT -->
-  <script type="module" src="common/js/main.js"></script>
+  <script type="module" src="/common/js/main.js"></script>
 </body>
 </html>

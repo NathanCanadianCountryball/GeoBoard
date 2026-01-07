@@ -19,8 +19,8 @@ body {
 }
 
 main {
-  position: absolute;
-  top: 140px !important;
+  position: relative;
+  top: 70px;
   box-sizing: border-box;
 }
 
@@ -55,6 +55,8 @@ p {
   background-color: #decda7;
   color: #8f7d2e;
   padding: 20px;
+  width: 95vw;
+  min-width: 400px; 
   margin-bottom: 20px;
   border-radius: 10px;
   border-left: 5px solid var(--accent-border);
@@ -96,7 +98,8 @@ a ~ h3 {
 /* Folders */
 .article-folder {
   border-radius: 10px;
-  overflow: hidden; /* makes the background clip cleanly */
+  overflow-x: hidden;
+  overflow-y: visible; /* makes the background clip cleanly */
   margin-bottom: 20px;
   box-shadow: 0 4px 12px rgba(0,0,0,0.1);
   transition: opacity 0.3s ease;
@@ -191,7 +194,6 @@ a ~ h3 {
   flex-wrap: wrap;
   gap: 10px;
   padding: 10px 0;
-  top: 90px;
 }
 
 .filter-btn {
@@ -249,9 +251,9 @@ a ~ h3 {
 /* Clear button */
 .search-container #clearSearch {
   position: absolute;
-  right: 45px; /* Position inside the input */
-  top: 50%;
+  right: 45px;
   transform: translateY(-50%);
+  top: calc(50% + 5px);
   background: transparent;
   border: none;
   font-size: 1.8rem;

@@ -4,9 +4,8 @@
   <meta charset="UTF-8">
   <title>GeoBoard - Timeline of the Battle of Okinawa</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-  <link rel="stylesheet" href="common/default.css">
-  <link rel="stylesheet" href="common/articletemplate.css">
-  <link rel="stylesheet" href="css/battleofokinawa-style.css">
+  <link rel="stylesheet" href="/common/default.css">
+  <link rel="stylesheet" href="/css/battleofokinawa-style.css">
 </head>
 <body>
  <!-- SETTINGS PANEL -->
@@ -42,20 +41,51 @@
       <button id="closeSettings">Close</button>
     </div>
   <!-- TOPBAR -->
-    <header class="topbar">
-      <div class="topbar-left">
-        <a href="index.html">
-          <img id="geoLogo" src="Assets/Media/GeoBoardIcon.svg" alt="GeoBoard Logo">
+<header class="topbar">
+  <div class="topbar-left">
+    <a href="/index.html" class="logo-link">
+      <img id="geoLogo" src="/assets/media/GeoBoardIcon.svg" alt="GeoBoard Logo">
+    </a>
+  </div>
+  <nav class="topbar-nav" aria-label="Main Navigation">
+    <ul class="topbar-menu">
+      <li>
+        <a href="/index.html" class="nav-pill">
+          <i class="fa-solid fa-home"></i>
+          <span>Home</span>
         </a>
-      </div>
-      <ul class="topbar-menu">
-        <li><a href="index.html"><i class="fa-solid fa-house-user"></i> Home</a></li>
-        <li><a href="#"><i class="fas fa-landmark"></i> History Quizzes</a></li>
-        <li id="darkModeToggle"><a href="#"><i class="fas fa-moon"></i> Dark Mode</a></li>
-        <li><a href="#"><i class="fas fa-cog"></i> Settings</a></li>
-        <li><a href="#"><i class="fa-solid fa-user"></i> Profile</a></li>
-      </ul>
-    </header>
+      </li>
+
+      <li>
+        <a href="#" class="nav-pill">
+          <i class="fas fa-landmark"></i>
+          <span>History Quizzes</span>
+        </a>
+      </li>
+
+      <li>
+        <button id="darkModeToggle" class="nav-pill nav-pill--button">
+          <i class="fas fa-moon"></i>
+          <span>Dark Mode</span>
+        </button>
+      </li>
+
+      <li>
+        <a href="#" class="nav-pill">
+          <i class="fas fa-cog"></i>
+          <span>Settings</span>
+        </a>
+      </li>
+
+      <li>
+        <a href="#" class="nav-pill">
+          <i class="fa-solid fa-user"></i>
+          <span>Profile</span>
+        </a>
+      </li>
+    </ul>
+  </nav>
+</header>
   <!-- MAIN CONTENT -->
   <main>
     <!-- ARTICLE TITLE -->
@@ -101,8 +131,8 @@
     </div>
 
     <div class="map-container">
-      <img src="Assets/Media/OkinawaLandingMapLight.png" alt="Okinawa Map Light" class="okinawa-map light-mode-map">
-      <img src="Assets/Media/OkinawaLandingMapDark.png" alt="Okinawa Map Dark" class="okinawa-map dark-mode-map">
+      <img src="/assets/media/OkinawaLandingMapLight.png" alt="Okinawa Map Light" class="okinawa-map light-mode-map">
+      <img src="/assets/media/OkinawaLandingMapDark.png" alt="Okinawa Map Dark" class="okinawa-map dark-mode-map">
     </div>
 
 
@@ -360,6 +390,6 @@
 </main>
 
   <!-- SCRIPT -->
-  <script type="module" src="common/js/main.js"></script>
+  <script type="module" src="/common/js/main.js"></script>
 </body>
 </html>

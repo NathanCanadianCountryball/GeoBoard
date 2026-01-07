@@ -4,8 +4,8 @@
   <meta charset="UTF-8">
   <title>GeoBoard - Articles</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-  <link rel="stylesheet" href="common/default.css">
-  <link rel="stylesheet" href="css/articles-style.css">
+  <link rel="stylesheet" href="/common/default.css">
+  <link rel="stylesheet" href="/css/articles-style.css">
 </head>
 <body>
     <!-- SETTINGS PANEL -->
@@ -41,21 +41,52 @@
       <button id="closeSettings">Close</button>
     </div>
 
-    <!-- TOPBAR -->
-    <header class="topbar">
-      <div class="topbar-left">
-        <a href="index.html">
-          <img id="geoLogo" src="Assets/Media/GeoBoardIcon.svg" alt="GeoBoard Logo">
+<!-- TOPBAR -->
+<header class="topbar">
+  <div class="topbar-left">
+    <a href="/index.html" class="logo-link">
+      <img id="geoLogo" src="/assets/media/GeoBoardIcon.svg" alt="GeoBoard Logo">
+    </a>
+  </div>
+  <nav class="topbar-nav" aria-label="Main Navigation">
+    <ul class="topbar-menu">
+      <li>
+        <a href="/index.html" class="nav-pill">
+          <i class="fa-solid fa-home"></i>
+          <span>Home</span>
         </a>
-      </div>
-      <ul class="topbar-menu">
-        <li><a href="index.html"><i class="fa-solid fa-house-user"></i> Home</a></li>
-        <li><a href="#"><i class="fas fa-landmark"></i> History Quizzes</a></li>
-        <li id="darkModeToggle"><a href="#"><i class="fas fa-moon"></i> Dark Mode</a></li>
-        <li><a href="#"><i class="fas fa-cog"></i> Settings</a></li>
-        <li><a href="#"><i class="fa-solid fa-user"></i> Profile</a></li>
-      </ul>
-    </header>
+      </li>
+
+      <li>
+        <a href="#" class="nav-pill">
+          <i class="fas fa-landmark"></i>
+          <span>History Quizzes</span>
+        </a>
+      </li>
+
+      <li>
+        <button id="darkModeToggle" class="nav-pill nav-pill--button">
+          <i class="fas fa-moon"></i>
+          <span>Dark Mode</span>
+        </button>
+      </li>
+
+      <li>
+        <a href="#" class="nav-pill">
+          <i class="fas fa-cog"></i>
+          <span>Settings</span>
+        </a>
+      </li>
+
+      <li>
+        <a href="#" class="nav-pill">
+          <i class="fa-solid fa-user"></i>
+          <span>Profile</span>
+        </a>
+      </li>
+    </ul>
+  </nav>
+</header>
 
     <main>
       <div class="search-container">
@@ -81,7 +112,7 @@
       <section class="articles-menu">
         <h2>Articles</h2>
 
-        <a href="communism-explained.html" class="article-preview" data-era="modern" data-tags="ideologies">
+        <a href="/communism-explained.html" class="article-preview" data-era="modern" data-tags="ideologies">
           <h3>Communism, Explained</h3>
           <span class="tag">Ideologies</span>
           <p>Born from a dream of equality, communism seems like the utopia for all... or is it?</p>
@@ -91,13 +122,13 @@
           <i class="fas fa-folder"></i> World War II
           </button>
           <div class="folder-content">
-            <a href="worldwartwo.html" class="article-preview base-lesson overview" data-tags="wwii overview">
+            <a href="/worldwartwo.html" class="article-preview base-lesson overview" data-tags="wwii overview">
               <h3>World War II Overview</h3>
               <span class="tag">WWII</span>
               <span class="tag">Overview</span>
               <p>The global conflict that reshaped the 20th century.</p>
             </a>
-            <a href="battleofkursk.html" class="article-preview" data-era="modern" data-tags="wwii europe nazi-germany ussr">
+            <a href="/battleofkursk.html" class="article-preview" data-era="modern" data-tags="wwii europe nazi-germany ussr">
               <h3>The Battle of Kursk</h3>
               <span class="tag">Europe WWII</span>
               <span class="tag">Nazi Germany</span>
@@ -105,7 +136,7 @@
               <p>The largest tank battle in history, and the last nails in the coffin for the German Eastern Front.</p>
             </a>
 
-            <a href="battleofokinawa.html" id="okinawaLink" class="article-preview" data-era="modern" data-tags="wwii asia-pacific usa japanese-empire timeline-articles">
+            <a href="/battleofokinawa.html" id="okinawaLink" class="article-preview" data-era="modern" data-tags="wwii asia-pacific usa japanese-empire timeline-articles">
               <h3>Timeline of the Battle of Okinawa</h3>
               <span class="tag">Pacific WWII</span>
               <span class="tag">USA</span>
@@ -123,7 +154,7 @@
       <p id="noResultsMessage" style="display:none; text-align:center; margin:30px; font-size:1.2rem; color:#666;">No results found. Try another filter or clear the search.</p>
     </main>
     <!-- SCRIPT -->
-    <script type="module" src="common/js/main.js"></script>
+    <script type="module" src="/common/js/main.js"></script>
 
 </body>
 </html>
