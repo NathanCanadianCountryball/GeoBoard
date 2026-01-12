@@ -125,35 +125,6 @@ body.dark .subtitle h3 {
   line-height: 1.1;
 }
 
-
-#date {
-  color: #781b1b;
-  font-family: 'Courier New', Courier, monospace;
-  font-weight: bold;
-  font-size: 20px;
-  margin-left: 20px;
-}
-
-
-body.dark #date {
-  color: #ff6b6b;
-  text-shadow: 2px 2px 5px #781b1b;
-}
-
-
-.summary {
-  font-family: 'Courier New', monospace;
-  font-weight: bold;
-  font-size: var(--font-size);
-  color: #000000;
-  margin-top: 0;
-  margin-bottom: 4px;
-}
-
-body.dark .summary {
-  color: var(--accent-border);
-}
-
 /* =============================
    ANIMATIONS
 ============================= */

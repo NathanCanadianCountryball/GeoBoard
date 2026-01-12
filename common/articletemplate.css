@@ -298,7 +298,7 @@ li:before.list {
 
 /* Article Opening Styles */
 #date {
-  color: #781b1b;
+  color: #1b785f;
   font-family: 'Courier New', Courier, monospace;
   font-weight: bold;
   font-size: 20px;
@@ -307,8 +307,8 @@ li:before.list {
 
 
 body.dark #date {
-  color: #ff6b6b;
-  text-shadow: 2px 2px 5px #781b1b;
+  color: #dde9e7;
+  text-shadow: 2px 2px 5px #083723;
 }
 
 .summary {

@@ -10,8 +10,8 @@ export function applyTheme(theme) {
   const logo = document.getElementById("geoLogo");
   if (logo) {
     logo.src = theme === "dark"
-      ? "Assets/Media/GeoBoardIconDark.svg"
-      : "Assets/Media/GeoBoardIcon.svg";
+      ? "/assets/media/GeoBoardIconDark.svg"
+      : "/assets/media/GeoBoardIcon.svg";
     console.log(`Logo updated to: ${logo.src}`);
   } else {
     console.error("Logo element not found (id='geoLogo')");

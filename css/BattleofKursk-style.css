@@ -34,20 +34,6 @@ body.dark .article-content h2 {
   font-family: 'SpaceGrotesk', sans-serif;
 }
 
-#date {
-  color: #781b1b;
-  font-family: 'Courier New', Courier, monospace;
-  font-weight: bold;
-  font-size: 20px;
-  margin-left: 20px;
-}
-
-
-body.dark #date {
-  color: #ff6b6b;
-  text-shadow: 2px 2px 5px #781b1b;
-}
-
 /* =============================
    IMAGES
 ============================= */
