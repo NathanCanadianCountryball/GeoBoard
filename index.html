@@ -5,51 +5,98 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>GeoBoard</title>
 
-  <!-- Fonts & Icons -->
+  <!-- ICONS -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
-  <!-- Stylesheets -->
+  <!-- STYLESHEETS -->
   <link rel="stylesheet" href="/common/default.css">
   <link rel="stylesheet" href="/css/index-style.css">
-   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
-     integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
-     crossorigin=""/>
-    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
-     integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
-     crossorigin=""></script>
+  <link href="https://unpkg.com/maplibre-gl@3.6.2/dist/maplibre-gl.css" rel="stylesheet"/>
+  <script src="https://unpkg.com/maplibre-gl@3.6.2/dist/maplibre-gl.js"></script>
 </head>
 <body>
+
     <!-- SETTINGS PANEL -->
     <div id="settingsPanel" class="settings-panel">
-      <h2>Settings</h2>
-      <div class="font-size">
-        <label for="fontSlider">Font Size</label>
-        <input type="range" id="fontSlider" min="12" max="24" value="16">
-        <small id="fontSizeValue">16px</small>
+      <div class="settings-tabs">
+        <div class="tab active" data-tab="reading">
+          <span class="tab-icon"><i class="fa-solid fa-eye"></i></span>
+          <span class="tab-label">Reading</span>
+        </div>
+        <div class="tab" data-tab="learning">
+          <span class="tab-icon"><i class="fa-solid fa-chalkboard-user"></i></span>
+          <span class="tab-label">Learning</span>
+        </div>
+        <div class="tab" data-tab="perspective">
+          <span class="tab-icon"><i class="fa-solid fa-globe"></i></span>
+          <span class="tab-label">Perspective</span>
+        </div>
+        <div class="tab" data-tab="about">
+          <span class="tab-icon"><i class="fa-solid fa-circle-info"></i></span>
+          <span class="tab-label">About</span>
+        </div>
       </div>
 
-      <div class="font-style">
-        <label for="fontSelector">Font Style</label>
-          <select id="fontSelector">
-            <option value="default">Default</option>
-            <option value="'Geologica', sans-serif">Geologica</option>
-            <option value="'Courier New', monospace">Courier New</option>
-            <option value="'SpaceGrotesk', sans-serif">Space Grotesk</option>
-            <option value="'FunnelDisplay', sans-serif">FunnelDisplay</option>
-            <option value="'Forum', serif">Forum</option>
-          </select>
-      </div>
-      
-      <div class="language-select">
-        <label for="languageSelector">Language</label>
-        <select id="languageSelector">
-          <option value="en" selected>English</option>
-          <option value="es">Español</option>
-        </select>
-      </div>
+      <div class="settings-content">
+        <h2 id="contentTitle">Reading & Accessibility</h2>
+        
+        <!-- Reading & Accessibility Content -->
+        <div id="readingContent" class="tab-content active">
+          <div class="font-size">
+            <label for="fontSlider">Font Size</label>
+            <input type="range" id="fontSlider" min="12" max="24" value="16">
+            <small id="fontSizeValue">16px</small>
+          </div>
 
-      <p>Coming soon: adjustable font sizes, themes, and more!</p>
-      <button id="closeSettings">Close</button>
+          <div class="font-style">
+            <label for="fontSelector">Font Style</label>
+            <select id="fontSelector">
+              <option value="default">Default</option>
+              <option value="'Geologica', sans-serif">Geologica</option>
+              <option value="'Courier New', monospace">Courier New</option>
+              <option value="'SpaceGrotesk', sans-serif">Space Grotesk</option>
+              <option value="'FunnelDisplay', sans-serif">FunnelDisplay</option>
+              <option value="'Forum', serif">Forum</option>
+            </select>
+          </div>
+          
+          <div class="language-select">
+            <label for="languageSelector">Language</label>
+            <select id="languageSelector">
+              <option value="en" selected>English</option>
+              <option value="es">Español</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Learning Context Content -->
+        <div id="learningContent" class="tab-content">
+          <p class="coming-soon">Coming soon!</p>
+        </div>
+
+        <!-- Perspective Lens Content -->
+        <div id="perspectiveContent" class="tab-content">
+          <p class="coming-soon">Coming soon!</p>
+        </div>
+
+        <!-- About & Transparency Content -->
+        <div id="aboutContent" class="tab-content">
+          <p> GeoBoard is an interactive learning platform that helps students explore 
+            how geography, history, and political systems change over time. It focuses 
+            on systems, tradeoffs, and cause-and-effect—not on telling users what to 
+            believe. It is not intended to be a replacement of teachers, families or 
+            peers, but is meant to assist students in their learning journey. Please 
+            note that this is a prototype to showcase GeoBoard and may contain bugs, 
+            AI filler text in articles or incomplete features.
+          </p>
+          <br>
+          <h5>Developed by Nathan Wong, a high school student in Vancouver, Canada.</h5>
+          <h5>Version 0.4.0</h5>
+          <h5>For questions, email GeoBoard at nathanwongtybusiness@gmail.com</h5>
+        </div>
+
+        <button id="closeSettings" class="close-btn">Close</button>
+      </div>
     </div>
 
 <!-- TOPBAR -->
@@ -71,14 +118,14 @@
       <li>
         <a href="#" class="nav-pill">
           <i class="fas fa-landmark"></i>
-          <span>History Quizzes</span>
+          <span>History Quizzes (WIP)</span>
         </a>
       </li>
 
       <li>
         <button id="darkModeToggle" class="nav-pill nav-pill--button">
           <i class="fas fa-moon"></i>
-          <span>Dark Mode</span>
+          <span>Dark Mode (WIP)</span>
         </button>
       </li>
 
@@ -92,7 +139,7 @@
       <li>
         <a href="#" class="nav-pill">
           <i class="fa-solid fa-user"></i>
-          <span>Profile</span>
+          <span>Profile (WIP)</span>
         </a>
       </li>
     </ul>
@@ -101,7 +148,45 @@
 
   <!-- MAIN CONTENT -->
   <main class="main-content">
-    <!-- Page content goes here -->
+    <!-- Sidebar Overlay -->
+    <div id="sidebarOverlay" class="sidebar-overlay"></div>
+    
+    <!-- Country Info Sidebar -->
+    <aside id="countrySidebar" class="country-sidebar">
+      <div class="sidebar-header">
+        <button id="closeSidebar" class="close-sidebar-btn" aria-label="Close sidebar">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+      
+      <div class="sidebar-content">
+        <h2 id="countryName" class="country-name-title">Country Name</h2>
+        
+        <div class="country-flag">
+          <img id="countryFlag" src="" alt="Country flag">
+        </div>
+        
+        <div id="countryInfo" class="country-details">
+          <!-- Country information will be populated here -->
+        </div>
+        
+        <div class="sidebar-actions">
+          <button id="timeMachineBtn" class="action-btn timemachine-btn" style="display: none;">
+            <i class="fas fa-clock-rotate-left"></i>
+            TimeMachine
+          </button>
+          <button class="action-btn">
+            <i class="fas fa-book"></i>
+            View Articles
+          </button>
+          <button class="action-btn">
+            <i class="fas fa-history"></i>
+            View Timeline
+          </button>
+        </div>
+      </div>
+    </aside>
+    
     <div id="map"></div>
   </main>
 

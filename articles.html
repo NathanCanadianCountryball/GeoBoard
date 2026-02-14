@@ -10,35 +10,85 @@
 <body>
     <!-- SETTINGS PANEL -->
     <div id="settingsPanel" class="settings-panel">
-      <h2>Settings</h2>
-      <div class="font-size">
-        <label for="fontSlider">Font Size</label>
-        <input type="range" id="fontSlider" min="12" max="24" value="16">
-        <small id="fontSizeValue">16px</small>
+      <div class="settings-tabs">
+        <div class="tab active" data-tab="reading">
+          <span class="tab-icon"><i class="fa-solid fa-eye"></i></span>
+          <span class="tab-label">Reading</span>
+        </div>
+        <div class="tab" data-tab="learning">
+          <span class="tab-icon"><i class="fa-solid fa-chalkboard-user"></i></span>
+          <span class="tab-label">Learning</span>
+        </div>
+        <div class="tab" data-tab="perspective">
+          <span class="tab-icon"><i class="fa-solid fa-globe"></i></span>
+          <span class="tab-label">Perspective</span>
+        </div>
+        <div class="tab" data-tab="about">
+          <span class="tab-icon"><i class="fa-solid fa-circle-info"></i></span>
+          <span class="tab-label">About</span>
+        </div>
       </div>
 
-      <div class="font-style">
-        <label for="fontSelector">Font Style</label>
-          <select id="fontSelector">
-            <option value="default">Default</option>
-            <option value="'Geologica', sans-serif">Geologica</option>
-            <option value="'Courier New', monospace">Courier New</option>
-            <option value="'SpaceGrotesk', sans-serif">Space Grotesk</option>
-            <option value="'FunnelDisplay', sans-serif">FunnelDisplay</option>
-            <option value="'Forum', serif">Forum</option>
-          </select>
-      </div>
-      
-      <div class="language-select">
-        <label for="languageSelector">Language</label>
-        <select id="languageSelector">
-          <option value="en" selected>English</option>
-          <option value="es">Español</option>
-        </select>
-      </div>
+      <div class="settings-content">
+        <h2 id="contentTitle">Reading & Accessibility</h2>
+        
+        <!-- Reading & Accessibility Content -->
+        <div id="readingContent" class="tab-content active">
+          <div class="font-size">
+            <label for="fontSlider">Font Size</label>
+            <input type="range" id="fontSlider" min="12" max="24" value="16">
+            <small id="fontSizeValue">16px</small>
+          </div>
 
-      <p>Coming soon: adjustable font sizes, themes, and more!</p>
-      <button id="closeSettings">Close</button>
+          <div class="font-style">
+            <label for="fontSelector">Font Style</label>
+            <select id="fontSelector">
+              <option value="default">Default</option>
+              <option value="'Geologica', sans-serif">Geologica</option>
+              <option value="'Courier New', monospace">Courier New</option>
+              <option value="'SpaceGrotesk', sans-serif">Space Grotesk</option>
+              <option value="'FunnelDisplay', sans-serif">FunnelDisplay</option>
+              <option value="'Forum', serif">Forum</option>
+            </select>
+          </div>
+          
+          <div class="language-select">
+            <label for="languageSelector">Language</label>
+            <select id="languageSelector">
+              <option value="en" selected>English</option>
+              <option value="es">Español</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Learning Context Content -->
+        <div id="learningContent" class="tab-content">
+          <p class="coming-soon">Coming soon!</p>
+        </div>
+
+        <!-- Perspective Lens Content -->
+        <div id="perspectiveContent" class="tab-content">
+          <p class="coming-soon">Coming soon!</p>
+        </div>
+
+        <!-- About & Transparency Content -->
+        <div id="aboutContent" class="tab-content">
+          <p> GeoBoard is an interactive learning platform that helps students explore 
+            how geography, history, and political systems change over time. It focuses 
+            on systems, tradeoffs, and cause-and-effect—not on telling users what to 
+            believe. It is not intended to be a replacement of teachers, families or 
+            peers, but is meant to assist students in their learning journey. Please 
+            note that this is a prototype to showcase GeoBoard and may contain bugs, 
+            AI filler text in articles or incomplete features.
+          </p>
+          <br>
+          <h5>Developed by Nathan Wong, a high school student in Vancouver, Canada.</h5>
+          <h5>Version 0.4.0</h5>
+          <h5>For questions, email GeoBoard at nathanwongtybusiness@gmail.com</h5>
+        </div>
+
+        <button id="closeSettings" class="close-btn">Close</button>
+      </div>
     </div>
 
 <!-- TOPBAR -->
@@ -60,14 +110,14 @@
       <li>
         <a href="#" class="nav-pill">
           <i class="fas fa-landmark"></i>
-          <span>History Quizzes</span>
+          <span>History Quizzes (WIP)</span>
         </a>
       </li>
 
       <li>
         <button id="darkModeToggle" class="nav-pill nav-pill--button">
           <i class="fas fa-moon"></i>
-          <span>Dark Mode</span>
+          <span>Dark Mode (WIP)</span>
         </button>
       </li>
 
@@ -81,7 +131,7 @@
       <li>
         <a href="#" class="nav-pill">
           <i class="fa-solid fa-user"></i>
-          <span>Profile</span>
+          <span>Profile (WIP)</span>
         </a>
       </li>
     </ul>
@@ -113,7 +163,7 @@
         <h2>Articles</h2>
 
         <a href="/communism-explained.html" class="article-preview" data-era="modern" data-tags="ideologies">
-          <h3>Communism, Explained</h3>
+          <h3>Communism, Explained (Work in Progress)</h3>
           <span class="tag">Ideologies</span>
           <p>Born from a dream of equality, communism seems like the utopia for all... or is it?</p>
         </a>
@@ -123,7 +173,7 @@
           </button>
           <div class="folder-content">
             <a href="/worldwartwo.html" class="article-preview base-lesson overview" data-tags="wwii overview">
-              <h3>World War II Overview</h3>
+              <h3>World War II Overview (Work in Progress)</h3>
               <span class="tag">WWII</span>
               <span class="tag">Overview</span>
               <p>The global conflict that reshaped the 20th century.</p>

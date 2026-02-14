@@ -6,6 +6,42 @@ import {
 export function setupSettingsPanel() {
   console.log("Setting up settings panel");
   
+  // Tab switching logic
+  const tabs = document.querySelectorAll('.tab');
+  const tabContents = document.querySelectorAll('.tab-content');
+  const contentTitle = document.getElementById('contentTitle');
+  
+  const tabTitles = {
+    'reading': 'Reading & Accessibility',
+    'learning': 'Learning Context',
+    'perspective': 'Perspective Lens',
+    'about': 'About & Transparency'
+  };
+  
+  tabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+      const targetTab = tab.getAttribute('data-tab');
+      
+      // Remove active class from all tabs and contents
+      tabs.forEach(t => t.classList.remove('active'));
+      tabContents.forEach(content => content.classList.remove('active'));
+      
+      // Add active class to clicked tab
+      tab.classList.add('active');
+      
+      // Show corresponding content
+      const targetContent = document.getElementById(`${targetTab}Content`);
+      if (targetContent) {
+        targetContent.classList.add('active');
+      }
+      
+      // Update title
+      if (contentTitle) {
+        contentTitle.textContent = tabTitles[targetTab];
+      }
+    });
+  });
+  
   // Open/close panel
   if (settingsBtn) {
     console.log("Settings button found:", settingsBtn);

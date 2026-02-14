@@ -45,48 +45,6 @@ body.dark .article-content h2 {
   transition: opacity 0.4s ease;
 }
 
-/* =============================
-   PARAGRAPHS
-============================= */
-p {
-  font-family: 'Geologica', sans-serif;
-  font-weight: 400;
-  color: var(--text);
-  padding: 20px 20px;
-  font-size: calc(var(--font-size) + 2px);
-  margin: 0 auto 24px;
-  line-height: 1.6; /* Improved line spacing */
-}
-
-body.dark p {
-  color: #cce2e0;
-}
-
-/* =============================
-   PULL QUOTE
-============================= */
-.pull-quote h4{
-  font-family: 'SpaceGrotesk', sans-serif;
-  font-size: 1.3rem;
-  font-style: italic;
-  background-color: #f0f6f4;
-  border-left: 4px solid var(--accent-border);
-  padding: 16px;
-  margin: 30px 40px;
-  color: #1d3c45;
-  box-shadow: var(--box-shadow);
-}
-
-.pull-quote p {
-  font-style: italic;
-  font-size: var(--font-size);
-}
-
-body.dark .pull-quote {
-  background-color: #122f3b;
-  color: #acebf6;
-}
-
 /* Title Section */
 #title {
   display: flex;

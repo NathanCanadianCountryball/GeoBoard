@@ -26,7 +26,7 @@ document.addEventListener("DOMContentLoaded", () => {
   console.log("Has .timeline element:", hasTimeline);
   console.log("Has .timeline-item elements:", hasTimelineItems);
 
-  // === Timeline Pages (detected by presence of timeline elements) ===
+  //Timeline Pages (detected by presence of timeline elements)
   if (hasTimeline || hasTimelineItems) {
     console.log("✓ Timeline page detected. Loading timeline module.");
     import('./modules/timeline.js').then(mod => {
@@ -41,14 +41,14 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // === Articles Page ===
+  //Articles Page
   else if (path.includes("articles.html") || path.includes("/articles")) {
     console.log("✓ Articles page detected. Setting up article features.");
     setupFilters();           // Article filter buttons
     setupFolderToggles();     // Folder opening
   }
 
-  // === Normal Articles ===
+  //Normal Articles
   else if (path.includes("normal")) {
     console.log("✓ Normal article page detected.");
     import('./modules/normalarticle.js').then(mod => {
@@ -56,13 +56,13 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // === Homepage ===
+  //Homepage
   else if (path.endsWith("index.html") || path === "/" || path.endsWith("/index")) {
     console.log("✓ Homepage detected. Initializing map.");
-    setupMap();
+    setupMap(); // Map will automatically apply saved theme
   }
 
-  // === Default fallback ===
+  //Default fallback
   else {
     console.log("⚠ No specialized JS module detected for this page.");
     console.log("Path:", path);
@@ -70,10 +70,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 });
 
-// ————————————————————————————————————————————
 // Folder Toggle Functionality
-// Handles opening and closing article folders
-// ————————————————————————————————————————————
 function setupFolderToggles() {
   console.log("Setting up folder toggles...");
   const folderToggles = document.querySelectorAll(".folder-toggle");
@@ -85,4 +82,6 @@ function setupFolderToggles() {
       content.classList.toggle("open");
     });
   });
+
+  setupMap();
 }
