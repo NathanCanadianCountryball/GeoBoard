@@ -1,0 +1,680 @@
+:root {
+  --bg: #dde9e7;
+  --surface: #eef3f1;
+  --text: #477268;
+  --text-muted: #6b9189;
+  --border: #c4d8d4;
+  --accent: #c76f4a;
+  --accent-hover: #77341a;
+  --accent-soft: #f5e6de;
+  --nav-bg: #93b7b1;
+  --nav-light-bg: #dde9e7;
+  --nav-text: #22315A;
+  --nav-accent: #DD8B66;
+  --pill-bg: #EEF3F1;
+  --pill-bg-hover: #ffffffd9;
+  --pill-border: #0000000f;
+  --card: #d0e7db;
+
+  /* Recognition status colors */
+  --status-full: #3b82f6;
+  --status-partial: #f59e0b;
+  --status-disputed: #ef4444;
+  --status-unrecognized: #9ca3af;
+  --status-observer: #8b5cf6;
+}
+
+/* ── BASE ── */
+body {
+  font-family: 'Geologica', 'FunnelDisplay', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  overflow: hidden;
+  height: 100vh;
+}
+
+p {
+  font-size: 1rem;
+  font-family: "FunnelDisplay", sans-serif;
+}
+
+main {
+  overflow: visible !important;
+  top: 70px;
+}
+
+.topbar-breadcrumb {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  font-family: 'Geologica', sans-serif;
+}
+
+.topbar-breadcrumb a {
+  color: var(--accent);
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.topbar-breadcrumb .crumb-active {
+  color: var(--nav-text);
+  font-weight: 600;
+}
+
+.topbar-meta {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  font-size: 0.78rem;
+  color: var(--text-muted);
+}
+
+.reading-time { display: flex; align-items: center; gap: 4px; }
+
+/* ── LEFT: MAP PANE ── */
+.map-pane {
+  position: relative;
+  background: #b8d0cc;
+}
+
+#map {
+  width: 100%;
+  height: 100%;
+}
+
+/* Tooltip */
+.map-tooltip {
+  position: absolute;
+  background: color-mix(in srgb, var(--nav-text) 92%, transparent);
+  color: white;
+  padding: 8px 12px;
+  border-radius: 8px;
+  font-size: 0.78rem;
+  font-family: 'Geologica', sans-serif;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.15s ease;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  backdrop-filter: blur(4px);
+  white-space: nowrap;
+}
+
+.map-tooltip.visible { opacity: 1; }
+
+.tooltip-status-dot {
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+/* Legend */
+.map-legend {
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+  background: color-mix(in srgb, var(--surface) 95%, transparent);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 12px 16px;
+  font-size: 0.72rem;
+  z-index: 10;
+  backdrop-filter: blur(8px);
+  min-width: 180px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.legend-title {
+  font-weight: 600;
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-muted);
+  margin-bottom: 8px;
+}
+
+.legend-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 3px 0;
+  color: var(--text);
+}
+
+.legend-dot {
+  width: 10px; height: 10px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+/* Chapter indicator on map */
+.chapter-badge {
+  position: absolute;
+  top: 68px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--accent);
+  color: white;
+  padding: 5px 14px;
+  border-radius: 999px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  z-index: 10;
+  transition: opacity 0.4s ease;
+  box-shadow: 0 3px 8px rgba(199, 111, 74, 0.35);
+  font-family: 'Geologica', sans-serif;
+}
+
+/* ── RIGHT: ARTICLE PANE ── */
+.article-pane {
+  display: flex;
+  flex-direction: column;
+  background: var(--surface);
+  border-left: 1px solid var(--border);
+  overflow: hidden;
+}
+
+/* Infobox — sticky top */
+.infobox {
+  flex-shrink: 0;
+  border-bottom: 2px solid var(--border);
+  background: var(--nav-light-bg);
+  transition: all 0.35s ease;
+  overflow: hidden;
+  min-height: 160px;
+  max-height: 220px;
+  margin-top: 32px;
+}
+
+.infobox-chapter {
+  padding: 20px 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.infobox-eyebrow {
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--accent);
+  font-family: 'Geologica', sans-serif;
+}
+
+.infobox-title {
+  font-family: 'FunnelDisplay', serif;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--nav-text);
+  line-height: 1.3;
+}
+
+.infobox-body {
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  line-height: 1.6;
+  font-family: 'Geologica', sans-serif;
+}
+
+/* Infobox: country hover state */
+.infobox-country {
+  padding: 16px 28px;
+  display: none;
+  gap: 16px;
+  align-items: flex-start;
+}
+
+.infobox-country.visible { display: flex; }
+
+.infobox-flag {
+  width: 64px;
+  height: 42px;
+  object-fit: cover;
+  border-radius: 4px;
+  border: 1px solid var(--border);
+  flex-shrink: 0;
+}
+
+.infobox-country-details { flex: 1; }
+
+.infobox-country-name {
+  font-family: 'FunnelDisplay', serif;
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--nav-text);
+  margin-bottom: 4px;
+}
+
+.status-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 2px 9px;
+  border-radius: 12px;
+  font-size: 0.68rem;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+.status-badge.full         { background: #dbeafe; color: #1d4ed8; }
+.status-badge.partial      { background: #fef3c7; color: #b45309; }
+.status-badge.disputed     { background: #fee2e2; color: #b91c1c; }
+.status-badge.unrecognized { background: #f3f4f6; color: #374151; }
+.status-badge.observer     { background: #ede9fe; color: #6d28d9; }
+
+.infobox-facts {
+  display: flex;
+  gap: 16px;
+  font-size: 0.75rem;
+  color: var(--text-muted);
+}
+
+.infobox-fact strong {
+  display: block;
+  color: var(--text);
+  font-weight: 600;
+  font-size: 0.8rem;
+}
+
+/* ── ARTICLE SCROLL AREA ── */
+.article-scroll {
+  flex: 1;
+  overflow: hidden;
+  padding: 0 0 80px 0;
+  scroll-behavior: smooth;
+  position: relative;
+}
+
+.article-scroll::-webkit-scrollbar { width: 4px; }
+.article-scroll::-webkit-scrollbar-track { background: transparent; }
+.article-scroll::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
+
+/* ── ARTICLE HEADER ── */
+.article-header {
+  padding: 32px 28px 24px;
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 18px;
+  background: var(--surface);
+}
+
+.article-tag {
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 10px;
+  font-family: 'Geologica', sans-serif;
+}
+
+.article-title {
+  font-family: 'FunnelDisplay', serif;
+  font-size: 3rem;
+  font-weight: 700;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  color: var(--nav-text);
+  margin-bottom: 14px;
+}
+
+.article-subtitle {
+  font-size: 0.95rem;
+  color: var(--text);
+  line-height: 1.65;
+  font-weight: 300;
+}
+
+.article-byline {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 18px;
+  padding-top: 18px;
+  border-top: 1px solid var(--border);
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  font-family: 'Geologica', sans-serif;
+}
+
+.byline-dot {
+  width: 3px; height: 3px;
+  border-radius: 50%;
+  background: var(--border);
+}
+
+/* ── CHAPTER SECTIONS ── */
+.chapter {
+  padding: 32px 28px;
+  transition: background 0.4s ease, border-left 0.4s ease opacity 0.35s ease;;
+  background: var(--surface);
+  border-bottom: none;
+}
+
+.chapter.active {
+  background: var(--nav-light-bg);
+  border-left: 3px solid var(--accent);
+  padding-left: 25px;
+  transition: border-left 0.4s ease, background 0.4s ease;
+}
+
+.chapter-label {
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: 'Geologica', sans-serif;
+}
+
+.chapter-label::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--border);
+}
+
+.chapter-title {
+  font-family: 'FunnelDisplay', serif;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--nav-text);
+  margin-bottom: 14px;
+  line-height: 1.3;
+}
+
+.chapter-body {
+  font-size: 0.88rem;
+  line-height: 1.8;
+  color: var(--text);
+  font-family: 'Geologica', sans-serif;
+}
+
+.chapter-body p { margin-bottom: 14px; }
+.chapter-body p:last-child { margin-bottom: 0; }
+
+/* Pull quote */
+.pull-quote {
+  margin: 20px 0;
+  padding: 16px 20px;
+  border-left: 3px solid var(--accent);
+  background: var(--accent-soft);
+  border-radius: 0 8px 8px 0;
+  font-family: 'FunnelDisplay', sans-serif;
+  font-style: italic;
+  font-weight: 100;
+  font-size: 0.95rem;
+  color: var(--accent-hover);
+  line-height: 1.5;
+}
+
+/* Country callout chips */
+.country-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  padding: 2px 10px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  vertical-align: middle;
+  margin: 0 2px;
+  text-decoration: none;
+  color: var(--nav-text);
+  font-family: 'Geologica', sans-serif;
+}
+
+.country-chip:hover {
+  background: var(--accent-soft);
+  border-color: var(--accent);
+  color: var(--accent-hover);
+  transform: translateY(-1px);
+}
+
+.country-chip .chip-dot {
+  width: 6px; height: 6px;
+  border-radius: 50%;
+}
+
+/* ARTICLE SUBBAR */
+.article-subbar {
+  position: fixed;
+  left: 0; right: 0;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 1.4rem;
+  background-color: color-mix(in srgb, var(--nav-light-bg) 90%, transparent);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--border);
+  z-index: 90; /* below topbar (1000) but above map (1) */
+  overflow: hidden; /* keeps progress bar clipped inside */
+}
+
+.subbar-left,
+.subbar-right {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.subbar-divider {
+  width: 1px;
+  height: 14px;
+  background: var(--border);
+}
+
+.subbar-tags {
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  font-family: 'Geologica', sans-serif;
+  letter-spacing: 0.02em;
+}
+
+.reading-time {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  font-family: 'Geologica', sans-serif;
+}
+
+.reading-time i { font-size: 0.7rem; }
+
+/* Progress bar — pinned to the bottom edge of the subbar */
+.progress-bar {
+  position: absolute;
+  bottom: 0; left: 0;
+  height: 2px;
+  width: 0%;
+  background: var(--accent);
+  box-shadow: 0 0 6px rgba(199, 111, 74, 0.5);
+  transition: width 0.1s ease;
+  z-index: 91;
+}
+
+/* MAIN LAYOUT */
+.layout {
+  display: grid;
+  grid-template-columns: 55% 45%;
+  height: calc(100vh - 120px);
+}
+
+.chapter-nav {
+  position: fixed;
+  right: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  z-index: 50;
+}
+
+.nav-dot {
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  background: var(--border);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  position: relative;
+}
+
+.nav-dot:hover  { background: var(--accent); transform: scale(1.3); }
+.nav-dot.active { background: var(--accent); transform: scale(1.2); }
+
+.nav-dot-label {
+  position: absolute;
+  right: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+  white-space: nowrap;
+  font-size: 0.7rem;
+  color: var(--text-muted);
+  background: var(--surface);
+  padding: 2px 8px;
+  border-radius: 4px;
+  border: 1px solid var(--border);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.15s ease;
+}
+
+.nav-dot:hover .nav-dot-label { opacity: 1; }
+
+/* ── WIREFRAME ANNOTATION BADGES
+   Remove these in the final article build. ── */
+.wf-note {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  background: #fef9c3;
+  border: 1px dashed #ca8a04;
+  border-radius: 6px;
+  padding: 2px 8px;
+  font-size: 0.68rem;
+  color: #92400e;
+  font-weight: 500;
+  vertical-align: middle;
+  margin-left: 6px;
+}
+
+/* ── UTILITY ── */
+.scroll-sentinel { height: 1px; }
+
+.article-scroll {
+  overflow-y: hidden;
+}
+
+.chapter.active {
+  border-left: 3px solid var(--accent);
+  padding-left: 25px;
+  transition: border-left 0.4s ease, background 0.4s ease;
+}
+
+.chapter {
+  transition: background 0.4s ease, border-left 0.4s ease;
+}
+
+/* ── SNAP OVERLAY ──
+   Docked to the bottom of #articleScroll at all times.
+   Starts at opacity:0. JS fades it in as overscroll builds.
+   Never slides — only opacity and the chevrons move. */
+#snapOverlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  /* Tall enough to comfortably hold chevrons + label + clearance */
+  height: 38%;
+  pointer-events: none;
+  z-index: 20;
+  opacity: 0;
+  /* Transition only on opacity so JS tick-by-tick updates are smooth */
+  transition: opacity 200ms ease;
+  background: linear-gradient(
+    to bottom,
+    transparent 0%,
+    rgba(238, 243, 241, 0.65) 28%,
+    rgba(238, 243, 241, 0.92) 58%,
+    rgba(238, 243, 241, 1.00) 100%
+  );
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  padding-bottom: 24px;
+}
+
+/* When going to a previous chapter, gradient and arrow flip to top */
+#snapOverlay.overlay-up {
+  bottom: auto;
+  top: 0;
+  background: linear-gradient(
+    to top,
+    transparent 0%,
+    rgba(238, 243, 241, 0.65) 28%,
+    rgba(238, 243, 241, 0.92) 58%,
+    rgba(238, 243, 241, 1.00) 100%
+  );
+  align-items: flex-start;
+  padding-bottom: 0;
+  padding-top: 24px;
+}
+
+/* ── Arrow + label wrapper ── */
+#snapArrow {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0;
+  color: var(--accent);
+}
+
+#snapOverlay.overlay-up #snapArrow {
+  flex-direction: column-reverse;
+}
+
+/* ── Individual chevron SVGs ── */
+.snap-chevron {
+  width: 22px;
+  height: 13px;
+  /* Spread transition matches per-tick feel (snappy but not jarring) */
+  transition: transform 80ms ease-out;
+  opacity: 0.9;
+}
+
+/* ── Next-chapter label ── */
+#snapNextLabel {
+  margin-top: 8px;
+  font-size: 0.68rem;
+  font-family: 'Geologica', sans-serif;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  color: var(--accent);
+  opacity: 0;
+  transition: opacity 80ms ease-out;
+  white-space: nowrap;
+  text-transform: uppercase;
+}
+
+#snapOverlay.overlay-up #snapNextLabel {
+  margin-top: 0;
+  margin-bottom: 8px;
+}

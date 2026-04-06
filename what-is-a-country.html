@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GeoBoard — What Is a Country?</title>
+
+  <!-- ICONS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+  <!-- MAP -->
+  <link href="https://unpkg.com/maplibre-gl@3.6.2/dist/maplibre-gl.css" rel="stylesheet"/>
+  <script src="https://unpkg.com/maplibre-gl@3.6.2/dist/maplibre-gl.js"></script>
+
+  <!-- FONTS -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Geologica:wght@300;400;600;700&family=Playfair+Display:ital,wght@0,700;1,400&display=swap" rel="stylesheet">
+
+  <!-- STYLES -->
+  <link rel="stylesheet" href="./css/what-is-a-country-style.css">
+  <link rel="stylesheet" href="./common/default.css">
+</head>
+<body>
+
+    <!-- SETTINGS PANEL -->
+    <div id="settingsPanel" class="settings-panel">
+      <div class="settings-tabs">
+        <div class="tab active" data-tab="reading">
+          <span class="tab-icon"><i class="fa-solid fa-eye"></i></span>
+          <span class="tab-label">Reading</span>
+        </div>
+        <div class="tab" data-tab="learning">
+          <span class="tab-icon"><i class="fa-solid fa-chalkboard-user"></i></span>
+          <span class="tab-label">Learning</span>
+        </div>
+        <div class="tab" data-tab="perspective">
+          <span class="tab-icon"><i class="fa-solid fa-globe"></i></span>
+          <span class="tab-label">Perspective</span>
+        </div>
+        <div class="tab" data-tab="about">
+          <span class="tab-icon"><i class="fa-solid fa-circle-info"></i></span>
+          <span class="tab-label">About</span>
+        </div>
+      </div>
+
+      <div class="settings-content">
+        <h2 id="contentTitle">Reading & Accessibility</h2>
+        
+        <!-- Reading & Accessibility Content -->
+        <div id="readingContent" class="tab-content active">
+          <div class="font-size">
+            <label for="fontSlider">Font Size</label>
+            <input type="range" id="fontSlider" min="12" max="24" value="16">
+            <small id="fontSizeValue">16px</small>
+          </div>
+
+          <div class="font-style">
+            <label for="fontSelector">Font Style</label>
+            <select id="fontSelector">
+              <option value="default">Default</option>
+              <option value="'Geologica', sans-serif">Geologica</option>
+              <option value="'Courier New', monospace">Courier New</option>
+              <option value="'SpaceGrotesk', sans-serif">Space Grotesk</option>
+              <option value="'FunnelDisplay', sans-serif">FunnelDisplay</option>
+              <option value="'Forum', serif">Forum</option>
+            </select>
+          </div>
+          
+          <div class="language-select">
+            <label for="languageSelector">Language</label>
+            <select id="languageSelector">
+              <option value="en" selected>English</option>
+              <option value="es">Español</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Learning Context Content -->
+        <div id="learningContent" class="tab-content">
+          <p class="coming-soon">Coming soon!</p>
+        </div>
+
+        <!-- Perspective Lens Content -->
+        <div id="perspectiveContent" class="tab-content">
+          <p class="coming-soon">Coming soon!</p>
+        </div>
+
+        <!-- About & Transparency Content -->
+        <div id="aboutContent" class="tab-content">
+          <p> GeoBoard is an interactive learning platform that helps students explore 
+            how geography, history, and political systems change over time. It focuses 
+            on systems, tradeoffs, and cause-and-effect—not on telling users what to 
+            believe. It is not intended to be a replacement of teachers, families or 
+            peers, but is meant to assist students in their learning journey. Please 
+            note that this is a prototype to showcase GeoBoard and may contain bugs, 
+            AI filler text in articles or incomplete features.
+          </p>
+          <br>
+          <h5>Developed by Nathan Wong, a high school student in Vancouver, Canada.</h5>
+          <h5>Version 0.4.0</h5>
+          <h5>For questions, email GeoBoard at nathanwongtybusiness@gmail.com</h5>
+        </div>
+
+        <button id="closeSettings" class="close-btn">Close</button>
+      </div>
+    </div>
+
+<!-- TOPBAR -->
+  <header class="topbar">
+    <div class="topbar-left">
+      <a href="/index.html" class="logo-link">
+        <img id="geoLogo" src="/assets/media/GeoBoardIcon.svg" alt="GeoBoard Logo">
+      </a>
+    </div>
+    <nav class="topbar-nav" aria-label="Main Navigation">
+      <ul class="topbar-menu">
+        <li>
+          <a href="/index.html" class="nav-pill">
+            <i class="fa-solid fa-home"></i>
+            <span>Home</span>
+          </a>
+        </li>
+
+        <li>
+          <a href="#" class="nav-pill">
+            <i class="fas fa-landmark"></i>
+            <span>History Quizzes (WIP)</span>
+          </a>
+        </li>
+
+        <li>
+          <button id="darkModeToggle" class="nav-pill nav-pill--button">
+            <i class="fas fa-moon"></i>
+            <span>Dark Mode (WIP)</span>
+          </button>
+        </li>
+
+        <li>
+          <a href="#" class="nav-pill">
+            <i class="fas fa-cog"></i>
+            <span>Settings</span>
+          </a>
+        </li>
+
+        <li>
+          <a href="#" class="nav-pill">
+            <i class="fa-solid fa-user"></i>
+            <span>Profile (WIP)</span>
+          </a>
+        </li>
+      </ul>
+    </nav>
+  </header>
+
+<!-- SUBBAR -->
+<div class="article-subbar" id="articleSubbar">
+  <div class="subbar-left">
+    <nav class="topbar-breadcrumb">
+      <a href="#">Articles</a>
+      <span>›</span>
+      <span class="crumb-active">What Is a Country?</span>
+    </nav>
+  </div>
+  <div class="subbar-right">
+    <div class="reading-time">
+      <i class="fa-regular fa-clock"></i>
+      <span>7 min read</span>
+    </div>
+    <div class="subbar-divider"></div>
+    <span class="subbar-tags">Geography · International Law · Politics</span>
+  </div>
+  <div class="progress-bar" id="progressBar"></div>
+</div>
+
+<!-- CHAPTER NAV -->
+<nav class="chapter-nav" id="chapterNav"></nav>
+
+<main>
+  <div class="layout">
+
+    <!-- MAP PANE -->
+    <div class="map-pane">
+      <div id="map"></div>
+
+      <div class="map-tooltip" id="mapTooltip">
+        <div class="tooltip-status-dot" id="tooltipDot"></div>
+        <span id="tooltipText">Country Name</span>
+      </div>
+
+      <div class="chapter-badge" id="chapterBadge">Introduction</div>
+
+      <div class="map-legend">
+        <div class="legend-title">Recognition Status</div>
+        <div class="legend-row"><div class="legend-dot" style="background:var(--status-full)"></div>Fully Recognized</div>
+        <div class="legend-row"><div class="legend-dot" style="background:var(--status-partial)"></div>Partially Recognized</div>
+        <div class="legend-row"><div class="legend-dot" style="background:var(--status-disputed)"></div>Disputed Territory</div>
+        <div class="legend-row"><div class="legend-dot" style="background:var(--status-observer)"></div>UN Observer</div>
+        <div class="legend-row"><div class="legend-dot" style="background:var(--status-unrecognized)"></div>Unrecognized</div>
+      </div>
+    </div>
+
+    <!-- ARTICLE PANE -->
+    <div class="article-pane">
+      <div class="infobox" id="infobox">
+        <div class="infobox-chapter" id="infoboxChapter">
+          <div class="infobox-eyebrow" id="infoboxEyebrow">Introduction</div>
+          <div class="infobox-title" id="infoboxTitle">A question with no easy answer</div>
+          <div class="infobox-body" id="infoboxBody">
+            You probably think you know what a country is. But the more you look,
+            the stranger the answer becomes. Hover over the map to explore.
+          </div>
+        </div>
+        <div class="infobox-country" id="infoboxCountry">
+          <img class="infobox-flag" id="infoboxFlag" src="" alt="Country flag">
+          <div class="infobox-country-details">
+            <div class="infobox-country-name" id="infoboxCountryName">—</div>
+            <div class="status-badge full" id="infoboxStatusBadge">● Fully Recognized</div>
+            <div class="infobox-facts">
+              <div class="infobox-fact"><strong id="infoboxUN">—</strong>UN Member</div>
+              <div class="infobox-fact"><strong id="infoboxRecognizedBy">—</strong>Recognized by</div>
+              <div class="infobox-fact"><strong id="infoboxCapital">—</strong>Capital</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="article-scroll" id="articleScroll">
+        <div class="article-header">
+          <div class="article-tag">GeoBoard · Geography</div>
+          <h1 class="article-title">What Is a Country?</h1>
+          <p class="article-subtitle">
+            You live in one, carry its passport, and cheer for it at the Olympics. Countries 
+            feel like the most natural thing in the world — they are permanent, obvious, and 
+            fixed on every map you've ever seen. But when pressed to define exactly what makes 
+            a country, most of us realize the answer is far more complicated than one can imagine.
+          </p>
+          <div class="article-byline">
+            <span>GeoBoard Editorial</span>
+            <div class="byline-dot"></div>
+            <span>March 2025</span>
+            <div class="byline-dot"></div>
+            <span>7 min read</span>
+          </div>
+        </div>
+
+        <div class="chapter" id="chapter-0" data-chapter="0">
+          <div class="scroll-sentinel" id="sentinel-0"></div>
+          <div class="chapter-label">Chapter 1</div>
+          <h2 class="chapter-title">The Simplest Question With No Simple Answer</h2>
+          <div class="chapter-body">
+            <p>There are 193 countries in the world. Or 195. It could also be 197. Actually, it depends on who you ask.
+            The disagreement didn't appear overnight — in fact, it reflects one of the biggest tensions at the heart of international
+            politics. The number changes based on something way more than a textbook definition.</p>
+          <h2 class="chapter-title">Meet the United Nations</h2>
+            <p>Almost the entire world looks to the United Nations for that answer. Inside the United Nations are 193 member states, most of them are fully recognized as countries, like the
+              <span class="country-chip" data-country="USA" data-status="full">
+                <span class="chip-dot" style="background:var(--status-full)"></span> United States
+              </span> or
+              <span class="country-chip" data-country="FRA" data-status="full">
+                <span class="chip-dot" style="background:var(--status-full)"></span> France
+              </span>.
+            </p>
+            <p>To get into this country club, you need to be a <strong>member state</strong> of the UN. Let's say a country called Geoland wants to join. Its 
+              government sends a letter to the <strong>Secretary-General</strong> basically saying they exist, they're a country, and they want to join the UN.</p>
+            <p>The Security Council, made up of 15 countries, then votes on whether to recommend Geoland as a member state. If Geoland gets 9 out of 15 votes in the 
+              Security Council saying "yay" instead of "nay", and no "nay"s from the 5 permanent members (China, France, Russia, the UK, and the US), then it goes to 
+              the <strong>General Assembly</strong>, a council of all 193 member states. There, Geoland needs a <em>two-thirds</em> majority vote to be admitted as a 
+              member state. Congratulations, Geoland is now a member of the United Nations, and a textbook example of a country!</p> 
+            <p>
+              This process is relatively simple for international matters. However, the UN doesn't have a clear definition of what a country is, and it doesn't have a 
+              clear framework for solving disputes over recognition. So there are many entities that function as countries in practice, but aren't recognized by the 
+              UN as such. Examples include
+              <span class="country-chip" data-country="TWN" data-status="partial">
+                <span class="chip-dot" style="background:var(--status-partial)"></span> Taiwan
+              </span>,
+              <span class="country-chip" data-country="XKX" data-status="partial">
+                <span class="chip-dot" style="background:var(--status-partial)"></span> Kosovo
+              </span>, and even some super edge-cases like the
+              <span class="country-chip" data-country="PSE" data-status="observer">
+                <span class="chip-dot" style="background:var(--status-observer)"></span> State of Palestine
+              </span>
+              — all of which are considered by some to be countries, but not all. So if they're not countries, what are they?
+            </p>
+            <p style="color:var(--text-muted);font-size:0.8rem;margin-top:16px;">
+              <strong>Continue exploring:</strong> Hover countries on the map to see their recognition
+              status. Highlighted countries in your GeoJSON are colour-coded by tier.
+            </p>
+          </div>
+        </div>
+
+        <div class="chapter" id="chapter-1" data-chapter="1">
+          <div class="scroll-sentinel" id="sentinel-1"></div>
+          <div class="chapter-label">Chapter 2</div>
+          <h2 class="chapter-title">The Birth of the State</h2>
+          <div class="chapter-body">
+            <p>The answer to our question lies in the history of how states came to be.</p>
+            <p> It's 1648. Europe has just pulled itself through years and years of war, like the Eighty 
+              Years War and the Thirty Years War in the many German states that was under the rule of an 
+              Emperor.
+            </p>
+            <p>The peace treaty that ended all these wars was the Peace of Westphalia, and its changes to 
+                Europe were huge. It established the principle of sovereignty, meaning that each state had 
+                exclusive authority over its own affairs and its relations with other states, as well as 
+                allowing their princes who ruled them to choose their own religion and political systems 
+                without external interference. The Holy Roman Empire now exercised less 
+                power over the states that made it up.
+            </p>
+            <p>
+              Basically, the Peace of Westphalia made the Holy Roman Empire's states more independent, 
+              resembling modern nation-states, creating the pretext for all of modern statehood. This weakened 
+              the Holy Roman Empire, and it contributed to its eventual dissolution by Napoleon in 1806.
+            </p>
+            <p>
+              The HRE's states had clear identities, shared culture and defined government, which made Westphalia a lot easier to implement.
+              For the next two and a half centuries, the Westphalian model spread — first across Europe, then through colonialism across the 
+              rest of the world. However by the 1920s, the states of the world were way more complex 
+              in their cultures and politics than they were back when Westphalia was signed. Tribes and ethnic groups were eyeing their colonial 
+              rulers, vying for independence and to rule themselves free of foreign control.  So now, who qualified? Who got a seat at the table? 
+              The League of Nations, the international body created after WWI to prevent future wars, had no clear answer. Disputes over borders 
+              and recognition dragged on with no legal framework to resolve them.
+            </p>
+            <p>
+              Our countries in the Americas might give us the final answer.
+            </p>
+          </div>
+        </div>
+
+        <div class="chapter" id="chapter-2" data-chapter="2">
+          <div class="scroll-sentinel" id="sentinel-2"></div>
+          <div class="chapter-label">Chapter 3</div>
+          <h2 class="chapter-title">Montevideo</h2>
+          <div class="chapter-body">
+            <p>In 1933, Montevideo, Uruguay, 20 countries sat down and tried to answer this
+            question once and for all. Their convention outlined four criteria for statehood that
+            are still the starting point for every international law class today.</p>
+            <p>To be a state, an entity needs: a permanent population, a defined territory, an effective
+            government, and the capacity to enter into relations with other states. Simple enough — until 
+            you realize most breakaway regions satisfy all four criteria.</p>
+            <div class="pull-quote">
+              The Montevideo criteria are necessary, but not sufficient. Recognition by others is the
+              invisible fifth requirement.
+            </div>
+            <p>This is the closest treaty outlining the criteria for a country. However, Montevideo 
+              is not bulletproof. Consider
+            <span class="country-chip" data-country="TWN" data-status="partial">
+              <span class="chip-dot" style="background:var(--status-partial)"></span> Taiwan
+            </span>.
+            It has a government, borders, a currency, and a population. By Montevideo's measure,
+            it qualifies. But it is recognized by only 12 UN member states. Why?</p>
+            <p>Turns out, other countries have a say as well...</p>
+          </div>
+        </div>
+
+        <div class="chapter" id="chapter-3" data-chapter="3">
+          <div class="scroll-sentinel" id="sentinel-3"></div>
+          <div class="chapter-label">Chapter 4</div>
+          <h2 class="chapter-title">Recognition: The Politics of Existence</h2>
+          <div class="chapter-body">
+            <p>Recognition is — in a nutshell — a small nudge saying <em>I acknowledge you exist.</em>
+            The recognizing nation may then form relations with it, or issue travel advisories, 
+            or engage in other forms of diplomatic interaction. Despite it seeming to be a 
+            simple act, it is profoundly political. Some people even say that recognition directly 
+            decides whether a country exists (called the constitutive view) as opposed to an optional 
+            criterion (the declaratory view). Whether a country recognizes another can sometimes 
+            reveal its alliances, history, and interests far more than any map can.
+            </p>
+            <br>
+            <p>
+            Let's return to our example, 
+            <span class="country-chip" data-country="TWN" data-status="partial">
+              <span class="chip-dot" style="background:var(--status-partial)"></span> Taiwan
+            </span>
+            . It is recognized by only 12 UN member states — and yet it has a thriving democracy,
+            a world-leading semiconductor industry, and a population of 23 million.
+            </p>
+            <p>
+            Turns out it did have more recognition in the past. Before 1949, Taiwan (then called 
+            the Republic of China) was recognized by most of the world as the legitimate government 
+            of all of China. But then, communists who opposed the Republic waged war aginst them, and won. 
+            </p>
+            <br>
+            <p>
+            Taiwan, then called the Republic of China, had been recognised as the legitimate government of China — 
+            until 1971, when the UN transferred its seat to the newly powerful
+            <span class="country-chip" data-country="CHN" data-status="full">
+              <span class="chip-dot" style="background:var(--status-full)"></span> People's Republic of China
+            </span>
+            . Most countries followed suit in recognizing the PRC, who also declared a "One China" policy, that 
+            stated that only one China existed, the PRC itself. Since then, countries have been increasingly 
+            attracted to China's growing economic influence, and so they have switched their recognition to the 
+            PRC. Taiwan's recognition has dwindled to just a few small countries in Central America and the Pacific.
+            </p>
+            <p>
+              This is a complex and evolving issue, with implications that extend far beyond the simple question 
+              of statehood. Taiwan's story and goal for independence and recognition is controversial and is heavily 
+              debated. This entire story we just simplified heavily for you comes from a single act of recognition.
+            </p>
+          </div>
+        </div>
+
+        <div class="chapter" id="chapter-4" data-chapter="4">
+          <div class="scroll-sentinel" id="sentinel-4"></div>
+          <div class="chapter-label">Chapter 5</div>
+          <h2 class="chapter-title">The Edge Cases That Break Every Definition</h2>
+          <div class="chapter-body">
+            <p>This even applies to the UN itself. Some countries in the UN function more as 
+              a city, while some regions are distinct enough from their parent states to 
+              function as a country.</p>
+            <p>
+            <span class="country-chip" data-country="VAT" data-status="full">
+              <span class="chip-dot" style="background:var(--status-full)"></span> Vatican City
+            </span>
+            has a population of around 800, making it the world's smallest state — yet it
+            maintains diplomatic relations with over 180 countries. Despite its small size, 
+            it has an observer seat at the UN, embassies around the world and is the headquarters
+            of the Catholic Church and over 1 billion faithful.
+            </p>
+            <p>
+            On the other end of the scale,
+            <span class="country-chip" data-country="HKG" data-status="full">
+              <span class="chip-dot" style="background:var(--status-full)"></span> Hong Kong
+            </span>,
+            a city in southern China, is a 'Special Administrative Region' with a population of over 7.5 
+            million. This once-British colony has its own culture and government distinct from Beijing, but is 
+            internationally considered part of China.</p>
+
+            <p>Then there are places that <em>used to be</em> countries:
+            <span class="country-chip" data-country="DDR" data-status="unrecognized">
+              <span class="chip-dot" style="background:var(--status-unrecognized)"></span> East Germany
+            </span>,
+            <span class="country-chip" data-country="YUG" data-status="unrecognized">
+              <span class="chip-dot" style="background:var(--status-unrecognized)"></span> Yugoslavia
+            </span>,
+            and the
+            <span class="country-chip" data-country="SUN" data-status="unrecognized">
+              <span class="chip-dot" style="background:var(--status-unrecognized)"></span> Soviet Union
+            </span>,
+            whose seats at the UN are now held by their successor states.</p>
+          </div>
+        </div>
+
+        <div class="chapter" id="chapter-4" data-chapter="4">
+          <div class="scroll-sentinel" id="sentinel-4"></div>
+          <div class="chapter-label">Conclusion</div>
+          <h2 class="chapter-title">Why It Matters</h2>
+          <div class="chapter-body">
+            <p>
+              So, did we answer our question? Not quite. But we've seen the complexity of 
+              the country, and this raises many other questions. Why do we have countries? 
+              What are the motives behind independence? What are the thoughts behind a country's
+              decision to establish relations, or increase taxes, or expand on rights? Why do
+              people allow themselves to be ruled under a capital city tens to hundreds of miles 
+              away?
+            </p>
+            <p>
+              How we define a country determines who gets a seat at the table when climate 
+              agreements are signed, who can appeal to international courts when their rights 
+              are violated, and whose citizens can travel freely.
+            </p>
+            <p>
+              Every line on the world map is shaped by years, decades and centuries of decisions made by 
+              citizens, generals and leaders. Analyzing these decisions is called political theory, and it's 
+              the first step to understanding the world.
+            </p>
+            <div class="pull-quote">
+              The world map shows humanity's unity and divison, our greatest feats and our darkest scars. 
+              Behind every border is not just a jumble of political laws and treaties, but a history of 
+              how we got here, and where we're going.
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+
+<!-- ARTICLE SCRIPT -->
+<script type="module" src="/common/js/main.js"></script>
+</body>
+</html>

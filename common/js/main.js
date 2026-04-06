@@ -48,6 +48,16 @@ document.addEventListener("DOMContentLoaded", () => {
     setupFolderToggles();     // Folder opening
   }
 
+  //What Is a Country? article
+  else if (path.includes("what-is-a-country")) {
+    console.log("✓ What Is a Country? article detected.");
+    import('./modules/article-template.js').then(mod => {
+      mod?.setupArticle?.();
+    }).catch(err => {
+      console.error("Error loading article-template.js:", err);
+    });
+  }
+
   //Normal Articles
   else if (path.includes("normal")) {
     console.log("✓ Normal article page detected.");
