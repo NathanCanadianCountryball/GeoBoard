@@ -7,6 +7,84 @@ let countryLayersActive = true;
 // Zoom threshold - interactions disabled below this zoom level
 const ZOOM_THRESHOLD = 3.5;
 
+// ── Small countries (module scope) ──
+const SMALL_COUNTRIES = {
+  MDV: { name: 'Maldives',          coords: [73.5, 3.2] },
+  SMR: { name: 'San Marino',        coords: [12.45, 43.93] },
+  SGP: { name: 'Singapore',         coords: [103.8, 1.35] },
+  BRB: { name: 'Barbados',          coords: [-59.55, 13.17] },
+  MLT: { name: 'Malta',             coords: [14.5, 35.9] },
+  LIE: { name: 'Liechtenstein',     coords: [9.55, 47.15] },
+  MCO: { name: 'Monaco',            coords: [7.42, 43.73] },
+  AND: { name: 'Andorra',           coords: [1.52, 42.5] },
+  VAT: { name: 'Vatican City',      coords: [12.45, 41.90] },
+  NRU: { name: 'Nauru',             coords: [166.93, -0.52] },
+  TUV: { name: 'Tuvalu',            coords: [179.2, -8.5] },
+  PLW: { name: 'Palau',             coords: [134.5, 7.5] },
+  KIR: { name: 'Kiribati',          coords: [173.0, 1.4] },
+  WSM: { name: 'Samoa',             coords: [-172.1, -13.8] },
+  GRD: { name: 'Grenada',           coords: [-61.7, 12.1] },
+  LCA: { name: 'Saint Lucia',       coords: [-60.98, 13.9] },
+  VCT: { name: 'St Vincent & Gren.',coords: [-61.2, 13.25] },
+  DMA: { name: 'Dominica',          coords: [-61.35, 15.4] },
+  ATG: { name: 'Antigua & Barbuda', coords: [-61.8, 17.05] },
+  KNA: { name: 'St Kitts & Nevis',  coords: [-62.75, 17.35] },
+  SYC: { name: 'Seychelles',        coords: [55.45, -4.65] },
+  COM: { name: 'Comoros',           coords: [43.3, -11.7] },
+  STP: { name: 'São Tomé & Príncipe', coords: [6.7, 0.3] },
+  CPV: { name: 'Cabo Verde',        coords: [-23.6, 16.0] },
+  BHS: { name: 'Bahamas',           coords: [-76.0, 24.5] },
+  BHR: { name: 'Bahrain',           coords: [50.55, 26.0] },
+  QAT: { name: 'Qatar',             coords: [51.2, 25.3] },
+  MUS: { name: 'Mauritius',         coords: [57.5, -20.3] },
+};
+
+// ── Territory → sovereign (module scope) ──
+const TERRITORY_SOVEREIGN = {
+  FRO: { code: 'DNK', name: 'Denmark' },
+  GRL: { code: 'DNK', name: 'Denmark' },
+  PRI: { code: 'USA', name: 'United States' },
+  GUM: { code: 'USA', name: 'United States' },
+  VIR: { code: 'USA', name: 'United States' },
+  ASM: { code: 'USA', name: 'United States' },
+  MNP: { code: 'USA', name: 'United States' },
+  HKG: { code: 'CHN', name: 'China' },
+  MAC: { code: 'CHN', name: 'China' },
+  ABW: { code: 'NLD', name: 'Netherlands' },
+  CUW: { code: 'NLD', name: 'Netherlands' },
+  SXM: { code: 'NLD', name: 'Netherlands' },
+  NCL: { code: 'FRA', name: 'France' },
+  PYF: { code: 'FRA', name: 'France' },
+  GUF: { code: 'FRA', name: 'France' },
+  MTQ: { code: 'FRA', name: 'France' },
+  GLP: { code: 'FRA', name: 'France' },
+  REU: { code: 'FRA', name: 'France' },
+  MYT: { code: 'FRA', name: 'France' },
+  SPM: { code: 'FRA', name: 'France' },
+  BLM: { code: 'FRA', name: 'France' },
+  MAF: { code: 'FRA', name: 'France' },
+  GIB: { code: 'GBR', name: 'United Kingdom' },
+  BMU: { code: 'GBR', name: 'United Kingdom' },
+  CYM: { code: 'GBR', name: 'United Kingdom' },
+  TCA: { code: 'GBR', name: 'United Kingdom' },
+  VGB: { code: 'GBR', name: 'United Kingdom' },
+  AIA: { code: 'GBR', name: 'United Kingdom' },
+  MSR: { code: 'GBR', name: 'United Kingdom' },
+  SHN: { code: 'GBR', name: 'United Kingdom' },
+  FLK: { code: 'GBR', name: 'United Kingdom' },
+  SGS: { code: 'GBR', name: 'United Kingdom' },
+  PCN: { code: 'GBR', name: 'United Kingdom' },
+  IOT: { code: 'GBR', name: 'United Kingdom' },
+  CXR: { code: 'AUS', name: 'Australia' },
+  CCK: { code: 'AUS', name: 'Australia' },
+  NFK: { code: 'AUS', name: 'Australia' },
+  COK: { code: 'NZL', name: 'New Zealand' },
+  NIU: { code: 'NZL', name: 'New Zealand' },
+  TKL: { code: 'NZL', name: 'New Zealand' },
+  ESH: { code: 'MAR', name: 'Morocco' },
+  PSE: { code: null,  name: null },
+};
+
 // Function to add country layers to the map
 function addCountryLayers(map) {
   // Check if source already exists, if so remove it
@@ -66,7 +144,7 @@ function toggleCountryLayers(map, visible) {
   
   const fillLayer = map.getLayer('country-fills');
   const borderLayer = map.getLayer('country-borders');
-  
+
   if (fillLayer) {
     map.setLayoutProperty('country-fills', 'visibility', visible ? 'visible' : 'none');
   }
@@ -76,6 +154,76 @@ function toggleCountryLayers(map, visible) {
   
   countryLayersActive = visible;
   console.log(`Country interactions ${visible ? 'enabled' : 'disabled'} (zoom threshold)`);
+}
+
+function addSmallCountryMarkers(map) {
+  if (map.getSource('small-countries')) return;
+
+  const features = Object.entries(SMALL_COUNTRIES).map(([code, info]) => ({
+    type: 'Feature',
+    properties: {
+      NAME: info.name,
+      ADM0_A3: code,
+      iso_a3: code,
+      is_small: true
+    },
+    geometry: {
+      type: 'Point',
+      coordinates: info.coords
+    }
+  }));
+
+  map.addSource('small-countries', {
+    type: 'geojson',
+    data: { type: 'FeatureCollection', features }
+  });
+
+  // Visible dot
+  map.addLayer({
+    id: 'small-country-dots',
+    type: 'circle',
+    source: 'small-countries',
+    paint: {
+      'circle-radius': [
+        'interpolate', ['linear'], ['zoom'],
+        2, 3.5,
+        5, 5,
+        8, 7
+      ],
+      'circle-color': '#c76f4a',
+      'circle-stroke-width': 1.5,
+      'circle-stroke-color': '#fff',
+      'circle-opacity': 0.9
+    }
+  });
+
+  // Larger invisible hit area for easier clicking
+  map.addLayer({
+    id: 'small-country-hit',
+    type: 'circle',
+    source: 'small-countries',
+    paint: {
+      'circle-radius': [
+        'interpolate', ['linear'], ['zoom'],
+        2, 14,
+        5, 18,
+        8, 22
+      ],
+      'circle-opacity': 0
+    }
+  });
+
+  map.on('mouseenter', 'small-country-hit', () => {
+    map.getCanvas().style.cursor = 'pointer';
+  });
+  map.on('mouseleave', 'small-country-hit', () => {
+    map.getCanvas().style.cursor = '';
+  });
+
+  map.on('click', 'small-country-hit', (e) => {
+    if (!e.features.length) return;
+    showCountrySidebar(e.features[0].properties);
+  });
 }
 
 export function setupCountryInteractions(map) {
@@ -166,18 +314,20 @@ export function setupCountryInteractions(map) {
   // If map is already loaded, add layers immediately
   if (map.isStyleLoaded()) {
     addCountryLayers(map);
+    addSmallCountryMarkers(map);
     setupEventHandlers();
     setupZoomToggle();
   } else {
     map.once('load', () => {
       addCountryLayers(map);
+      addSmallCountryMarkers(map);
       setupEventHandlers();
       setupZoomToggle();
     });
   }
 }
 
-function showCountrySidebar(properties) {
+async function showCountrySidebar(properties) {
   const sidebar = document.getElementById('countrySidebar');
   const overlay = document.getElementById('sidebarOverlay');
   
@@ -186,86 +336,164 @@ function showCountrySidebar(properties) {
     return;
   }
 
-  // Extract country data using the actual property names from the vector tiles
-  const name = properties.NAME || properties.name || properties.ADMIN || 'Unknown';
+  // 1. Get fallback values from vector tile
+  const fallbackName = properties.NAME || properties.name || 'Unknown';
   const code3 = properties.ADM0_A3 || properties.iso_a3 || '';
-  const code2 = properties.ISO_A2 || properties.iso_a2 || convertISO3toISO2(code3);
-  const population = properties.POP_EST || properties.pop_est || null;
-  
-  // Populate sidebar - name at top
+  const sovereign = TERRITORY_SOVEREIGN[code3];
+  const sovereignHtml = sovereign && sovereign.name
+    ? `<div class="info-row">
+        <span class="info-label">Sovereign state</span>
+        <span class="info-value">${sovereign.name}</span>
+      </div>`
+    : '';
+  const rawPop = properties.POP_EST || properties.pop_est || null;
+
+  // DOM Elements
   const nameElement = document.getElementById('countryName');
+  const officialNameEl = document.getElementById('countryOfficialName');
+  const nativeNameEl = document.getElementById('countryNativeName');
   const flagElement = document.getElementById('countryFlag');
-  
-  if (nameElement) {
-    nameElement.textContent = name;
-  }
-  
-  if (flagElement) {
-    if (code2) {
-      flagElement.src = `https://flagcdn.com/w320/${code2.toLowerCase()}.png`;
-      flagElement.alt = `${name} flag`;
-      flagElement.style.display = 'block';
-    } else {
-      flagElement.style.display = 'none';
-    }
-  }
-  
-  // Show additional info
+  const subtitleBlock = document.getElementById('countrySubtitleBlock');
+  const regionEl = document.getElementById('countryRegion');
   const infoContainer = document.getElementById('countryInfo');
+
+  // Set default loading UI state
+  if (nameElement) nameElement.textContent = fallbackName;
+  if (officialNameEl) officialNameEl.textContent = '';
+  if (nativeNameEl) nativeNameEl.textContent = '';
+  if (subtitleBlock) subtitleBlock.style.display = 'none';
+
   if (infoContainer) {
     infoContainer.innerHTML = `
-      ${code3 ? `
+      <div class="info-row">
+        <span class="info-label">Population:</span>
+        <span class="info-value">${formatPopulation(rawPop)}</span>
+      </div>
       <div class="info-row">
         <span class="info-label">ISO Code:</span>
         <span class="info-value">${code3}</span>
       </div>
-      ` : ''}
-      ${population ? `
-      <div class="info-row">
-        <span class="info-label">Population:</span>
-        <span class="info-value">${formatPopulation(population)}</span>
-      </div>
-      ` : ''}
     `;
   }
-  
-  // Check if this country has historical data and update TimeMachine button
-  updateTimeMachineButton(code3, name);
 
-  // Show sidebar and overlay
   sidebar.classList.add('active');
   overlay.classList.add('active');
-  
-  currentCountry = name;
+
+  currentCountry = fallbackName;
   currentCountryCode = code3;
-  console.log(`Showing: ${name}`);
+
+  updateTimeMachineButton(code3, fallbackName);
+
+  // 2. Fetch authenticated data from restcountries v5
+  if (code3) {
+    const apiKey = 'rc_live_4de1754bd78942d3bb35081f7d4e25ba';
+    
+    try {
+      const url = `https://api.restcountries.com/countries/v5/codes.alpha_3/${code3}?api-key=${apiKey}`;
+      
+      const response = await fetch(url, {
+        headers: { 'Authorization': `Bearer ${apiKey}` }
+      });
+
+      if (response.ok) {
+        const raw = await response.json();
+        const data = raw?.data?.objects?.[0];
+
+        if (!data) {
+          console.warn('No country object in response', raw);
+          return;
+        }
+
+        // Names
+        if (nameElement) nameElement.textContent = data.names?.common || fallbackName;
+        if (officialNameEl) officialNameEl.textContent = data.names?.official || '';
+
+        // Flag
+        if (flagElement) {
+          const flagUrl = data.flag?.url_png || data.flag?.url_svg || '';
+          if (flagElement.tagName === 'IMG') {
+            flagElement.src = flagUrl;
+            flagElement.style.display = flagUrl ? 'block' : 'none';
+          } else {
+            flagElement.innerHTML = flagUrl
+              ? `<img src="${flagUrl}" alt="${fallbackName} flag" style="width:100%; height:100%; object-fit:cover; border-radius:8px;" />`
+              : '';
+          }
+        }
+
+        // Region / subtitle
+        if (subtitleBlock && (data.region || data.subregion)) {
+          subtitleBlock.style.display = 'flex';
+          if (regionEl) regionEl.textContent = data.subregion || data.region || '';
+        }
+
+        // Languages, capital, currencies
+        const languagesStr = Array.isArray(data.languages)
+          ? data.languages.map(l => l.name).join(', ')
+          : 'N/A';
+
+        const capitalStr = data.capitals?.[0]?.name || 'N/A';
+
+        let currenciesStr = 'N/A';
+        if (Array.isArray(data.currencies)) {
+          currenciesStr = data.currencies
+            .map(c => `${c.name || ''}${c.symbol ? ` (${c.symbol})` : ''}`)
+            .join(', ');
+        }
+
+        // Render the stats panel
+      if (infoContainer) {
+          infoContainer.innerHTML = `
+            <div class="info-row">
+              <span class="info-label">Capital:</span>
+              <span class="info-value">${capitalStr}</span>
+            </div>
+            <div class="info-row">
+              <span class="info-label">Population:</span>
+              <span class="info-value">${formatPopulation(data.population || rawPop)}</span>
+            </div>
+            <div class="info-row">
+              <span class="info-label">Official languages:</span>
+              <span class="info-value">${languagesStr}</span>
+            </div>
+            <div class="info-row">
+              <span class="info-label">Currency:</span>
+              <span class="info-value">${currenciesStr}</span>
+            </div>
+            ${sovereignHtml}
+            <div class="info-row">
+              <span class="info-label">ISO Code:</span>
+              <span class="info-value">${code3}</span>
+            </div>
+          `;
+        }
+      } else {
+        console.warn(`REST Countries API HTTP ${response.status}: ${response.statusText}`);
+      }
+    } catch (err) {
+      console.error('Fetch error:', err);
+    }
+  }
+
+  setupActionButtons(code3, fallbackName);
 }
 
-// Helper function to format population with commas
+// ── HELPER FUNCTIONS ──
+
 function formatPopulation(pop) {
-  if (!pop) return 'N/A';
+  if (!pop || isNaN(pop)) return 'N/A';
   return Number(pop).toLocaleString();
 }
 
-// Update TimeMachine button visibility and handler
 function updateTimeMachineButton(countryCode, countryName) {
   const timeMachineBtn = document.getElementById('timeMachineBtn');
-  if (!timeMachineBtn) {
-    console.log('TimeMachine button element not found');
-    return;
-  }
-  
-  console.log(`Checking TimeMachine data for ${countryCode}`);
-  
-  // Check if this country has historical data
+  if (!timeMachineBtn) return;
+
   import('./timemachine.js').then(mod => {
-    console.log('TimeMachine module loaded');
     if (mod.hasHistoricalData(countryCode)) {
-      console.log(`✓ ${countryCode} has historical data - showing button`);
       timeMachineBtn.style.display = 'flex';
       timeMachineBtn.onclick = () => showTimeMachineModal(countryCode, countryName);
     } else {
-      console.log(`${countryCode} has no historical data`);
       timeMachineBtn.style.display = 'none';
     }
   }).catch(err => {
@@ -274,44 +502,28 @@ function updateTimeMachineButton(countryCode, countryName) {
   });
 }
 
-// Show TimeMachine modal with year slider
 function showTimeMachineModal(countryCode, countryName) {
-  console.log(`Opening TimeMachine for ${countryName}`);
-  
   import('./timemachine.js').then(mod => {
     const periods = mod.getHistoricalPeriods(countryCode);
     if (periods.length === 0) return;
-    
-    // For now, just show the first period (1949-1990 for Germany)
+
     const period = periods[0];
     const midYear = Math.floor((period.from + period.to) / 2);
-    
+
     mod.showHistoricalPeriod(countryCode, midYear);
-    
-    // Show notification
-    alert(`🕰️ TimeMachine: Showing ${countryName} in ${midYear}
-${period.name} (${period.from}-${period.to})
 
-${period.states ? period.states.map(s => s.name).join(' & ') : ''}
+    alert(`🕰️ TimeMachine: Showing ${countryName} in ${midYear}\n${period.name} (${period.from}-${period.to})\n\nClick anywhere on the map to return to present day.`);
 
-Click anywhere on the map to return to present day.`);
-    
-    // Add one-time click handler to clear historical view
-    // Remove any existing handler first
     if (timeMachineMap._timeMachineClickHandler) {
       timeMachineMap.off('click', timeMachineMap._timeMachineClickHandler);
     }
-    
-    // Create new handler
+
     const clickHandler = () => {
       mod.clearHistoricalLayers();
-      console.log('Returned to present day');
-      // Remove this handler after use
       timeMachineMap.off('click', clickHandler);
       timeMachineMap._timeMachineClickHandler = null;
     };
-    
-    // Store reference and attach
+
     timeMachineMap._timeMachineClickHandler = clickHandler;
     timeMachineMap.on('click', clickHandler);
   }).catch(err => {
@@ -319,61 +531,21 @@ Click anywhere on the map to return to present day.`);
   });
 }
 
-// Helper function to convert ISO3 to ISO2 codes for common countries
-function convertISO3toISO2(iso3) {
-  const iso3to2 = {
-    // Europe
-    'POL': 'PL', 'GBR': 'GB', 'FRA': 'FR', 'DEU': 'DE', 'ITA': 'IT', 'ESP': 'ES',
-    'PRT': 'PT', 'NLD': 'NL', 'BEL': 'BE', 'CHE': 'CH', 'AUT': 'AT', 'SWE': 'SE',
-    'NOR': 'NO', 'DNK': 'DK', 'FIN': 'FI', 'ISL': 'IS', 'IRL': 'IE', 'GRC': 'GR',
-    'TUR': 'TR', 'RUS': 'RU', 'UKR': 'UA', 'BLR': 'BY', 'ROU': 'RO', 'BGR': 'BG',
-    'HUN': 'HU', 'CZE': 'CZ', 'SVK': 'SK', 'HRV': 'HR', 'SVN': 'SI', 'SRB': 'RS',
-    'BIH': 'BA', 'MKD': 'MK', 'ALB': 'AL', 'EST': 'EE', 'LVA': 'LV', 'LTU': 'LT',
-    'MDA': 'MD', 'MNE': 'ME', 'LUX': 'LU', 'MLT': 'MT', 'CYP': 'CY', 'AND': 'AD',
-    'MCO': 'MC', 'SMR': 'SM', 'VAT': 'VA', 'LIE': 'LI', 'GEO': 'GE', 'ARM': 'AM',
-    'AZE': 'AZ', 'KOS': 'XK',
-    
-    // Americas
-    'USA': 'US', 'CAN': 'CA', 'MEX': 'MX', 'BRA': 'BR', 'ARG': 'AR', 'CHL': 'CL',
-    'PER': 'PE', 'COL': 'CO', 'VEN': 'VE', 'ECU': 'EC', 'BOL': 'BO', 'PRY': 'PY',
-    'URY': 'UY', 'GUY': 'GY', 'SUR': 'SR', 'GUF': 'GF', 'CRI': 'CR', 'PAN': 'PA',
-    'NIC': 'NI', 'HND': 'HN', 'SLV': 'SV', 'GTM': 'GT', 'BLZ': 'BZ', 'CUB': 'CU',
-    'JAM': 'JM', 'HTI': 'HT', 'DOM': 'DO', 'PRI': 'PR', 'TTO': 'TT', 'BHS': 'BS',
-    'BRB': 'BB', 'GRD': 'GD', 'VCT': 'VC', 'LCA': 'LC', 'DMA': 'DM', 'ATG': 'AG',
-    'KNA': 'KN',
-    
-    // Asia
-    'CHN': 'CN', 'JPN': 'JP', 'KOR': 'KR', 'PRK': 'KP', 'IND': 'IN', 'PAK': 'PK',
-    'BGD': 'BD', 'IDN': 'ID', 'THA': 'TH', 'VNM': 'VN', 'PHL': 'PH', 'MYS': 'MY',
-    'SGP': 'SG', 'MMR': 'MM', 'LAO': 'LA', 'KHM': 'KH', 'TWN': 'TW', 'HKG': 'HK',
-    'MAC': 'MO', 'MNG': 'MN', 'NPL': 'NP', 'LKA': 'LK', 'BTN': 'BT', 'MDV': 'MV',
-    'BRN': 'BN', 'TLS': 'TL', 'AFG': 'AF', 'KAZ': 'KZ', 'UZB': 'UZ', 'TKM': 'TM',
-    'KGZ': 'KG', 'TJK': 'TJ',
-    
-    // Middle East
-    'ARE': 'AE', 'SAU': 'SA', 'IRN': 'IR', 'IRQ': 'IQ', 'ISR': 'IL', 'JOR': 'JO',
-    'LBN': 'LB', 'SYR': 'SY', 'YEM': 'YE', 'OMN': 'OM', 'KWT': 'KW', 'QAT': 'QA',
-    'BHR': 'BH', 'PSE': 'PS',
-    
-    // Africa
-    'ZAF': 'ZA', 'EGY': 'EG', 'NGA': 'NG', 'KEN': 'KE', 'ETH': 'ET', 'TZA': 'TZ',
-    'UGA': 'UG', 'GHA': 'GH', 'DZA': 'DZ', 'MAR': 'MA', 'TUN': 'TN', 'LBY': 'LY',
-    'SDN': 'SD', 'SSD': 'SS', 'AGO': 'AO', 'MOZ': 'MZ', 'MDG': 'MG', 'CMR': 'CM',
-    'CIV': 'CI', 'NER': 'NE', 'BFA': 'BF', 'MLI': 'ML', 'SEN': 'SN', 'TCD': 'TD',
-    'SOM': 'SO', 'ZWE': 'ZW', 'ZMB': 'ZM', 'MWI': 'MW', 'BWA': 'BW', 'NAM': 'NA',
-    'LSO': 'LS', 'SWZ': 'SZ', 'GAB': 'GA', 'GNQ': 'GQ', 'COG': 'CG', 'COD': 'CD',
-    'CAF': 'CF', 'TGO': 'TG', 'BEN': 'BJ', 'MRT': 'MR', 'GMB': 'GM', 'GNB': 'GW',
-    'GIN': 'GN', 'SLE': 'SL', 'LBR': 'LR', 'ERI': 'ER', 'DJI': 'DJ', 'RWA': 'RW',
-    'BDI': 'BI', 'MUS': 'MU', 'SYC': 'SC', 'CPV': 'CV', 'STP': 'ST', 'COM': 'KM',
-    
-    // Oceania
-    'AUS': 'AU', 'NZL': 'NZ', 'PNG': 'PG', 'FJI': 'FJ', 'SLB': 'SB', 'VUT': 'VU',
-    'NCL': 'NC', 'PYF': 'PF', 'WSM': 'WS', 'GUM': 'GU', 'TON': 'TO', 'KIR': 'KI',
-    'FSM': 'FM', 'MHL': 'MH', 'PLW': 'PW', 'NRU': 'NR', 'TUV': 'TV', 'NIU': 'NU',
-    'COK': 'CK', 'ASM': 'AS'
-  };
-  
-  return iso3to2[iso3] || '';
+function setupActionButtons(countryCode, countryName) {
+  const articlesBtn = document.getElementById('viewArticlesBtn');
+  const timelineBtn = document.getElementById('viewTimelineBtn');
+
+  if (articlesBtn) {
+    articlesBtn.onclick = () => {
+      window.location.href = `/articles.html?country=${encodeURIComponent(countryCode)}`;
+    };
+  }
+
+  if (timelineBtn) {
+    timelineBtn.onclick = () => {
+      alert(`Timeline for ${countryName} (${countryCode}) coming soon!`);
+    };
+  }
 }
 
 export function closeSidebar() {
@@ -388,20 +560,13 @@ export function closeSidebar() {
   currentCountry = null;
 }
 
-// Setup close handlers
 export function setupSidebarHandlers() {
   const closeBtn = document.getElementById('closeSidebar');
   const overlay = document.getElementById('sidebarOverlay');
   
-  if (closeBtn) {
-    closeBtn.addEventListener('click', closeSidebar);
-  }
+  if (closeBtn) closeBtn.addEventListener('click', closeSidebar);
+  if (overlay) overlay.addEventListener('click', closeSidebar);
   
-  if (overlay) {
-    overlay.addEventListener('click', closeSidebar);
-  }
-  
-  // ESC key to close
   document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape' && currentCountry) {
       closeSidebar();

@@ -92,7 +92,7 @@
           </p>
           <br>
           <h5>Developed by Nathan Wong, a high school student in Vancouver, Canada.</h5>
-          <h5>Version 0.4.0</h5>
+          <h5>Version 0.6.0</h5>
           <h5>For questions, email GeoBoard at nathanwongtybusiness@gmail.com</h5>
         </div>
 
@@ -153,40 +153,49 @@
     <div id="sidebarOverlay" class="sidebar-overlay"></div>
     
     <!-- Country Info Sidebar -->
-    <aside id="countrySidebar" class="country-sidebar">
-      <div class="sidebar-header">
-        <button id="closeSidebar" class="close-sidebar-btn" aria-label="Close sidebar">
-          <i class="fas fa-times"></i>
-        </button>
-      </div>
-      
-      <div class="sidebar-content">
-        <h2 id="countryName" class="country-name-title">Country Name</h2>
-        
-        <div class="country-flag">
-          <img id="countryFlag" src="" alt="Country flag">
-        </div>
-        
-        <div id="countryInfo" class="country-details">
-          <!-- Country information will be populated here -->
-        </div>
-        
-        <div class="sidebar-actions">
-          <button id="timeMachineBtn" class="action-btn timemachine-btn" style="display: none;">
-            <i class="fas fa-clock-rotate-left"></i>
-            TimeMachine
-          </button>
-          <button class="action-btn">
-            <i class="fas fa-book"></i>
-            View Articles
-          </button>
-          <button class="action-btn">
-            <i class="fas fa-history"></i>
-            View Timeline
-          </button>
-        </div>
-      </div>
-    </aside>
+<aside id="countrySidebar" class="country-sidebar">
+  <div class="sidebar-header">
+    <button id="closeSidebar" class="close-sidebar-btn" aria-label="Close sidebar">
+      <i class="fas fa-times"></i>
+    </button>
+  </div>
+  
+  <div class="sidebar-content">
+    <div class="country-title-block">
+    <div class="country-flag">
+      <img id="countryFlag" src="" alt="Country flag">
+    </div>
+    <h2 id="countryName" class="country-name-title">Country Name</h2>
+    <p id="countryOfficialName" class="country-official-name"></p>
+    <p id="countryNativeName" class="country-native-name"></p>
+    </div>
+    <div id="countrySubtitleBlock" class="country-subtitle-block" style="display: none;">
+      <span id="countryRegion"></span>
+      <span id="countrySubregion"></span>
+    </div>
+    
+    <!-- Detailed Stats Container -->
+    <div id="countryInfo" class="country-details">
+    </div>
+    
+    <!-- Actions -->
+    <div class="sidebar-actions">
+      <button id="timeMachineBtn" class="action-btn timemachine-btn" style="display: none;">
+        <i class="fas fa-clock-rotate-left"></i>
+        TimeMachine
+      </button>
+      <button id="viewArticlesBtn" class="action-btn">
+        <i class="fas fa-book"></i>
+        View Articles
+      </button>
+
+      <button id="viewTimelineBtn" class="action-btn">
+        <i class="fas fa-history"></i>
+        View Timeline
+      </button>
+    </div>
+  </div>
+</aside>
     
     <div id="map"></div>
   </main>

@@ -8,6 +8,59 @@ export async function setupArticle() {
   } catch (err) {
     console.error('GeoJSON load error:', err);
   }
+  
+  // Attach directly to window so HTML onclick properties can access them
+  window.advanceFlow = function(step, isYes) {
+    const card1 = document.getElementById('card-step1');
+    const card2 = document.getElementById('card-step2');
+    const card3 = document.getElementById('card-step3');
+    const resultCard = document.getElementById('card-result');
+    
+    const connect1 = document.getElementById('connect-1');
+    const connect2 = document.getElementById('connect-2');
+    const connect3 = document.getElementById('connect-3');
+
+    const resultTitle = document.getElementById('result-title');
+    const resultBody = document.getElementById('result-body');
+
+    if (!isYes) {
+      resultCard.classList.remove('hidden');
+      resultTitle.textContent = "Statehood Denied";
+      resultBody.textContent = "Darn it! Under Section 1 of the Montevideo Convention, missing any single core pillar immediately invalidates your claim to statehood.";
+      resultCard.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      return;
+    }
+
+    if (step === 'step1') {
+      card1.classList.add('passed');
+      connect1.classList.add('active');
+      card2.classList.remove('locked');
+    } else if (step === 'step2') {
+      card2.classList.add('passed');
+      connect2.classList.add('active');
+      card3.classList.remove('locked');
+    } else if (step === 'step3') {
+      card3.classList.add('passed');
+      connect3.classList.add('active');
+      
+      resultCard.classList.remove('hidden');
+      resultTitle.textContent = "Accepted But Not Guaranteed";
+      resultBody.textContent = "Congrats! Technically, your entity satisfies all legal conditions for statehood! According to the Declaratory Theory, it's fully a country. Simple enough — until you realize most breakaway regions satisfy all four criteria. Scroll down to Chapter 4 to find out why a region can check all these boxes and still remain invisible in the eyes of the UN.";
+      resultCard.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }
+  };
+
+  window.resetFlow = function() {
+    const cards = ['card-step1', 'card-step2', 'card-step3'];
+    cards.forEach(id => {
+      const el = document.getElementById(id);
+      el.classList.remove('passed');
+      if(id !== 'card-step1') el.classList.add('locked');
+    });
+
+    document.querySelectorAll('.flow-connector').forEach(c => c.classList.remove('active'));
+    document.getElementById('card-result').classList.add('hidden');
+  };
 }
 
 function initMap(RECOGNITION_DATA) {
@@ -24,21 +77,21 @@ const chapters = [
   {
     label: "Chapter 2", eyebrow: "Chapter 2",
     title: "The Birth of the State",
-    body: "The modern state is a surprisingly recent invention. It took a century of European war to produce the first real blueprint.",
+    body: "The state is a surprisingly recent invention. It took a century of European war to produce some resemblance to a modern country.",
     mapFocus: { center: [10, 50], zoom: 3.5 },
     highlight: []
   },
   {
     label: "Chapter 3", eyebrow: "Chapter 3",
     title: "Montevideo",
-    body: "In 1933, 20 nations tried to define statehood once and for all. Their four criteria are still the starting point — and still not enough.",
+    body: "In 1933, 20 nations tried to define statehood once and for all. Their four criteria became the international rulebook—but rules are made to be broken.",
     mapFocus: { center: [-56, -34], zoom: 3.5 },
     highlight: []
   },
   {
     label: "Chapter 4", eyebrow: "Chapter 4",
     title: "Recognition: The Politics of Existence",
-    body: "Recognition isn't just diplomatic courtesy — it's the difference between having a voice in the world and being invisible to it.",
+    body: "All countries want to take a seat at the UN table. But there are countries who are just as determined as they are to wipe their name off the map.",
     mapFocus: { center: [121, 24], zoom: 4.5 },
     highlight: []
   },
@@ -52,7 +105,14 @@ const chapters = [
   {
     label: "Conclusion", eyebrow: "Conclusion",
     title: "Why It Matters",
-    body: "How we define a country determines who gets a seat at the table — and whose citizens can travel freely.",
+    body: "The question of what constitutes a country is essentially a power play. The answer forces you to pick a side in politics, interests and stakes that are higher than you think.",
+    mapFocus: { center: [0, 20], zoom: 1.5 },
+    highlight: []
+  },
+  {
+    label: "Bibliography", eyebrow: "Sources",
+    title: "Bibliography",
+    body: "Eight primary sources underpin this article — from the Montevideo Convention to UN membership records and recent analyses of Taiwan's diplomatic standing. Click on the links to be reidrected to them.",
     mapFocus: { center: [0, 20], zoom: 1.5 },
     highlight: []
   }
@@ -315,16 +375,15 @@ function setupHover() {
 }
 
 function setupSnapScroll() {
-  // ── Config knobs ──
-  const SNAP_THRESHOLD  = 110;  // px of overscroll to trigger a snap
-  const COOLDOWN_MS     = 900;  // ms lockout after each snap
-  const SMALL_THRESHOLD = 8;    // ignore wheel ticks smaller than this
-  const SLIDE_MS        = 480;  // chapter slide animation duration
+  // ── Config knobs (tuned for a softer social-media feel) ──
+  const SNAP_THRESHOLD  = 95;   // slightly easier to trigger
+  const COOLDOWN_MS     = 750;  // shorter lockout feels snappier
+  const SMALL_THRESHOLD = 6;
+  const SLIDE_MS        = 520;  // a touch longer = smoother
+  const RELEASE_WAIT_MS = 120;  // faster decision after finger lifts
 
-  // How long after the last wheel event before we treat the gesture
-  // as "released". 150ms is short enough to feel instant, long enough
-  // not to fire mid-trackpad-momentum.
-  const RELEASE_WAIT_MS = 150;
+  // Easing used for chapter slides
+  const EASE = 'cubic-bezier(0.32, 0.72, 0, 1)'; // iOS-like
 
   // ── State ──
   let currentIndex         = 0;
@@ -333,138 +392,123 @@ function setupSnapScroll() {
   let isOnCooldown         = false;
   let lastWheelTime        = 0;
   let hasScrolledInChapter = false;
-  let releaseTimer         = null;  // setTimeout handle — cleared on each tick
+  let releaseTimer         = null;
 
   const outerEl    = document.getElementById('articleScroll');
   const chapterEls = Array.from(document.querySelectorAll('.chapter'));
 
-  // ── Move .article-header inside chapter 0 ──
+  // Move .article-header inside chapter 0
   const header   = outerEl.querySelector('.article-header');
   const chapter0 = chapterEls[0];
   if (header && chapter0) {
     chapter0.insertBefore(header, chapter0.firstChild);
   }
 
-  // ── Make outer container a clipping viewport ──
   outerEl.style.overflow = 'hidden';
   outerEl.style.position = 'relative';
 
-  // ── Style each chapter as its own full-height scrollable pane ──
   chapterEls.forEach((ch, i) => {
-    ch.style.position  = 'absolute';
-    ch.style.top       = '0';
-    ch.style.left      = '0';
-    ch.style.width     = '100%';
-    ch.style.height    = '100%';
+    ch.style.position      = 'absolute';
+    ch.style.top           = '0';
+    ch.style.left          = '0';
+    ch.style.width         = '100%';
+    ch.style.height        = '100%';
     ch.style.paddingBottom = '80px';
-    ch.style.overflowY = 'auto';
-    ch.style.overflowX = 'hidden';
-    ch.style.boxSizing = 'border-box';
-    ch.style.transform  = i === 0 ? 'translateY(0%)' : 'translateY(100%)';
-    ch.style.transition = `transform ${SLIDE_MS}ms cubic-bezier(0.4, 0, 0.2, 1)`;
-    ch.style.willChange = 'transform';
+    ch.style.overflowY     = 'auto';
+    ch.style.overflowX     = 'hidden';
+    ch.style.boxSizing     = 'border-box';
+    ch.style.transform     = i === 0 ? 'translateY(0%)' : 'translateY(100%)';
+    ch.style.transition    = `transform ${SLIDE_MS}ms ${EASE}`;
+    ch.style.willChange    = 'transform';
+    ch.style.opacity       = i === 0 ? '1' : '0';
   });
 
-  // ── Build arrow + gradient overlay ──
-  // The overlay is a separate div that lives inside #articleScroll.
-  // It sits above the chapter content using z-index, and moves with
-  // the chapter during the slide animation by sharing the same
-  // translateY transform (applied in sync in activateChapter).
+  // Overlay
   const overlayEl = document.createElement('div');
   overlayEl.id = 'snapOverlay';
 
-  // The arrow container inside the overlay
   const arrowEl = document.createElement('div');
   arrowEl.id = 'snapArrow';
   arrowEl.innerHTML = `
-    <svg class="snap-chevron" viewBox="0 0 24 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <polyline points="2,2 12,12 22,2" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
-    </svg>
-    <svg class="snap-chevron" viewBox="0 0 24 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <polyline points="2,2 12,12 22,2" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
-    </svg>
-    <svg class="snap-chevron" viewBox="0 0 24 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <polyline points="2,2 12,12 22,2" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
-    </svg>
+  <svg class="snap-chevron" viewBox="0 0 24 14" fill="none">
+    <polyline points="2,2 12,12 22,2" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+  </svg>
+  <svg class="snap-chevron" viewBox="0 0 24 14" fill="none">
+    <polyline points="2,2 12,12 22,2" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+  </svg>
+  <svg class="snap-chevron" viewBox="0 0 24 14" fill="none">
+    <polyline points="2,2 12,12 22,2" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+  </svg>
+  <span id="snapNextLabel">Next chapter</span>
   `;
   overlayEl.appendChild(arrowEl);
   outerEl.appendChild(overlayEl);
 
   const chevrons = Array.from(arrowEl.querySelectorAll('.snap-chevron'));
+    const nextLabel = document.getElementById('snapNextLabel');
 
-  function updateArrow(progress, direction, chEl) {
+    function updateArrow(progress, direction, chEl) {
     const isUp = direction < 0;
 
     if (progress <= 0) {
-      // Hide everything and reset chapter nudge
       overlayEl.style.opacity   = '0';
-      overlayEl.style.transform = isUp
-        ? 'translateY(-100%)'   // reset to off top
-        : 'translateY(100%)';   // reset to off bottom
+      overlayEl.style.transform = isUp ? 'translateY(-12px)' : 'translateY(12px)';
       if (chEl) chEl.style.transform = 'translateY(0%)';
+      if (nextLabel) nextLabel.style.opacity = '0';
       return;
     }
 
-    // ── FIX 1: Slide overlay in from off-screen as progress builds ──
-    // At progress=0: overlay is translateY(100%) — fully below the pane.
-    // At progress=1: overlay is translateY(0%)   — fully visible.
-    const slideIn = isUp
-      ? `translateY(${-100 + progress * 100}%)`  // slides down from top
-      : `translateY(${100 - progress * 100}%)`;  // slides up from bottom
-
-    overlayEl.style.transform = slideIn;
-    overlayEl.style.opacity   = String(Math.min(progress * 1.6, 1));
+    const rise = isUp ? -12 + progress * 12 : 12 - progress * 12;
+    overlayEl.style.transform = `translateY(${rise}px)`;
+    overlayEl.style.opacity   = String(Math.min(progress * 1.4, 1));
     overlayEl.classList.toggle('overlay-up', isUp);
 
-    // ── FIX 4: Nudge the chapter content upward as overscroll builds ──
-    // Max nudge is 32px. We use the chapter's current translateY base (0%)
-    // plus a small pixel offset so text drifts up as the overlay comes in.
-    const nudgePx = progress * 32;
+    const nudgePx = progress * 18;
     if (chEl) {
-      // Preserve the chapter's base translateY(0%) and add the nudge on top
       chEl.style.transform = isUp
-        ? `translateY(${nudgePx}px)`   // nudge down when going to prev
-        : `translateY(${-nudgePx}px)`; // nudge up when going to next
+        ? `translateY(${nudgePx}px)`
+        : `translateY(${-nudgePx}px)`;
     }
 
-    // ── Chevron spread ──
-    const spread = progress * 8;
-    chevrons[0].style.transform = `translateY(${isUp ?  spread : -spread}px)`;
-    chevrons[1].style.transform = `translateY(0px)`;
-    chevrons[2].style.transform = `translateY(${isUp ? -spread :  spread}px)`;
+    const spread = progress * 6;
+    chevrons.forEach((c, i) => {
+      const offset = i === 0 ? (isUp ? spread : -spread)
+                  : i === 2 ? (isUp ? -spread :  spread)
+                  : 0;
+      c.style.transform = `translateY(${offset}px) rotate(${isUp ? 180 : 0}deg)`;
+      c.style.opacity = String(0.45 + progress * 0.55 - i * 0.08);
+    });
+
+    if (nextLabel) {
+      nextLabel.textContent = isUp ? 'Previous chapter' : 'Next chapter';
+      nextLabel.style.opacity = String(Math.min(progress * 1.8, 1));
+    }
   }
 
-  // ── hideOverlay ──
-  // Fades the overlay and chevrons out in place, and springs the chapter
-  // text back to its resting position. Called when the user releases
-  // without reaching the snap threshold.
   function hideOverlay(chEl) {
-    overlayEl.style.transition = 'opacity 220ms ease';
+    overlayEl.style.transition = 'opacity 200ms ease, transform 220ms ease';
     overlayEl.style.opacity    = '0';
+    overlayEl.style.transform  = 'translateY(8px)';
 
     if (chEl) {
-      chEl.style.transition = 'transform 280ms cubic-bezier(0.25, 0.46, 0.45, 0.94)';
+      chEl.style.transition = `transform 280ms ${EASE}`;
       chEl.style.transform  = 'translateY(0%)';
     }
   }
 
-  // ── Wheel listener on each chapter ──
-  chapterEls.forEach((chEl, i) => {
+    chapterEls.forEach((chEl, i) => {
     chEl.addEventListener('wheel', (event) => {
       const delta = event.deltaY;
-
       if (Math.abs(delta) < SMALL_THRESHOLD) return;
-      if (isAnimating || isOnCooldown) return;
+      if (isAnimating) return;
 
-      // Clear any pending release timer — the user is still scrolling
       if (releaseTimer) {
         clearTimeout(releaseTimer);
         releaseTimer = null;
       }
 
-      // Decay overscroll if the user paused
       const now = Date.now();
-      if (now - lastWheelTime > 350) overscroll = 0;
+      if (now - lastWheelTime > 320) overscroll = 0;
       lastWheelTime = now;
 
       const scrollingDown = delta > 0;
@@ -474,80 +518,75 @@ function setupSnapScroll() {
 
       if (scrollingDown && atBottom) {
         if (i >= chapterEls.length - 1) return;
-
         const chapterHasOverflow = chEl.scrollHeight > chEl.clientHeight + 2;
         if (chapterHasOverflow && !hasScrolledInChapter) {
           event.preventDefault();
           return;
         }
-
         overscroll += delta;
         event.preventDefault();
-
       } else if (scrollingUp && atTop) {
         if (i <= 0) return;
         overscroll += delta;
         event.preventDefault();
-
       } else {
-        // Normal in-chapter scroll — reset overscroll and hide any overlay
-        overscroll = 0;
+        if (overscroll !== 0) {
+          overscroll = 0;
+          updateArrow(0, 1, chEl);
+        }
         hasScrolledInChapter = true;
+        return;
+      }
+
+      if (Math.abs(overscroll) > SNAP_THRESHOLD) {
+        overscroll = Math.sign(overscroll) * SNAP_THRESHOLD;
+      }
+
+      if (overscroll === 0 || Math.abs(overscroll) < SMALL_THRESHOLD) {
+        overscroll = 0;
         updateArrow(0, 1, chEl);
         return;
       }
 
-      const direction = scrollingDown ? 1 : -1;
-      // Cap overscroll at threshold so it doesn't grow unboundedly
-      overscroll = Math.sign(overscroll) * Math.min(Math.abs(overscroll), SNAP_THRESHOLD);
-      const progress = Math.abs(overscroll) / SNAP_THRESHOLD;
+      const direction = overscroll > 0 ? 1 : -1;
+      const progress  = Math.abs(overscroll) / SNAP_THRESHOLD;
       updateArrow(progress, direction, chEl);
 
-      // ── Schedule a release check ──
-      // Every wheel tick resets this timer. When the wheel finally goes quiet
-      // for RELEASE_WAIT_MS, the callback runs and decides: snap or return.
       releaseTimer = setTimeout(() => {
         releaseTimer = null;
-        const didSnap = Math.abs(overscroll) >= SNAP_THRESHOLD;
+        const didSnap = Math.abs(overscroll) >= SNAP_THRESHOLD * 0.92;
+        const snapDir = overscroll > 0 ? 1 : -1;
         overscroll = 0;
 
-        if (didSnap) {
-          // ── Snap ──
-          const nextIndex = currentIndex + direction;
+        if (didSnap && !isOnCooldown) {
+          const nextIndex = currentIndex + snapDir;
           if (nextIndex < 0 || nextIndex >= chapterEls.length) {
             hideOverlay(chEl);
             return;
           }
 
-          // Slide chapter out
-          chEl.style.transition = `transform ${SLIDE_MS}ms cubic-bezier(0.4, 0, 0.2, 1)`;
-          chEl.style.transform  = direction > 0 ? 'translateY(-100%)' : 'translateY(100%)';
+          chEl.style.transition = `transform ${SLIDE_MS}ms ${EASE}, opacity ${SLIDE_MS * 0.7}ms ease`;
+          chEl.style.transform  = snapDir > 0 ? 'translateY(-100%)' : 'translateY(100%)';
+          chEl.style.opacity    = '0';
 
-          // Fade overlay out in place
-          overlayEl.style.transition = 'opacity 180ms ease';
+          overlayEl.style.transition = 'opacity 160ms ease';
           overlayEl.style.opacity    = '0';
 
-          activateChapter(nextIndex, direction);
+          activateChapter(nextIndex, snapDir);
 
           isAnimating  = true;
           isOnCooldown = true;
           setTimeout(() => { isAnimating  = false; }, SLIDE_MS);
           setTimeout(() => { isOnCooldown = false; }, COOLDOWN_MS);
-
         } else {
-          // ── Not enough force — return everything to rest ──
           hideOverlay(chEl);
         }
-
       }, RELEASE_WAIT_MS);
-
     }, { passive: false });
   });
 
-  // Activate chapter 0 on load
   activateChapter(0, 1);
 
-  // ── ACTIVATE CHAPTER ──
   function activateChapter(index, direction) {
     const prevIndex = currentIndex;
     currentIndex    = index;
@@ -556,64 +595,108 @@ function setupSnapScroll() {
     const outgoing = chapterEls[prevIndex];
     const incoming = chapterEls[index];
 
-    // FIX 3: Reset the scroll-intent guard for the new chapter.
-    // Short chapters (no overflow) don't need the guard — treat as already scrolled.
     hasScrolledInChapter = false;
-
-    // Slide outgoing chapter out (only if not first load)
-    if (outgoing && prevIndex !== index) {
-      outgoing.style.transition = `transform ${SLIDE_MS}ms cubic-bezier(0.4, 0, 0.2, 1)`;
-      outgoing.style.transform  = direction > 0 ? 'translateY(-100%)' : 'translateY(100%)';
-    }
-
-    // Reset overlay to off-screen starting position for the incoming direction,
-    // with no transition so it snaps instantly before the next overscroll
-    overlayEl.style.transition = 'none';
-    overlayEl.style.opacity    = '0';
-    overlayEl.style.transform  = direction > 0 ? 'translateY(100%)' : 'translateY(-100%)';
-
-    // Snap incoming to its off-screen starting position (no transition)
-    incoming.style.transition = 'none';
-    incoming.style.transform  = direction > 0 ? 'translateY(100%)' : 'translateY(-100%)';
-    incoming.scrollTop        = 0;
-
-    // Two rAF frames: let browser commit the starting position, then animate in
     requestAnimationFrame(() => {
       requestAnimationFrame(() => {
-        incoming.style.transition = `transform ${SLIDE_MS}ms cubic-bezier(0.4, 0, 0.2, 1)`;
-        incoming.style.transform  = 'translateY(0%)';
+        if (incoming.scrollHeight > incoming.clientHeight + 4) {
+          hasScrolledInChapter = true;
+        }
       });
     });
 
-    // ── Update infobox ──
+    if (outgoing && prevIndex !== index) {
+      outgoing.style.transition = `transform ${SLIDE_MS}ms ${EASE}, opacity ${SLIDE_MS * 0.65}ms ease`;
+      outgoing.style.transform  = direction > 0 ? 'translateY(-100%)' : 'translateY(100%)';
+      outgoing.style.opacity    = '0';
+    }
+
+    // Reset overlay
+    overlayEl.style.transition = 'none';
+    overlayEl.style.opacity    = '0';
+    overlayEl.style.transform  = 'translateY(8px)';
+
+    // Position incoming off-screen, then animate in
+    incoming.style.transition = 'none';
+    incoming.style.transform  = direction > 0 ? 'translateY(100%)' : 'translateY(-100%)';
+    incoming.style.opacity    = '0';
+    incoming.scrollTop        = 0;
+
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        incoming.style.transition = `transform ${SLIDE_MS}ms ${EASE}, opacity ${SLIDE_MS * 0.7}ms ease`;
+        incoming.style.transform  = 'translateY(0%)';
+        incoming.style.opacity    = '1';
+      });
+    });
+
+    // Infobox + badge + nav
     document.getElementById('infoboxEyebrow').textContent = ch.eyebrow;
     document.getElementById('infoboxTitle').textContent   = ch.title;
     document.getElementById('infoboxBody').textContent    = ch.body;
+    document.getElementById('chapterBadge').textContent   = ch.label;
 
-    // ── Update chapter badge ──
-    document.getElementById('chapterBadge').textContent = ch.label;
-
-    // ── Update nav dots ──
     document.querySelectorAll('.nav-dot').forEach((dot, i) => {
       dot.classList.toggle('active', i === index);
     });
 
-    // ── Update active chapter highlight ──
     chapterEls.forEach((section, i) => {
       section.classList.toggle('active', i === index);
     });
 
-    // ── Fly the map ──
+    // Progress bar by chapter index
+    const progressEl = document.getElementById('progressBar');
+    if (progressEl) {
+      progressEl.style.width = ((index + 1) / chapters.length * 100) + '%';
+    }
+
     map.flyTo({
       center:   ch.mapFocus.center,
       zoom:     ch.mapFocus.zoom,
-      duration: 1200,
+      duration: 1100,
       essential: true
     });
   }
 
-  // Expose activateChapter for nav dots
   outerEl._activateChapter = activateChapter;
+
+  // Footnote navigation (unchanged logic, just keep it)
+  const bibIndex  = chapterEls.length - 1;
+  const bibEl     = chapterEls[bibIndex];
+  let fnOriginIndex = 0;
+
+  document.querySelectorAll('a.fn-ref').forEach(link => {
+    link.addEventListener('click', e => {
+      e.preventDefault();
+      const targetId = link.getAttribute('href').slice(1);
+      fnOriginIndex = currentIndex;
+      const direction = bibIndex > currentIndex ? 1 : -1;
+      activateChapter(bibIndex, direction);
+      setTimeout(() => {
+        const targetEl = bibEl.querySelector('#' + targetId);
+        if (targetEl) {
+          targetEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          targetEl.classList.add('fn-highlight');
+          setTimeout(() => targetEl.classList.remove('fn-highlight'), 1200);
+        }
+      }, SLIDE_MS + 40);
+    });
+  });
+
+  document.querySelectorAll('a.fn-back').forEach(link => {
+    link.addEventListener('click', e => {
+      e.preventDefault();
+      const targetId = link.getAttribute('href').slice(1);
+      const returnIndex = fnOriginIndex;
+      activateChapter(returnIndex, returnIndex < bibIndex ? -1 : 1);
+      setTimeout(() => {
+        const originChEl = chapterEls[returnIndex];
+        const anchorEl   = originChEl.querySelector('#' + targetId);
+        if (anchorEl) {
+          anchorEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+      }, SLIDE_MS + 40);
+    });
+  });
 }
 
 
@@ -651,3 +734,4 @@ function setupProgressBar() {
 }
 
 }
+

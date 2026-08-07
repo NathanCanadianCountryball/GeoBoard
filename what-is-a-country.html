@@ -97,8 +97,8 @@
           </p>
           <br>
           <h5>Developed by Nathan Wong, a high school student in Vancouver, Canada.</h5>
-          <h5>Version 0.4.0</h5>
-          <h5>For questions, email GeoBoard at nathanwongtybusiness@gmail.com</h5>
+          <h5>Version 0.6.0</h5>
+          <h5>For questions, email GeoBoard at <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="325c53465a535c455d5c55464b5047415b5c57414172555f535b5e1c515d5f">[email&#160;protected]</a></h5>
         </div>
 
         <button id="closeSettings" class="close-btn">Close</button>
@@ -260,12 +260,12 @@
                 <span class="chip-dot" style="background:var(--status-full)"></span> France
               </span>.
             </p>
-            <p>To get into this country club, you need to be a <strong>member state</strong> of the UN. Let's say a country called Geoland wants to join. Its 
-              government sends a letter to the <strong>Secretary-General</strong> basically saying they exist, they're a country, and they want to join the UN.</p>
+            <p>If you have a seat at the UN, you're a country. Simple enough — but to get into this country club, a state must join the UN in the first place. Let's say a country called Geoland wants to join. Its 
+              government sends a letter to the UN's <strong>Secretary-General</strong> basically saying they exist, they're a country, and they want to join the UN.</p>
             <p>The Security Council, made up of 15 countries, then votes on whether to recommend Geoland as a member state. If Geoland gets 9 out of 15 votes in the 
-              Security Council saying "yay" instead of "nay", and no "nay"s from the 5 permanent members (China, France, Russia, the UK, and the US), then it goes to 
-              the <strong>General Assembly</strong>, a council of all 193 member states. There, Geoland needs a <em>two-thirds</em> majority vote to be admitted as a 
-              member state. Congratulations, Geoland is now a member of the United Nations, and a textbook example of a country!</p> 
+              Security Council saying "yay" instead of "nay", and no "nay"s from the 5 permanent members (China, France, Russia, the United Kingdom, and the United States), then Geoland's proposal goes to 
+              the council of all 193 member states, called the <strong>General Assembly</strong>. There, Geoland needs a <em>two-thirds</em> majority vote to be admitted as a 
+              member state. Congratulations, Geoland is now a member of the United Nations, and a textbook example of a country!<a href="#fn1" class="fn-ref" id="fnref1" title="UN About Us: About UN Membership"><sup>1</sup></a></p> 
             <p>
               This process is relatively simple for international matters. However, the UN doesn't have a clear definition of what a country is, and it doesn't have a 
               clear framework for solving disputes over recognition. So there are many entities that function as countries in practice, but aren't recognized by the 
@@ -279,7 +279,7 @@
               <span class="country-chip" data-country="PSE" data-status="observer">
                 <span class="chip-dot" style="background:var(--status-observer)"></span> State of Palestine
               </span>
-              — all of which are considered by some to be countries, but not all. So if they're not countries, what are they?
+              — all of which are considered by some to be countries, but not all. So if they're not countries, what are they?<a href="#fn2" class="fn-ref" id="fnref2" title="UN Research Guide: Observers"><sup>2</sup></a>
             </p>
             <p style="color:var(--text-muted);font-size:0.8rem;margin-top:16px;">
               <strong>Continue exploring:</strong> Hover countries on the map to see their recognition
@@ -303,7 +303,7 @@
                 exclusive authority over its own affairs and its relations with other states, as well as 
                 allowing their princes who ruled them to choose their own religion and political systems 
                 without external interference. The Holy Roman Empire now exercised less 
-                power over the states that made it up.
+                power over the states that made it up.<a href="#fn3" class="fn-ref" id="fnref3" title="Encyclopædia Britannica: Peace of Westphalia"><sup>3</sup></a>
             </p>
             <p>
               Basically, the Peace of Westphalia made the Holy Roman Empire's states more independent, 
@@ -332,12 +332,59 @@
           <div class="chapter-body">
             <p>In 1933, Montevideo, Uruguay, 20 countries sat down and tried to answer this
             question once and for all. Their convention outlined four criteria for statehood that
-            are still the starting point for every international law class today.</p>
-            <p>To be a state, an entity needs: a permanent population, a defined territory, an effective
-            government, and the capacity to enter into relations with other states. Simple enough — until 
-            you realize most breakaway regions satisfy all four criteria.</p>
+            are still the starting point for every international law class today.<a href="#fn4" class="fn-ref" id="fnref4" title="Montevideo Convention on the Rights and Duties of States (1933)"><sup>4</sup></a></p>
+            <!-- Statehood Checker -->
+          <div class="statehood-module">
+            <div class="module-header">
+              <h3>To be or not to be a state...</h3>
+              <p>Run an entity through the Montevideo Convention check.</p>
+            </div>
+
+            <div class="flowchart-container">
+              
+              <div class="flow-card active" id="card-step1">
+                <p class="question-text">Does your chosen country have a fixed land area and people living in it every day?</p>
+                <div class="btn-group">
+                  <button class="flow-btn btn-yes" onclick="advanceFlow('step1', true)">Yes</button>
+                  <button class="flow-btn btn-no" onclick="advanceFlow('step1', false)">No</button>
+                </div>
+              </div>
+
+              <div class="flow-connector" id="connect-1"></div>
+
+              
+              <div class="flow-card locked" id="card-step2">
+                <p class="question-text">Does it have an operational government capable of making, enforcing, and protecting laws?</p>
+                <div class="btn-group">
+                  <button class="flow-btn btn-yes" onclick="advanceFlow('step2', true)">Yes</button>
+                  <button class="flow-btn btn-no" onclick="advanceFlow('step2', false)">No</button>
+                </div>
+              </div>
+
+              <div class="flow-connector" id="connect-2"></div>
+
+              
+              <div class="flow-card locked" id="card-step3">
+                <p class="question-text">Does it possess the capacity to independently form international relations and treaties with other states?</p>
+                <div class="btn-group">
+                  <button class="flow-btn btn-yes" onclick="advanceFlow('step3', true)">Yes</button>
+                  <button class="flow-btn btn-no" onclick="advanceFlow('step3', false)">No</button>
+                </div>
+              </div>
+
+              <div class="flow-connector" id="connect-3"></div>
+
+              <!-- Result Box -->
+              <div class="flow-card result-card hidden" id="card-result">
+                <div class="result-icon">⚖️</div>
+                <h4 id="result-title">Verdict</h4>
+                <p id="result-body"></p>
+                <button class="reset-btn" onclick="resetFlow()">Test Another Entity</button>
+              </div>
+            </div>
+          </div>
             <div class="pull-quote">
-              The Montevideo criteria are necessary, but not sufficient. Recognition by others is the
+              The Montevideo criteria is the bare minimum for a country to have a chance at a seat at the UN. Recognition by others is the
               invisible fifth requirement.
             </div>
             <p>This is the closest treaty outlining the criteria for a country. However, Montevideo 
@@ -358,11 +405,11 @@
           <div class="chapter-body">
             <p>Recognition is — in a nutshell — a small nudge saying <em>I acknowledge you exist.</em>
             The recognizing nation may then form relations with it, or issue travel advisories, 
-            or engage in other forms of diplomatic interaction. Despite it seeming to be a 
+            or engage in other forms of diplomatic interaction. Despite recognition seeming to be a 
             simple act, it is profoundly political. Some people even say that recognition directly 
             decides whether a country exists (called the constitutive view) as opposed to an optional 
             criterion (the declaratory view). Whether a country recognizes another can sometimes 
-            reveal its alliances, history, and interests far more than any map can.
+            reveal its alliances, history, and interests far more than any map can.<a href="#fn5" class="fn-ref" id="fnref5" title="Justia: Formation and Recognition of States Under International Law"><sup>5</sup></a><a href="#fn6" class="fn-ref" id="fnref6" title="Anerkennung: Recognition under International Law"><sup>6</sup></a>
             </p>
             <br>
             <p>
@@ -380,15 +427,15 @@
             </p>
             <br>
             <p>
-            Taiwan, then called the Republic of China, had been recognised as the legitimate government of China — 
+            The Republic of China, however, continued to be recognised as the legitimate government of all of China — 
             until 1971, when the UN transferred its seat to the newly powerful
             <span class="country-chip" data-country="CHN" data-status="full">
               <span class="chip-dot" style="background:var(--status-full)"></span> People's Republic of China
             </span>
-            . Most countries followed suit in recognizing the PRC, who also declared a "One China" policy, that 
+            (UN Resolution 2758). Most countries followed suit in recognizing the PRC, who also declared a "One China" policy, that 
             stated that only one China existed, the PRC itself. Since then, countries have been increasingly 
             attracted to China's growing economic influence, and so they have switched their recognition to the 
-            PRC. Taiwan's recognition has dwindled to just a few small countries in Central America and the Pacific.
+            PRC. Taiwan's recognition has dwindled to just a few small countries in Central America and the Pacific.<a href="#fn7" class="fn-ref" id="fnref7" title="BBC News: Taiwan's dwindling diplomatic allies"><sup>7</sup></a><a href="#fn8" class="fn-ref" id="fnref8" title="FPRI: Taiwan and the United Nations — Fifty Years After the ROC's Expulsion"><sup>8</sup></a>
             </p>
             <p>
               This is a complex and evolving issue, with implications that extend far beyond the simple question 
@@ -439,8 +486,8 @@
           </div>
         </div>
 
-        <div class="chapter" id="chapter-4" data-chapter="4">
-          <div class="scroll-sentinel" id="sentinel-4"></div>
+        <div class="chapter" id="chapter-5" data-chapter="5">
+          <div class="scroll-sentinel" id="sentinel-5"></div>
           <div class="chapter-label">Conclusion</div>
           <h2 class="chapter-title">Why It Matters</h2>
           <div class="chapter-body">
@@ -469,9 +516,101 @@
             </div>
           </div>
         </div>
-      </div>
-    </div>
-  </div>
+
+        <!-- BIBLIOGRAPHY CHAPTER -->
+        <div class="chapter" id="chapter-bib" data-chapter="bib">
+          <div class="scroll-sentinel" id="sentinel-bib"></div>
+          <div class="chapter-label">Sources</div>
+          <h2 class="chapter-title">Bibliography</h2>
+          <div class="chapter-body">
+            <ol class="bibliography-list">
+              <li id="fn1">
+                <span class="fn-num">1</span>
+                <span class="fn-body">
+                  United Nations. <em>About UN Membership.</em>
+                  <a href="https://www.un.org/en/about-us/about-un-membership" target="_blank" rel="noopener" class="fn-link">
+                    un.org/en/about-us/about-un-membership <i class="fa-solid fa-arrow-up-right-from-square fn-ext"></i>
+                  </a>
+                  <a href="#fnref1" class="fn-back" title="Back to text">↩</a>
+                </span>
+              </li>
+              <li id="fn2">
+                <span class="fn-num">2</span>
+                <span class="fn-body">
+                  UN Dag Hammarskjöld Library. <em>Research Guide: Observers.</em>
+                  <a href="https://research.un.org/en/unmembers/observers" target="_blank" rel="noopener" class="fn-link">
+                    research.un.org/en/unmembers/observers <i class="fa-solid fa-arrow-up-right-from-square fn-ext"></i>
+                  </a>
+                  <a href="#fnref2" class="fn-back" title="Back to text">↩</a>
+                </span>
+              </li>
+              <li id="fn3">
+                <span class="fn-num">3</span>
+                <span class="fn-body">
+                  Editors of Encyclopædia Britannica. <em>Peace of Westphalia.</em> Encyclopædia Britannica.
+                  <a href="https://www.britannica.com/event/Peace-of-Westphalia" target="_blank" rel="noopener" class="fn-link">
+                    britannica.com/event/Peace-of-Westphalia <i class="fa-solid fa-arrow-up-right-from-square fn-ext"></i>
+                  </a>
+                  <a href="#fnref3" class="fn-back" title="Back to text">↩</a>
+                </span>
+              </li>
+              <li id="fn4">
+                <span class="fn-num">4</span>
+                <span class="fn-body">
+                  International Law Students Association. <em>Montevideo Convention on the Rights and Duties of States</em> (1933). ILSA Jessup Archive.
+                  <a href="https://www.ilsa.org/Jessup/Jessup15/Montevideo%20Convention.pdf" target="_blank" rel="noopener" class="fn-link">
+                    ilsa.org — Montevideo Convention [PDF] <i class="fa-solid fa-arrow-up-right-from-square fn-ext"></i>
+                  </a>
+                  <a href="#fnref4" class="fn-back" title="Back to text">↩</a>
+                </span>
+              </li>
+              <li id="fn5">
+                <span class="fn-num">5</span>
+                <span class="fn-body">
+                  Justia. <em>Formation and Recognition of States Under International Law.</em>
+                  <a href="https://www.justia.com/international-law/formation-and-recognition-of-states-under-international-law/" target="_blank" rel="noopener" class="fn-link">
+                    justia.com/international-law/formation-and-recognition… <i class="fa-solid fa-arrow-up-right-from-square fn-ext"></i>
+                  </a>
+                  <a href="#fnref5" class="fn-back" title="Back to text">↩</a>
+                </span>
+              </li>
+              <li id="fn6">
+                <span class="fn-num">6</span>
+                <span class="fn-body">
+                  Institut für Öffentliches Recht. <em>Die Anerkennung von Staaten und Regierungen im Völkerrecht</em> [Recognition of States under International Law]. Uniset, 2005.
+                  <a href="https://uniset.ca/microstates2/PDF_Anerkennung__en_05.pdf" target="_blank" rel="noopener" class="fn-link">
+                    uniset.ca — Anerkennung [PDF] <i class="fa-solid fa-arrow-up-right-from-square fn-ext"></i>
+                  </a>
+                  <a href="#fnref6" class="fn-back" title="Back to text">↩</a>
+                </span>
+              </li>
+              <li id="fn7">
+                <span class="fn-num">7</span>
+                <span class="fn-body">
+                  BBC News. <em>Taiwan's Dwindling Band of Diplomatic Allies.</em> BBC, 9 January 2022.
+                  <a href="https://www.bbc.com/news/world-asia-china-59900139" target="_blank" rel="noopener" class="fn-link">
+                    bbc.com/news/world-asia-china-59900139 <i class="fa-solid fa-arrow-up-right-from-square fn-ext"></i>
+                  </a>
+                  <a href="#fnref7" class="fn-back" title="Back to text">↩</a>
+                </span>
+              </li>
+              <li id="fn8">
+                <span class="fn-num">8</span>
+                <span class="fn-body">
+                  Foreign Policy Research Institute. <em>Taiwan and the United Nations: Fifty Years After the ROC's Expulsion.</em> FPRI Event, 2021.
+                  <a href="https://www.fpri.org/event/2021/taiwan-and-the-united-nations-fifty-years-after-the-rocs-expulsion/" target="_blank" rel="noopener" class="fn-link">
+                    fpri.org/event/2021/taiwan-and-the-united-nations… <i class="fa-solid fa-arrow-up-right-from-square fn-ext"></i>
+                  </a>
+                  <a href="#fnref8" class="fn-back" title="Back to text">↩</a>
+                </span>
+              </li>
+            </ol>
+          </div>
+        </div>
+
+      </div><!-- /article-scroll -->
+    </div><!-- /article-pane -->
+  </div><!-- /layout -->
 </main>
 
 <!-- ARTICLE SCRIPT -->

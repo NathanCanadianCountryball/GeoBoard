@@ -1,4 +1,4 @@
-# Welcome to the GeoBoard!
+# Welcome to GeoBoard!
 **The world, at your fingertips.**
 
 GeoBoard is an educational platform designed to make history, geography, and politics engaging and accessible for young people—regardless of ethnic, economic, or religious background.

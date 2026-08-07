@@ -147,7 +147,7 @@ body.dark .topbar {
   border: 1px solid var(--pill-border);
   color: var(--nav-text) !important;
   text-decoration: none;
-  font-family: "FunnelDisplay", sans-serif;
+  font-family: (var(--font-family));
   font-weight: 500 !important;
   transition: 
     font-size 0.3s ease,

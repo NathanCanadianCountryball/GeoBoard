@@ -100,14 +100,15 @@ body {
   pointer-events: all;
 }
 
+/* Sidebar sits just under the topbar */
 .country-sidebar {
   position: fixed;
   left: -400px;
-  top: 0;
+  top: 130px;                          /* clears the topbar */
   width: 380px;
-  height: 100vh;
+  height: calc(100vh - 130px);
   background-color: var(--bg);
-  box-shadow: 2px 0 10px rgba(0, 0, 0, 0.2);
+  box-shadow: 2px 0 16px rgba(0, 0, 0, 0.18);
   z-index: 999;
   overflow-y: auto;
   transition: left 0.3s ease;
@@ -119,79 +120,161 @@ body {
   left: 0;
 }
 
+/* Close button – pure circle, zero shadow */
 .sidebar-header {
-  padding: 15px 20px;
-  border-bottom: none;
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
-  position: sticky;
-  top: 0;
-  background-color: var(--bg);
-  z-index: 10;
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  z-index: 30;
+  padding: 0;
+  margin: 0;
+  background: transparent;
+  border: none;
+  width: auto;
+  height: auto;
 }
 
 .close-sidebar-btn {
-  background: none;
+  width: 36px;
+  height: 36px;
+  min-width: 36px;
+  min-height: 36px;
+  padding: 6px, 0px !important;
+  margin: 0;
   border: none;
-  font-size: 1.5rem;
-  color: var(--text);
-  cursor: pointer;
-  padding: 8px;
   border-radius: 50%;
-  transition: background-color 0.2s ease;
+  background: rgba(0, 0, 0, 0.4);
+  color: #fff;
+  font-size: 1.1rem;
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 40px;
-  height: 40px;
+  cursor: pointer;
+  box-shadow: none !important;         /* no shadow at all */
+  outline: none;
+  line-height: 1;
+  transition: background 0.2s ease, transform 0.15s ease;
 }
 
 .close-sidebar-btn:hover {
-  background-color: var(--hover-bg, rgba(0, 0, 0, 0.05));
+  background: rgba(0, 0, 0, 0.65);
+  transform: scale(1.06);
+  box-shadow: none !important;
 }
 
-body.dark .close-sidebar-btn:hover {
-  background-color: rgba(255, 255, 255, 0.1);
+.close-sidebar-btn i {
+  pointer-events: none;
+  line-height: 1;
 }
 
+/* Content */
 .sidebar-content {
-  padding: 100px 20px 20px 20px;
+  padding: 0 0 28px 0;
   flex: 1;
   overflow-y: auto;
 }
 
-.country-name-title {
-  margin: 0 0 20px 0;
-  font-size: 1.8rem;
-  color: var(--text);
-  font-weight: 700;
-  text-align: left;
+.country-title-block {
+  position: relative;
+  margin: 0;
+  padding: 56px 20px 20px 20px;
+  min-height: 200px;
+  max-height: 220px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  overflow: hidden;
+  background-color: #111;
 }
 
 .country-flag {
-  width: 100%;
-  margin-bottom: 20px;
-  border-radius: 10px;
+  position: absolute;
+  inset: 0;
+  margin: 0;
+  border-radius: 0;
+  box-shadow: none;
+  z-index: 0;
   overflow: hidden;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
 .country-flag img {
   width: 100%;
-  height: auto;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
   display: block;
+  filter: brightness(0.42) contrast(1.08);
+}
+
+.country-title-block::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.45) 0%,
+    rgba(0, 0, 0, 0.25) 50%,
+    rgba(0, 0, 0, 0.7) 100%
+  );
+  z-index: 1;
+  pointer-events: none;
+}
+
+.country-name-title,
+.country-official-name,
+.country-native-name {
+  position: relative;
+  z-index: 2;
+  color: #fff !important;
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.55);
+  margin: 0;
+}
+
+.country-name-title {
+  font-size: 1.85rem;
+  font-weight: 800;
+  line-height: 1.15;
+  margin-bottom: 4px;
+}
+
+.country-official-name {
+  font-size: 1.05rem;
+  font-weight: 600;
+  opacity: 0.92;
+}
+
+.country-native-name {
+  font-size: 0.9rem;
+  opacity: 0.8;
+  margin-top: 2px;
+}
+
+/* Rest of content */
+.country-subtitle-block {
+  margin: 16px 20px 0 20px;
+  background-color: var(--card);
+  padding: 10px 14px;
+  border-radius: 8px;
+  font-size: 0.88rem;
+  font-weight: 500;
+  color: var(--text);
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
 }
 
 .country-details {
-  margin-bottom: 25px;
+  margin: 18px 20px 0 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
 }
 
 .info-row {
   display: flex;
-  justify-content: space-between;
-  padding: 12px 0;
-  border-bottom: 1px solid var(--border, #e5e7eb);
+  flex-direction: column;
+  padding-bottom: 8px;
+  border-bottom: 1px solid color-mix(in srgb, var(--text) 12%, transparent);
 }
 
 .info-row:last-child {
@@ -199,41 +282,45 @@ body.dark .close-sidebar-btn:hover {
 }
 
 .info-label {
-  font-weight: 600;
-  color: var(--text-secondary, #6b7280);
-  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--text);
+  font-size: 0.95rem;
 }
 
 .info-value {
   font-weight: 500;
   color: var(--text);
-  text-align: right;
+  font-size: 0.92rem;
+  margin-top: 2px;
+  opacity: 0.9;
 }
 
 .sidebar-actions {
+  margin: 24px 20px 0 20px;
   display: flex;
   flex-direction: column;
-  gap: 10px;
-  margin-top: 20px;
+  gap: 12px;
 }
 
 .action-btn {
   background-color: var(--link);
   color: white;
   border: none;
-  padding: 12px 20px;
-  border-radius: 8px;
+  padding: 14px 20px;
+  border-radius: 10px;
   cursor: pointer;
-  font-family: 'FunnelDisplay', sans-serif;
-  font-weight: 600;
+  font-family: inherit;
+  font-weight: 700;
   font-size: 1rem;
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: 10px;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  transition: transform 0.2s ease, background-color 0.2s ease, box-shadow 0.2s ease;
 }
 
 .action-btn:hover {
+  background-color: var(--link-hover);
   transform: translateY(-2px);
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
@@ -242,19 +329,7 @@ body.dark .close-sidebar-btn:hover {
   font-size: 1.1rem;
 }
 
-/* Responsive adjustments */
-@media (max-width: 768px) {
-  .country-sidebar {
-    width: 100%;
-    left: -100%;
-  }
-  
-  .country-sidebar.active {
-    left: 0;
-  }
-}
-
-/* TimeMachine Button */
+/* TimeMachine */
 .timemachine-btn {
   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
   position: relative;
@@ -279,4 +354,18 @@ body.dark .close-sidebar-btn:hover {
 .timemachine-btn:hover {
   transform: translateY(-3px);
   box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+  .country-sidebar {
+    width: 100%;
+    left: -100%;
+    top: 0;
+    height: 100vh;
+  }
+  
+  .country-sidebar.active {
+    left: 0;
+  }
 }
